@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:orientation="vertical">
+
+    <include layout="@layout/custom_toolbar" />
+
+
+    <com.shuhart.stepview.StepView
+        android:id="@+id/add_stepview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="16dp"
+        android:padding="16dp"
+        app:sv_animationType="Line"
+        app:sv_doneCircleColor="@color/colorAccent"
+        app:sv_doneCircleRadius="12dp"
+        app:sv_doneStepLineColor="@color/colorAccent"
+        app:sv_doneStepMarkColor="@color/white"
+        app:sv_nextStepLineColor="@color/darkGray"
+        app:sv_nextTextColor="@color/darkGray"
+        app:sv_selectedCircleColor="@color/colorPrimary"
+        app:sv_selectedCircleRadius="12dp"
+        app:sv_selectedStepNumberColor="@color/white"
+        app:sv_selectedTextColor="@color/colorPrimary"
+        app:sv_stepLineWidth="2dp"
+        app:sv_stepNumberTextSize="12sp"
+        app:sv_stepPadding="4dp"
+        app:sv_stepViewStyle="@style/StepView" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_marginTop="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="22dp"
+            android:text="@string/qabul_qilib_oluvchining_telefon_raqamini_kiriting"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_small" />
+
+        <EditText
+            android:id="@+id/create_mail_phone_et_phone"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_height"
+            android:layout_marginHorizontal="22dp"
+            android:layout_marginVertical="8dp"
+            android:background="@drawable/edittext_bg"
+            android:drawableStart="@drawable/ic_baseline_phone_android_24"
+            android:drawablePadding="8dp"
+            android:elevation="@dimen/elevation_size"
+            android:hint="@string/telefon_raqami"
+            android:inputType="number"
+            android:maxLength="12"
+            android:maxLines="1"
+            android:paddingHorizontal="16dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray"
+            android:textSize="@dimen/text_size_normal" />
+
+    </LinearLayout>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/create_mail_phone_btn_next"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginHorizontal="22dp"
+        android:layout_marginVertical="16dp"
+        android:enabled="true"
+        android:text="@string/keyingisi"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:cornerRadius="@dimen/edittext_corner_radius"
+        app:elevation="@dimen/elevation_size" />
+
+</LinearLayout>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardElevation="2dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+        <ImageView
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:id="@+id/dialog_success_close_btn_close"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:padding="4dp"
+            android:src="@drawable/ic_baseline_close_24"
+            app:tint="@color/black"/>
+
+        <ImageView
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/dialog_success_close_img_status"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/success"/>
+
+        <TextView
+            android:id="@+id/dialog_success_close_tv_title"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Title"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_medium"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_marginVertical="16dp"
+            android:id="@+id/dialog_success_close_tv_message"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="message"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_normal"/>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:paddingHorizontal="50dp"
+            app:backgroundTint="@color/colorPrimary"
+            android:textColor="@color/white"
+            android:id="@+id/dialog_success_close_btn_action"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="Okay"
+            android:textAllCaps="false"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"/>
+
+
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

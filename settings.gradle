@@ -1,0 +1,32 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+        jcenter()
+        maven { url 'https://jitpack.io' }
+        maven {
+            url "http://maven.google.com/"
+            allowInsecureProtocol(true)
+        }
+        resolutionStrategy {
+            eachPlugin {
+                if( requested.id.id == 'dagger.hilt.android.plugin') {
+                    useModule("com.google.dagger:hilt-android-gradle-plugin:2.38.1")
+                }
+            }
+        }
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        jcenter()
+        maven { url 'https://jitpack.io' }
+
+    }
+}
+rootProject.name = "DostavkaUz"
+include ':app'

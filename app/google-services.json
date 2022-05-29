@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "189451131802",
+    "project_id": "dostavkauz-a698f",
+    "storage_bucket": "dostavkauz-a698f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:189451131802:android:ab3424a9cb6de055c1f823",
+        "android_client_info": {
+          "package_name": "uz.ibroxim.dostavkauz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "189451131802-ljaofdldlt37ck5j65st09nedvk4cg43.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVlrUjfW0VY5HcKGcCUFoDv2t2gTQ_eUw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "189451131802-ljaofdldlt37ck5j65st09nedvk4cg43.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

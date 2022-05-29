@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    app:cardBackgroundColor="@android:color/transparent"
+    app:cardElevation="0dp"
+    app:cardCornerRadius="16dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:padding="16dp"
+        android:id="@+id/spin_kit"
+        style="@style/SpinKitView.Large.DoubleBounce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:SpinKit_Color="@color/white" />
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:visibility="gone"
+        android:id="@+id/custom_progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        style="@style/Widget.MaterialComponents.CircularProgressIndicator.Small"
+        android:layout_gravity="center"
+        app:trackCornerRadius="24dp"
+        app:indicatorColor="@color/colorPrimary"/>
+
+</androidx.cardview.widget.CardView>

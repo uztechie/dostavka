@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:text="@string/ro_yxatdan_o_tish"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_medium"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/asosiy_telefon_raqami"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_small" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+
+                <ImageView
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_marginEnd="4dp"
+                    android:src="@drawable/ic_star_red" />
+
+                <EditText
+                    android:layout_margin="8dp"
+                    android:elevation="@dimen/elevation_size"
+                    android:id="@+id/register_et_phone"
+                    style="@style/edittextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edittext_height"
+                    android:background="@drawable/edittext_bg"
+                    android:focusable="false"
+                    android:hint="@string/telefon_raqami"
+                    android:paddingHorizontal="16dp"
+                    android:textColorHint="@color/colorHint" />
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/shaxsiy_ma_lumotlar"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_small" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:layout_marginEnd="4dp"
+                        android:src="@drawable/ic_star_red" />
+
+                    <EditText
+                        android:elevation="@dimen/elevation_size"
+                        android:layout_margin="8dp"
+                        android:id="@+id/register_et_name"
+                        style="@style/edittextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/edittext_height"
+                        android:background="@drawable/edittext_bg"
+                        android:hint="@string/ismingiz"
+                        android:inputType="textCapWords"
+                        android:maxLines="1"
+                        android:paddingHorizontal="16dp"
+                        android:textColorHint="@color/colorHint"/>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:layout_marginEnd="4dp"
+                        android:src="@drawable/ic_star_red" />
+
+                    <EditText
+                        android:elevation="@dimen/elevation_size"
+                        android:layout_margin="8dp"
+                        android:id="@+id/register_et_surname"
+                        style="@style/edittextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/edittext_height"
+                        android:background="@drawable/edittext_bg"
+                        android:hint="@string/familiyangiz"
+                        android:inputType="textCapWords"
+                        android:maxLines="1"
+                        android:paddingHorizontal="16dp"
+                        android:textColorHint="@color/colorHint" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:layout_marginEnd="4dp"
+                        android:src="@drawable/ic_star_red" />
+
+                    <EditText
+                        android:elevation="@dimen/elevation_size"
+                        android:layout_margin="8dp"
+                        android:id="@+id/register_et_middle_name"
+                        style="@style/edittextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/edittext_height"
+                        android:background="@drawable/edittext_bg"
+                        android:hint="@string/otangizni_ismi"
+                        android:inputType="textCapWords"
+                        android:maxLines="1"
+                        android:paddingHorizontal="16dp"
+                        android:textColorHint="@color/colorHint"/>
+                </LinearLayout>
+
+
+                <EditText
+                    android:elevation="@dimen/elevation_size"
+                    android:id="@+id/register_et_phone2"
+                    style="@style/edittextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edittext_height"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/edittext_bg"
+                    android:hint="@string/telefon_2"
+                    android:inputType="phone"
+                    android:maxLines="1"
+                    android:paddingHorizontal="16dp"
+                    android:textColorHint="@color/colorHint" />
+
+                <EditText
+                    android:elevation="@dimen/elevation_size"
+                    android:id="@+id/register_et_note"
+                    style="@style/edittextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/edittext_bg"
+                    android:gravity="top|left"
+                    android:hint="@string/qo_shimcha_mailshot"
+                    android:inputType="textMultiLine"
+                    android:lines="3"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="16dp"
+                    android:privateImeOptions="nm"
+                    android:scrollbars="vertical"
+                    android:textColorHint="@color/colorHint" />
+
+
+            </LinearLayout>
+
+
+
+        <com.google.android.material.button.MaterialButton
+            app:elevation="@dimen/elevation_size"
+            android:id="@+id/register_btn_save"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginVertical="24dp"
+            android:text="@string/saqlash"
+            android:textAllCaps="false"
+            app:backgroundTint="@color/colorAccent"
+            app:cornerRadius="@dimen/edittext_corner_radius" />
+
+    </LinearLayout>
+
+
+</androidx.core.widget.NestedScrollView>

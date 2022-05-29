@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:orientation="vertical">
+
+    <include layout="@layout/custom_toolbar" />
+
+
+    <com.shuhart.stepview.StepView
+        android:id="@+id/add_stepview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        app:sv_animationType="Line"
+        app:sv_doneCircleColor="@color/colorAccent"
+        app:sv_doneCircleRadius="12dp"
+        app:sv_doneStepLineColor="@color/colorAccent"
+        app:sv_doneStepMarkColor="@color/white"
+        app:sv_nextStepLineColor="@color/darkGray"
+        app:sv_nextTextColor="@color/darkGray"
+        app:sv_selectedCircleColor="@color/colorPrimary"
+        app:sv_selectedCircleRadius="12dp"
+        app:sv_selectedStepNumberColor="@color/white"
+        app:sv_selectedTextColor="@color/colorPrimary"
+        app:sv_stepLineWidth="2dp"
+        app:sv_stepNumberTextSize="12sp"
+        app:sv_stepPadding="4dp"
+        app:sv_stepViewStyle="@style/StepView" />
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+
+
+            <RadioGroup
+                android:orientation="horizontal"
+                android:id="@+id/mail_radio_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:layout_marginEnd="4dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="40dp"
+                    android:text="@string/jismoniy_shaxs"
+                    android:id="@+id/mail_radio_physical"
+                    android:checked="true"/>
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:layout_width="0dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_weight="1"
+                    android:layout_height="40dp"
+                    android:text="@string/yuridik_shaxs"
+                    android:id="@+id/mail_radio_legal"/>
+            </RadioGroup>
+
+
+            <TextView
+                android:id="@+id/mail_tv_name"
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="6dp"
+                android:text="@string/qabul_qiluvchi_ismi"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_small" />
+
+
+            <EditText
+                android:inputType="textCapWords"
+                android:id="@+id/mail_et_info_name"
+                style="@style/edittextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edittext_height"
+                android:layout_margin="6dp"
+                android:background="@drawable/edittext_bg"
+                android:drawableStart="@drawable/ic_baseline_person_24"
+                android:drawablePadding="8dp"
+                android:elevation="@dimen/elevation_size"
+                android:hint="@string/ismni_kiriting"
+                android:paddingHorizontal="16dp"
+                android:textColorHint="@color/colorHint"
+                app:drawableTint="@color/gray" />
+
+
+            <TextView
+                android:id="@+id/mail_tv_lastname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="6dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/qabul_qiluvchining_familiyasi"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_small" />
+
+
+            <EditText
+                android:inputType="textCapWords"
+                android:id="@+id/mail_et_info_lastname"
+                style="@style/edittextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edittext_height"
+                android:layout_margin="6dp"
+                android:background="@drawable/edittext_bg"
+                android:drawableStart="@drawable/ic_baseline_person_24"
+                android:drawablePadding="8dp"
+                android:elevation="@dimen/elevation_size"
+                android:hint="@string/familiyani_kiriting"
+                android:paddingHorizontal="16dp"
+                android:textColorHint="@color/colorHint"
+                app:drawableTint="@color/gray" />
+
+            <TextView
+                android:id="@+id/mail_tv_middle_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="6dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/qabul_qiluvchining_otasining_ismi"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_small" />
+
+
+            <EditText
+                android:inputType="textCapWords"
+                android:id="@+id/mail_et_info_middlename"
+                style="@style/edittextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edittext_height"
+                android:layout_margin="6dp"
+                android:background="@drawable/edittext_bg"
+                android:drawableStart="@drawable/ic_baseline_person_24"
+                android:drawablePadding="8dp"
+                android:elevation="@dimen/elevation_size"
+                android:hint="@string/otasining_ismini_kiriting"
+                android:paddingHorizontal="16dp"
+                android:textColorHint="@color/colorHint"
+                app:drawableTint="@color/gray" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="6dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/asosiy_telefon_raqami"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_small" />
+
+
+            <EditText
+                android:id="@+id/mail_et_info_phone"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edittext_height"
+                android:layout_margin="8dp"
+                android:background="@drawable/edittext_bg"
+                android:drawableStart="@drawable/ic_baseline_phone_android_24"
+                android:drawablePadding="8dp"
+                android:elevation="@dimen/elevation_size"
+                android:hint="@string/telefon_raqami"
+                android:inputType="number"
+                android:maxLength="12"
+                android:maxLines="1"
+                android:paddingHorizontal="16dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                android:textSize="@dimen/text_size_normal" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="6dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/ikkinichi_telefon_raqami"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_small" />
+
+
+            <EditText
+                android:id="@+id/mail_et_info_phone2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edittext_height"
+                android:layout_margin="8dp"
+                android:background="@drawable/edittext_bg"
+                android:drawableStart="@drawable/ic_baseline_phone_android_24"
+                android:drawablePadding="8dp"
+                android:elevation="@dimen/elevation_size"
+                android:hint="@string/telefon_raqami_2"
+                android:inputType="number"
+                android:maxLength="12"
+                android:maxLines="1"
+                android:paddingHorizontal="16dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                android:textSize="@dimen/text_size_normal" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="6dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/qo_shimcha_izohlar"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_small" />
+
+            <EditText
+                android:id="@+id/mail_et_info_note"
+                style="@style/edittextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_margin="6dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/edittext_bg"
+                android:elevation="@dimen/elevation_size"
+                android:gravity="top|left"
+                android:hint="@string/izohlar"
+                android:inputType="textMultiLine"
+                android:lines="3"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="16dp"
+                android:privateImeOptions="nm"
+                android:scrollbars="vertical"
+                android:textColorHint="@color/colorHint"/>
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/mail_info_btn_next"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginHorizontal="22dp"
+        android:layout_marginVertical="16dp"
+        android:enabled="true"
+        android:text="@string/davom_etish"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:cornerRadius="@dimen/edittext_corner_radius"
+        app:elevation="@dimen/elevation_size" />
+
+</LinearLayout>

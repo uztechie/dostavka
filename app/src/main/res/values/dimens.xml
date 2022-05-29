@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_size_large">22sp</dimen>
+    <dimen name="text_size_medium">18sp</dimen>
+    <dimen name="text_size_normal">16sp</dimen>
+    <dimen name="text_size_small">12sp</dimen>
+    <dimen name="edittext_corner_radius">8dp</dimen>
+    <dimen name="elevation_size">2dp</dimen>
+    <dimen name="edittext_height">45dp</dimen>
+    <dimen name="dp14">14dp</dimen>
+</resources>

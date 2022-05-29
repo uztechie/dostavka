@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:orientation="vertical">
+
+    <include layout="@layout/custom_toolbar" />
+
+
+    <com.shuhart.stepview.StepView
+        android:id="@+id/add_stepview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        app:sv_selectedCircleColor="@color/colorPrimary"
+        app:sv_selectedTextColor="@color/colorPrimary"
+        app:sv_stepLineWidth="2dp"
+        app:sv_stepPadding="4dp"
+        app:sv_nextTextColor="@color/darkGray"
+        app:sv_nextStepLineColor="@color/darkGray"
+        app:sv_doneCircleColor="@color/colorAccent"
+        app:sv_doneStepLineColor="@color/colorAccent"
+        app:sv_doneCircleRadius="12dp"
+        app:sv_selectedCircleRadius="12dp"
+        app:sv_selectedStepNumberColor="@color/white"
+        app:sv_stepViewStyle="@style/StepView"
+        app:sv_doneStepMarkColor="@color/white"
+        app:sv_stepNumberTextSize="12sp"
+        app:sv_animationType="Line"/>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="6dp"
+                android:text="@string/qayerdan"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_small" />
+
+
+            <EditText
+                android:inputType="text"
+                android:id="@+id/mail_et_location_from"
+                style="@style/edittextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edittext_height"
+                android:layout_margin="6dp"
+                android:background="@drawable/edittext_bg"
+                android:drawableStart="@drawable/ic_baseline_location_on_16"
+                android:drawablePadding="8dp"
+                android:elevation="@dimen/elevation_size"
+                android:focusable="false"
+                android:hint="@string/joylashuvni_tanlang"
+                android:paddingHorizontal="16dp"
+                android:textColorHint="@color/colorHint"
+                app:drawableTint="@color/gray" />
+
+            <TextView
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="6dp"
+                android:text="@string/qayerga"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_small" />
+
+
+            <EditText
+                android:id="@+id/mail_et_location_province"
+                style="@style/edittextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edittext_height"
+                android:layout_margin="6dp"
+                android:background="@drawable/edittext_bg"
+                android:drawableStart="@drawable/ic_baseline_location_on_16"
+                android:drawablePadding="8dp"
+                android:elevation="@dimen/elevation_size"
+                android:focusable="false"
+                android:hint="@string/viloyatni_tanlang"
+                android:paddingHorizontal="16dp"
+                android:textColorHint="@color/colorHint"
+                app:drawableTint="@color/gray" />
+
+            <EditText
+                android:visibility="gone"
+                android:id="@+id/mail_et_location_region"
+                style="@style/edittextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edittext_height"
+                android:layout_margin="6dp"
+                android:background="@drawable/edittext_bg"
+                android:drawableStart="@drawable/ic_baseline_location_on_16"
+                android:drawablePadding="8dp"
+                android:elevation="@dimen/elevation_size"
+                android:focusable="false"
+                android:hint="@string/tumanni_tanlang"
+                android:paddingHorizontal="16dp"
+                android:textColorHint="@color/colorHint"
+                app:drawableTint="@color/gray" />
+
+            <EditText
+                android:visibility="gone"
+                android:id="@+id/mail_et_location_quarter"
+                style="@style/edittextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edittext_height"
+                android:layout_margin="6dp"
+                android:background="@drawable/edittext_bg"
+                android:drawableStart="@drawable/ic_baseline_location_on_16"
+                android:drawablePadding="8dp"
+                android:elevation="@dimen/elevation_size"
+                android:focusable="false"
+                android:hint="@string/mahallani_tanlang"
+                android:paddingHorizontal="16dp"
+                android:textColorHint="@color/colorHint"
+                app:drawableTint="@color/gray" />
+
+            <EditText
+                android:inputType="text"
+                android:visibility="gone"
+                android:id="@+id/mail_et_location_address"
+                style="@style/edittextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edittext_height"
+                android:layout_margin="6dp"
+                android:background="@drawable/edittext_bg"
+                android:drawableStart="@drawable/ic_baseline_location_on_16"
+                android:drawablePadding="8dp"
+                android:elevation="@dimen/elevation_size"
+                android:hint="@string/manzilni_kiriting"
+                android:paddingHorizontal="16dp"
+                android:textColorHint="@color/colorHint"
+                app:drawableTint="@color/gray" />
+
+
+
+            <TextView
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="6dp"
+                android:text="@string/nimalarni_yuborasiz"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_small" />
+
+            <EditText
+                android:layout_margin="6dp"
+                android:elevation="@dimen/elevation_size"
+                android:id="@+id/mail_et_location_mail_title"
+                style="@style/edittextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/edittext_bg"
+                android:gravity="top|left"
+                android:hint="@string/yuk_nomlarini_kiriting"
+                android:inputType="textMultiLine"
+                android:lines="3"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="16dp"
+                android:privateImeOptions="nm"
+                android:scrollbars="vertical"
+                android:textColorHint="@color/colorHint"/>
+
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/create_mail_location_btn_next"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:textColor="@color/white"
+        android:text="@string/davom_etish"
+        android:textAllCaps="false"
+        app:cornerRadius="@dimen/edittext_corner_radius"
+        android:layout_marginVertical="16dp"
+        android:layout_marginHorizontal="22dp"
+        app:elevation="@dimen/elevation_size"/>
+
+</LinearLayout>
