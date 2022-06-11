@@ -14,5 +14,9 @@ data class User(
     var surname:String? = null,
     var token:String? = null,
     var type:Int? = null,
-    var type_name:String? = null
+    var type_name:String? = null,
+    var passport_image:String? = null,
+    var passport_serial:String? = null,
+    var passport_number:String? = null,
+    var status:Boolean? = false,
 )

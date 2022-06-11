@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph_driver"
+    app:startDestination="@id/newOrdersFragment">
+
+    <fragment
+        android:id="@+id/newOrdersFragment"
+        android:name="uz.ibroxim.dostavkauz.fragments.driver.NewOrdersFragment"
+        android:label="NewOrdersFragment" >
+        <action
+            android:id="@+id/action_newOrdersFragment_to_newOrderDetailsFragment"
+            app:destination="@id/newOrderDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newOrderDetailsFragment"
+        android:name="uz.ibroxim.dostavkauz.fragments.driver.NewOrderDetailsFragment"
+        android:label="NewOrderDetailsFragment" >
+        <argument
+            android:name="order"
+            app:argType="uz.ibroxim.dostavkauz.models.Order" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderUpdateFragment"
+        android:name="uz.ibroxim.dostavkauz.fragments.driver.OrderUpdateFragment"
+        android:label="OrderUpdateFragment" >
+        <argument
+            android:name="barcode"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/tariffDriverFragment"
+        android:name="uz.ibroxim.dostavkauz.fragments.user.TariffFragment"
+        android:label="TariffFragment" />
+    <fragment
+        android:id="@+id/newsDriverFragment"
+        android:name="uz.ibroxim.dostavkauz.fragments.user.NewsFragment"
+        android:label="NewsFragment" />
+    <fragment
+        android:id="@+id/cabinetDriverFragment"
+        android:name="uz.ibroxim.dostavkauz.fragments.driver.CabinetDriverFragment"
+        android:label="CabinetDriverFragment" >
+        <action
+            android:id="@+id/action_cabinetDriverFragment_to_acceptedOrdersFragment"
+            app:destination="@id/acceptedOrdersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/acceptedOrdersFragment"
+        android:name="uz.ibroxim.dostavkauz.fragments.driver.AcceptedOrdersFragment"
+        android:label="AcceptedOrdersFragment" >
+        <action
+            android:id="@+id/action_acceptedOrdersFragment_to_acceptedOrderDetailsFragment"
+            app:destination="@id/acceptedOrderDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/acceptedOrderDetailsFragment"
+        android:name="uz.ibroxim.dostavkauz.fragments.driver.AcceptedOrderDetailsFragment"
+        android:label="AcceptedOrderDetailsFragment" >
+        <argument
+            android:name="order"
+            app:argType="uz.ibroxim.dostavkauz.models.Order" />
+        <action
+            android:id="@+id/action_acceptedOrderDetailsFragment_to_orderUpdateFragment"
+            app:destination="@id/orderUpdateFragment" />
+    </fragment>
+</navigation>

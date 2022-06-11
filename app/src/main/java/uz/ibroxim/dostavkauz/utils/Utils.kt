@@ -5,9 +5,11 @@ import android.app.Activity
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.net.Uri
 import android.os.Build
 import android.util.Log
 import android.view.View
@@ -16,15 +18,16 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.snackbar.Snackbar
 import uz.ibroxim.dostavkauz.R
-import java.sql.Time
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
-import kotlin.collections.HashMap
+
 
 object Utils {
 
@@ -344,6 +347,20 @@ object Utils {
 
 
         return number.replace("..(?!$)", "$0 ")
+    }
+
+    fun call(activity: Activity, phone:String?){
+        if (ContextCompat.checkSelfPermission(activity, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.CALL_PHONE), 202)
+        }
+        else{
+            phone?.let {
+                val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phone))
+                activity.startActivity(intent)
+            }
+        }
+
+
     }
 
 

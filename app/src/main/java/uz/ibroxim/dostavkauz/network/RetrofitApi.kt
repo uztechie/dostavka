@@ -6,6 +6,7 @@ import retrofit2.Response
 import retrofit2.http.*
 import uz.ibroxim.dostavkauz.models.*
 import uz.ibroxim.dostavkauz.utils.Constants
+import uz.ibroxim.dostavkauz.utils.SharedPref
 import uz.techie.mexmash.models.District
 import uz.techie.mexmash.models.Quarter
 import uz.techie.mexmash.models.Region
@@ -61,6 +62,16 @@ interface RetrofitApi {
         @Header("Authorization") token: String,
         @Header("MyToken") myToken: String = Constants.MY_TOKEN
     ):Response<Login>
+
+    //passport
+    @Multipart
+    @POST("customer-edit-or-create-passport-data/")
+    suspend fun uploadCustomerPassport(
+        @PartMap map:HashMap<String, RequestBody>,
+        @Part file:MultipartBody.Part,
+        @Header("Authorization") token: String = SharedPref.token,
+        @Header("MyToken") myToken: String = Constants.MY_TOKEN
+    ):Response<PostalResponse>
 
 
 
@@ -126,5 +137,64 @@ interface RetrofitApi {
         @Header("Authorization") token: String,
         @Header("MyToken") myToken: String = Constants.MY_TOKEN
     ):Response<PostalHistoryResponse>
+
+
+
+    //driver part
+
+    //new order
+
+    @GET("driver-new-postal-list/")
+    suspend fun loadNewOrders(
+        @Header("Authorization") token: String,
+        @Header("MyToken") myToken: String = Constants.MY_TOKEN
+    ):Response<OrderResponse>
+
+    @FormUrlEncoded
+    @GET("driver-search-barcode-id/")
+    suspend fun searchByBarcode(
+        @Field("barcode_id") barCode:String,
+        @Header("Authorization") token: String,
+        @Header("MyToken") myToken: String = Constants.MY_TOKEN
+    ):Response<SearchOrderResponse>
+
+
+    @Multipart
+    @POST("driver-edit-postal/")
+    suspend fun updateOrder(
+        @PartMap map:HashMap<String, RequestBody>,
+        @Part file:MultipartBody.Part,
+        @Header("Authorization") token: String,
+        @Header("MyToken") myToken: String = Constants.MY_TOKEN
+    ):Response<OrderResponse>
+
+    @FormUrlEncoded
+    @POST("driver-delete-postal/")
+    suspend fun deleteOrder(
+       @Field("barcode_id") barCode:String,
+        @Header("Authorization") token: String,
+        @Header("MyToken") myToken: String = Constants.MY_TOKEN
+    ):Response<DeleteOrderResponse>
+
+
+
+
+    @GET("driver-postal-hisotry/")
+    suspend fun loadOrdersHistory(
+        @Header("Authorization") token: String = SharedPref.token,
+        @Header("MyToken") myToken: String = Constants.MY_TOKEN
+    ):Response<OrderResponse>
+
+
+    //status
+    @FormUrlEncoded
+    @POST("driver-postal-add-status/")
+    suspend fun updateOrderStatus(
+        @Field("status") status:Int,
+        @Field("postal") postal:Int,
+        @Header("Authorization") token: String = SharedPref.token,
+        @Header("MyToken") myToken: String = Constants.MY_TOKEN
+    ):Response<UpdateStatusResponse>
+
 
 }

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:background="@color/colorBackground"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <include
+        layout="@layout/custom_toolbar"/>
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="6dp"
+                    android:text="@string/pasport_seriya_raqami"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_small" />
+
+                <TextView
+                    android:textStyle="bold"
+                    android:id="@+id/customer_passport_tv_help1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="6dp"
+                    android:text="@string/yordam"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+
+
+            <EditText
+                android:maxLength="9"
+                android:inputType="textCapCharacters"
+                android:id="@+id/customer_passport_serial"
+                style="@style/edittextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edittext_height"
+                android:layout_margin="6dp"
+                android:background="@drawable/edittext_bg"
+                android:drawableStart="@drawable/ic_id_card"
+                android:drawablePadding="8dp"
+                android:elevation="@dimen/elevation_size"
+                android:hint="AA0000001"
+                android:paddingHorizontal="16dp"
+                android:textColorHint="@color/colorHint"
+                app:drawableTint="@color/gray" />
+
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="6dp"
+                android:text="@string/shaxsiy_identifikatsiya_raqami_14_raqam"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_small" />
+
+            <TextView
+                android:textStyle="bold"
+                android:id="@+id/customer_passport_tv_help2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="6dp"
+                android:text="@string/yordam"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+
+
+
+            <EditText
+                android:inputType="number"
+                android:id="@+id/customer_passport_id"
+                style="@style/edittextStyle"
+                android:maxLength="14"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edittext_height"
+                android:layout_margin="6dp"
+                android:background="@drawable/edittext_bg"
+                android:drawableStart="@drawable/ic_id_card"
+                android:drawablePadding="8dp"
+                android:elevation="@dimen/elevation_size"
+                android:hint="00000000000002"
+                android:paddingHorizontal="16dp"
+                android:textColorHint="@color/colorHint"
+                app:drawableTint="@color/gray" />
+
+            <TextView
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="6dp"
+                android:text="@string/pasport_rasmini_tanlang"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_small" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="2dp"
+                app:cardCornerRadius="8dp"
+                android:layout_marginHorizontal="2dp"
+                android:layout_marginVertical="4dp"
+                >
+                <ImageView
+                    android:src="@drawable/passport"
+                    android:id="@+id/customer_passport_imageview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"/>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_marginTop="8dp"
+                android:id="@+id/customer_passport_btn_select_image"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:text="@string/rasmni_tanlash"
+                android:textAllCaps="false"
+                app:backgroundTint="@color/colorPrimaryLight"
+                android:textColor="@color/colorPrimary"
+                app:cornerRadius="@dimen/edittext_corner_radius"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/customer_passport_btn_save"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:enabled="true"
+                android:textColor="@color/white"
+                android:text="@string/saqlash"
+                android:textAllCaps="false"
+                app:cornerRadius="@dimen/edittext_corner_radius"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="16dp"
+                app:elevation="@dimen/elevation_size"/>
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
+
+
+
+
+</LinearLayout>

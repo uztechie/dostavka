@@ -42,6 +42,16 @@ class AppViewModel @Inject constructor(
 
     val postalHistoryResponse:MutableLiveData<Resource<PostalHistoryResponse>> = MutableLiveData()
 
+    val newOrderResponse:MutableLiveData<Resource<OrderResponse>> = MutableLiveData()
+    val searchByBarcodeResponse:MutableLiveData<Resource<SearchOrderResponse>> = MutableLiveData()
+    val updateOrderResponse:MutableLiveData<Resource<OrderResponse>> = MutableLiveData()
+    val deleteOrderResponse:MutableLiveData<Resource<DeleteOrderResponse>> = MutableLiveData()
+    val orderHistoryResponse:MutableLiveData<Resource<OrderResponse>> = MutableLiveData()
+
+    val updateStatusResponse:MutableLiveData<Resource<UpdateStatusResponse>> = MutableLiveData()
+
+    val uploadCustomerPassportResponse:MutableLiveData<Resource<PostalResponse>> = MutableLiveData()
+
 
 
 
@@ -143,6 +153,20 @@ class AppViewModel @Inject constructor(
         }
     }
 
+    fun uploadCustomerPassport(  map:HashMap<String, RequestBody>, file: MultipartBody.Part) = viewModelScope.launch {
+        uploadCustomerPassportResponse.postValue(Resource.Loading())
+        try {
+            val response = repository.uploadCustomerPassport(map, file)
+            uploadCustomerPassportResponse.postValue(handleUploadCustomerPassport(response))
+        }catch (e: UnknownHostException) {
+            uploadCustomerPassportResponse.postValue(Resource.Error("Интернетга боғланишда хатолик!"))
+        } catch (e: InterruptedIOException) {
+            uploadCustomerPassportResponse.postValue(Resource.Error("Интернетга боғланишда хатолик!"))
+        } catch (e: Exception) {
+            uploadCustomerPassportResponse.postValue(Resource.Error(message = e.toString()))
+        }
+    }
+
 
     //postal
 
@@ -229,6 +253,92 @@ class AppViewModel @Inject constructor(
     }
 
 
+    //driver part
+    //new order
+
+    fun loadNewOrders(token: String) = viewModelScope.launch {
+        newOrderResponse.postValue(Resource.Loading())
+        try {
+            val response = repository.loadNewOrders(token)
+            newOrderResponse.postValue(handleNewOrderResponse(response))
+        }catch (e: UnknownHostException) {
+            newOrderResponse.postValue(Resource.Error("Интернетга боғланишда хатолик!"))
+        } catch (e: InterruptedIOException) {
+            newOrderResponse.postValue(Resource.Error("Интернетга боғланишда хатолик!"))
+        } catch (e: Exception) {
+            newOrderResponse.postValue(Resource.Error(message = e.toString()))
+        }
+    }
+    fun searchByBarcode(barcode:String, token: String) = viewModelScope.launch {
+        searchByBarcodeResponse.postValue(Resource.Loading())
+        try {
+            val response = repository.searchByBarcode(barcode, token)
+            searchByBarcodeResponse.postValue(handleSearchOrderResponse(response))
+        }catch (e: UnknownHostException) {
+            searchByBarcodeResponse.postValue(Resource.Error("Интернетга боғланишда хатолик!"))
+        } catch (e: InterruptedIOException) {
+            searchByBarcodeResponse.postValue(Resource.Error("Интернетга боғланишда хатолик!"))
+        } catch (e: Exception) {
+            searchByBarcodeResponse.postValue(Resource.Error(message = e.toString()))
+        }
+    }
+    fun updateOrder(map:HashMap<String, RequestBody>, file:MultipartBody.Part, token: String) = viewModelScope.launch {
+        updateOrderResponse.postValue(Resource.Loading())
+        try {
+            val response = repository.updateOrder(map, file, token)
+            updateOrderResponse.postValue(handleNewOrderResponse(response))
+        }catch (e: UnknownHostException) {
+            updateOrderResponse.postValue(Resource.Error("Интернетга боғланишда хатолик!"))
+        } catch (e: InterruptedIOException) {
+            updateOrderResponse.postValue(Resource.Error("Интернетга боғланишда хатолик!"))
+        } catch (e: Exception) {
+            updateOrderResponse.postValue(Resource.Error(message = e.toString()))
+        }
+    }
+    fun deleteOrder(barcode: String, token: String) = viewModelScope.launch {
+        deleteOrderResponse.postValue(Resource.Loading())
+        try {
+            val response = repository.deleteOrder(barcode, token)
+            deleteOrderResponse.postValue(handleDeleteOrderResponse(response))
+        }catch (e: UnknownHostException) {
+            deleteOrderResponse.postValue(Resource.Error("Интернетга боғланишда хатолик!"))
+        } catch (e: InterruptedIOException) {
+            deleteOrderResponse.postValue(Resource.Error("Интернетга боғланишда хатолик!"))
+        } catch (e: Exception) {
+            deleteOrderResponse.postValue(Resource.Error(message = e.toString()))
+        }
+    }
+
+    fun loadOrderHistory() = viewModelScope.launch {
+        orderHistoryResponse.postValue(Resource.Loading())
+        try {
+            val response = repository.loadOrdersHistory()
+            orderHistoryResponse.postValue(handleNewOrderResponse(response))
+        }catch (e: UnknownHostException) {
+            orderHistoryResponse.postValue(Resource.Error("Интернетга боғланишда хатолик!"))
+        } catch (e: InterruptedIOException) {
+            orderHistoryResponse.postValue(Resource.Error("Интернетга боғланишда хатолик!"))
+        } catch (e: Exception) {
+            orderHistoryResponse.postValue(Resource.Error(message = e.toString()))
+        }
+    }
+
+    //status
+
+    fun updateOrderStatus(status:Int, postalId:Int) = viewModelScope.launch {
+        updateStatusResponse.postValue(Resource.Loading())
+        try {
+            val response = repository.updateOrderStatus(status, postalId)
+            updateStatusResponse.postValue(handleUpdateStatusResponse(response))
+        }catch (e: UnknownHostException) {
+            updateStatusResponse.postValue(Resource.Error("Интернетга боғланишда хатолик!"))
+        } catch (e: InterruptedIOException) {
+            updateStatusResponse.postValue(Resource.Error("Интернетга боғланишда хатолик!"))
+        } catch (e: Exception) {
+            updateStatusResponse.postValue(Resource.Error(message = e.toString()))
+        }
+    }
+
 
 
 
@@ -278,6 +388,16 @@ class AppViewModel @Inject constructor(
         return Resource.Error(response.message())
     }
 
+    private fun handleUploadCustomerPassport(response:Response<PostalResponse>):Resource<PostalResponse>{
+        Log.d(TAG, "handleUploadCustomerPassport: "+response.body())
+        if (response.isSuccessful){
+            response.body()?.let {
+                return Resource.Success(it)
+            }
+        }
+        return Resource.Error(response.message())
+    }
+
     private fun handlePostalResponse(response:Response<PostalResponse>):Resource<PostalResponse>{
         Log.d(TAG, "handlePostalResponse: "+response.body())
         if (response.isSuccessful){
@@ -318,6 +438,45 @@ class AppViewModel @Inject constructor(
         return Resource.Error(response.message())
     }
 
+
+    private fun handleNewOrderResponse(response:Response<OrderResponse>):Resource<OrderResponse>{
+        Log.d(TAG, "handleNewOrderResponse: "+response.body())
+        if (response.isSuccessful){
+            response.body()?.let {
+                return Resource.Success(it)
+            }
+        }
+        return Resource.Error(response.message())
+    }
+    private fun handleDeleteOrderResponse(response:Response<DeleteOrderResponse>):Resource<DeleteOrderResponse>{
+        Log.d(TAG, "handleDeleteOrderResponse: "+response.body())
+        if (response.isSuccessful){
+            response.body()?.let {
+                return Resource.Success(it)
+            }
+        }
+        return Resource.Error(response.message())
+    }
+
+    private fun handleSearchOrderResponse(response:Response<SearchOrderResponse>):Resource<SearchOrderResponse>{
+        Log.d(TAG, "handleSearchOrderResponse: "+response.body())
+        if (response.isSuccessful){
+            response.body()?.let {
+                return Resource.Success(it)
+            }
+        }
+        return Resource.Error(response.message())
+    }
+
+    private fun handleUpdateStatusResponse(response:Response<UpdateStatusResponse>):Resource<UpdateStatusResponse>{
+        Log.d(TAG, "handleUpdateStatusResponse: "+response.body())
+        if (response.isSuccessful){
+            response.body()?.let {
+                return Resource.Success(it)
+            }
+        }
+        return Resource.Error(response.message())
+    }
 
 
 

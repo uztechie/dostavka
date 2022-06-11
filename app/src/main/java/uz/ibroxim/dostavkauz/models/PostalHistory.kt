@@ -20,12 +20,6 @@ data class PostalHistory(
 
     ):Serializable
 
-data class SenderAddress(
-    val sender_address_name:String?,
-    val latitude:String?,
-    val longitude:String?,
-):Serializable
-
 data class ReceiverAddress(
     val street:String?,
     val quarters_name:String?,

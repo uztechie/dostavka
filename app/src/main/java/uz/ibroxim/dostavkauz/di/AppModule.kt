@@ -11,7 +11,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.scalars.ScalarsConverterFactory
 import uz.ibroxim.dostavkauz.utils.Constants
 import uz.techie.airshop.db.AppDatabase
 import uz.techie.airshop.network.RetrofitApi
@@ -26,7 +25,7 @@ object AppModule {
     @Singleton
     fun provideRetrofitApi(): RetrofitApi =
         Retrofit.Builder()
-            .baseUrl(Constants.BASE_URL)
+            .baseUrl(Constants.BASE_URL_WITH_API)
             .client(httpClient())
             .addConverterFactory(GsonConverterFactory.create())
             .build().create(RetrofitApi::class.java)

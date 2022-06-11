@@ -31,6 +31,11 @@ class AppRepository @Inject constructor(
     suspend fun registerCustomer(map:HashMap<String, Any>) = retrofitApi.registerCustomer(map)
     suspend fun updateCustomer(map:HashMap<String, Any>, token:String) = retrofitApi.updateCustomer(map, token)
 
+    suspend fun uploadCustomerPassport(
+        map:HashMap<String, RequestBody>,
+        file: MultipartBody.Part
+    ) = retrofitApi.uploadCustomerPassport(map, file)
+
     //postal
 
     suspend fun uploadPostalWithCustomer(
@@ -63,6 +68,17 @@ class AppRepository @Inject constructor(
     suspend fun loadNews(token: String) = retrofitApi.loadNews(token)
     suspend fun loadPostalHistory(token: String) = retrofitApi.loadPostalHistory(token)
 
+    //driver part
+    //new orders
+    suspend fun loadNewOrders(token: String) = retrofitApi.loadNewOrders(token)
+    suspend fun searchByBarcode(barcode:String, token: String) = retrofitApi.searchByBarcode(barcode, token)
+    suspend fun updateOrder(map:HashMap<String, RequestBody>, file:MultipartBody.Part, token: String) = retrofitApi.updateOrder(map, file, token)
+    suspend fun deleteOrder(barcode: String, token: String) = retrofitApi.deleteOrder(barcode, token)
+    suspend fun loadOrdersHistory() = retrofitApi.loadOrdersHistory()
+
+
+    //status
+    suspend fun updateOrderStatus(status:Int, postalId:Int) = retrofitApi.updateOrderStatus(status, postalId)
 
 
 

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/newOrdersFragment"
+        android:icon="@drawable/ic_baseline_star_24"
+        android:title="@string/yangi_buyurtmalar" />
+
+    <item
+        android:id="@+id/createMailFragment"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="@string/buyurtma_izlash" />
+
+    <item
+        android:id="@+id/tariffDriverFragment"
+        android:icon="@drawable/ic_baseline_info_24"
+        android:title="@string/tariflar" />
+
+    <item
+        android:id="@+id/newsDriverFragment"
+        android:icon="@drawable/ic_baseline_newspaper_24"
+        android:title="@string/yangiliklar" />
+
+    <item
+        android:id="@+id/cabinetDriverFragment"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="@string/kabinet" />
+</menu>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:background="@color/colorBackground"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <include
+        layout="@layout/custom_toolbar"/>
+
+
+
+    <ScrollView
+        android:id="@+id/new_order_details_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_marginTop="32dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/buyurtmachi_ma_lumotlari"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginHorizontal="16dp"/>
+            <com.google.android.material.card.MaterialCardView
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:textSize="@dimen/text_size_normal"
+                        android:textColor="@color/black"
+                        android:text="Name"
+                        android:drawablePadding="16dp"
+                        android:id="@+id/new_order_details_tv_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:drawableStartCompat="@drawable/ic_baseline_person_24" />
+
+
+                    <LinearLayout
+                        android:layout_marginTop="8dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <TextView
+                            android:layout_marginEnd="12dp"
+                            android:textSize="@dimen/text_size_normal"
+                            android:textColor="@color/black"
+                            android:text="phone"
+                            android:drawablePadding="16dp"
+                            android:id="@+id/new_order_details_tv_phone"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            app:drawableStartCompat="@drawable/ic_baseline_phone_android_24" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/new_order_details_btn_call"
+                            app:backgroundTint="@color/colorPrimaryLight"
+                            android:textColor="@color/colorPrimary"
+                            app:iconTint="@color/colorPrimary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="45dp"
+                            app:cornerRadius="4dp"
+                            android:text="@string/qo_ng_iroq"
+                            android:textAllCaps="false"
+                            android:textSize="12sp"
+                            app:icon="@drawable/ic_baseline_call_24"
+                            app:iconSize="16dp"/>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/buyurtmachi_manzili"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginHorizontal="16dp"/>
+            <com.google.android.material.card.MaterialCardView
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:textSize="@dimen/text_size_normal"
+                        android:textColor="@color/black"
+                        android:text="location"
+                        android:drawablePadding="16dp"
+                        android:id="@+id/new_order_details_tv_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:drawableStartCompat="@drawable/ic_baseline_location_on_20" />
+
+
+                    <TextView
+                        android:layout_marginTop="8dp"
+                        android:textSize="@dimen/text_size_normal"
+                        android:textColor="@color/black"
+                        android:text="Lat lon"
+                        android:drawablePadding="16dp"
+                        android:id="@+id/new_order_details_tv_latlon"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:drawableStartCompat="@drawable/ic_baseline_location_on_20" />
+
+
+                    <uz.ibroxim.dostavkauz.view.CustomMapView
+                        android:layout_marginTop="12dp"
+                        android:id="@+id/new_order_details_map"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_marginTop="16dp"
+                        android:layout_gravity="end"
+                        android:id="@+id/new_order_details_btn_map"
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        app:cornerRadius="4dp"
+                        android:text="@string/xarita_orqali_ochish"
+                        app:backgroundTint="@color/colorPrimaryLight"
+                        android:textColor="@color/colorPrimary"
+                        android:textAllCaps="false"
+                        android:textSize="12sp"
+                        app:iconTint="@color/colorPrimary"
+                        app:icon="@drawable/ic_baseline_location_searching_24"
+                        app:iconSize="16dp"/>
+
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </ScrollView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="16dp">
+
+        <com.google.android.material.button.MaterialButton
+            app:icon="@drawable/ic_baseline_delete_forever_24"
+            app:iconTint="@color/white"
+            app:iconSize="20dp"
+            app:iconGravity="textStart"
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            app:cornerRadius="8dp"
+            app:backgroundTint="@color/red"
+            android:text="@string/o_chirish"
+            android:id="@+id/new_order_details_btn_cancel"
+            android:layout_weight="1"
+            android:textAllCaps="false"
+            android:layout_marginEnd="8dp"/>
+        <com.google.android.material.button.MaterialButton
+            app:icon="@drawable/ic_baseline_check_24"
+            app:iconTint="@color/white"
+            app:iconSize="20dp"
+            app:iconGravity="textStart"
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            app:cornerRadius="8dp"
+            app:backgroundTint="@color/colorPrimary"
+            android:text="@string/qabul_qilish"
+            android:id="@+id/new_order_details_btn_accept"
+            android:layout_weight="1"
+            android:textAllCaps="false"
+            android:layout_marginStart="8dp"/>
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
