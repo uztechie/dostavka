@@ -181,6 +181,7 @@ class ChooseLocationFragment : Fragment(R.layout.fragment_choose_location) {
         super.onStop()
         choose_location_mapview1.onStop()
         MapKitFactory.getInstance().onStop()
+        job?.cancel()
         Log.d(TAG, "onStop: ")
     }
 

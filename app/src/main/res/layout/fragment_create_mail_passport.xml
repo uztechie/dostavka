@@ -38,13 +38,114 @@
         android:layout_weight="1">
 
         <LinearLayout
-            android:padding="22dp"
+            android:padding="16dp"
+            android:id="@+id/create_mail_passport_layout"
+            android:layout_marginTop="24dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
-                android:layout_marginTop="12dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="6dp"
+                android:text="@string/pasport_malumotlari"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_medium" />
+
+
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="6dp"
+                    android:text="@string/pasport_seriya_raqami"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_small" />
+
+                <TextView
+                    android:textStyle="bold"
+                    android:id="@+id/create_mail_passport_tv_help1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="6dp"
+                    android:text="@string/yordam"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+
+
+            <EditText
+                android:maxLength="9"
+                android:inputType="textCapCharacters"
+                android:id="@+id/create_mail_passport_serial"
+                style="@style/edittextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edittext_height"
+                android:layout_margin="6dp"
+                android:background="@drawable/edittext_bg"
+                android:drawableStart="@drawable/ic_id_card"
+                android:drawablePadding="8dp"
+                android:elevation="@dimen/elevation_size"
+                android:hint="AA0000001"
+                android:paddingHorizontal="16dp"
+                android:textColorHint="@color/colorHint"
+                app:drawableTint="@color/gray" />
+
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="6dp"
+                    android:text="@string/shaxsiy_identifikatsiya_raqami_14_raqam"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_small" />
+
+                <TextView
+                    android:textStyle="bold"
+                    android:id="@+id/create_mail_passport_tv_help2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="6dp"
+                    android:text="@string/yordam"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+
+
+
+            <EditText
+                android:inputType="number"
+                android:id="@+id/create_mail_passport_id"
+                style="@style/edittextStyle"
+                android:maxLength="14"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edittext_height"
+                android:layout_margin="6dp"
+                android:background="@drawable/edittext_bg"
+                android:drawableStart="@drawable/ic_id_card"
+                android:drawablePadding="8dp"
+                android:elevation="@dimen/elevation_size"
+                android:hint="00000000000002"
+                android:paddingHorizontal="16dp"
+                android:textColorHint="@color/colorHint"
+                app:drawableTint="@color/gray" />
+
+            <TextView
+                android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="6dp"
@@ -52,16 +153,25 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_small" />
 
-
-            <ImageView
-                android:src="@drawable/passport"
-                android:id="@+id/create_mail_passport_img"
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:scaleType="fitCenter"/>
+                android:layout_height="wrap_content"
+                app:cardElevation="2dp"
+                app:cardCornerRadius="8dp"
+                android:layout_marginHorizontal="2dp"
+                android:layout_marginVertical="4dp"
+                >
+                <ImageView
+                    android:src="@drawable/passport"
+                    android:id="@+id/create_mail_passport_imageview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"/>
+            </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/create_mail_passport_btn_choose_image"
+                android:layout_marginTop="8dp"
+                android:id="@+id/create_mail_passport_btn_select_image"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:text="@string/rasmni_tanlash"
@@ -77,16 +187,16 @@
 
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/create_mail_passport_btn_submit"
+        android:id="@+id/create_mail_passport_btn_next"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:enabled="true"
         android:textColor="@color/white"
-        android:text="@string/yuborish"
+        android:text="@string/keyingisi"
         android:textAllCaps="false"
         app:cornerRadius="@dimen/edittext_corner_radius"
         android:layout_marginVertical="16dp"
-        android:layout_marginHorizontal="22dp"
+        android:layout_marginHorizontal="16dp"
         app:elevation="@dimen/elevation_size"/>
 
 </LinearLayout>

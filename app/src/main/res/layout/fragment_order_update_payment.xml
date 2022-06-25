@@ -1,8 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:background="@color/lightGray"
+<LinearLayout android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/order_payment_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="@color/colorPrimary"/>
+
+        <TextView
+            android:layout_marginTop="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/to_lov_turi"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_small" />
+        <RadioGroup
+            android:id="@+id/order_payment_radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <RadioButton
+                android:checked="true"
+                android:layout_marginEnd="4dp"
+                android:id="@+id/order_payment_radio_cash"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/naqt"/>
+
+            <RadioButton
+                android:layout_marginStart="4dp"
+                android:id="@+id/order_payment_radio_card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/plastik"/>
+        </RadioGroup>
+
+        <TextView
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/to_lov_miqdori"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_small" />
+
+        <EditText
+
+            android:layout_marginTop="4dp"
+            android:id="@+id/order_payment_et_amount"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/edittext_bg"
+            android:hint="@string/summani_kiriting"
+            android:inputType="number"
+            android:maxLines="1"
+            android:paddingHorizontal="16dp"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/qo_shimcha_izohlar"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_small" />
+
+        <EditText
+            android:layout_marginTop="4dp"
+            android:id="@+id/order_payment_et_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:gravity="start"
+            android:paddingVertical="12dp"
+            android:background="@drawable/edittext_bg"
+            android:hint="@string/izohlar"
+            android:inputType="textMultiLine"
+            android:maxLines="3"
+            android:paddingHorizontal="16dp"
+            android:textColor="@color/black" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:text="@string/saqlash"
+            android:id="@+id/order_payment_btn_save"
+            android:textAllCaps="false"
+            app:cornerRadius="8dp"
+            android:layout_marginTop="24dp"
+            />
+
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>

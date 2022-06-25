@@ -22,6 +22,7 @@
                 android:adjustViewBounds="true" />
 
             <ImageView
+                android:background="@drawable/rounded_bg_for_icon"
                 android:id="@+id/news_details_btn_close"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
@@ -29,7 +30,7 @@
                 android:layout_margin="16dp"
                 android:padding="4dp"
                 android:src="@drawable/ic_baseline_close_24"
-                app:tint="@color/black" />
+                app:tint="@color/colorPrimary" />
         </FrameLayout>
 
 

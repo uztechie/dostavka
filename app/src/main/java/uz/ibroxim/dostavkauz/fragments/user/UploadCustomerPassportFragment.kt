@@ -91,6 +91,7 @@ class UploadCustomerPassportFragment:Fragment(R.layout.fragment_upload_customer_
                 if (!user.passport_image.isNullOrEmpty()){
                     Glide.with(this)
                         .load(Constants.BASE_URL+user.passport_image)
+                        .apply(Utils.options)
                         .into(customer_passport_imageview)
                 }
 
@@ -207,7 +208,7 @@ class UploadCustomerPassportFragment:Fragment(R.layout.fragment_upload_customer_
             val passport = MultipartBody.Part.createFormData("passport_image", file.name, filePart)
 
 
-            viewModel.uploadCustomerPassport(map, passport)
+            viewModel.uploadCustomerPassport(map, passport, SharedPref.token)
 
         }
     }

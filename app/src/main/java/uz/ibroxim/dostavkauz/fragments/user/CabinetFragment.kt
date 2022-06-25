@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.ktx.messaging
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.custom_toolbar.*
 import kotlinx.android.synthetic.main.dialog_update_user.*
@@ -18,6 +20,7 @@ import uz.ibroxim.dostavkauz.R
 import uz.ibroxim.dostavkauz.dialog.CustomProgressDialog
 import uz.ibroxim.dostavkauz.dialog.SuccessFailedDialog
 import uz.ibroxim.dostavkauz.models.User
+import uz.ibroxim.dostavkauz.utils.Constants
 import uz.ibroxim.dostavkauz.utils.Resource
 import uz.ibroxim.dostavkauz.utils.SharedPref
 import uz.ibroxim.dostavkauz.utils.Utils
@@ -54,6 +57,10 @@ class CabinetFragment:Fragment(R.layout.fragment_cabinet) {
             SuccessFailedDialog.SuccessFailedCallback {
             override fun onActionButtonClick(clickAction: String) {
                 if (clickAction == SuccessFailedDialog.ACTION_SUCCESS){
+
+                    Firebase.messaging.unsubscribeFromTopic(Constants.TOPIC_DRIVER)
+                    Firebase.messaging.unsubscribeFromTopic(Constants.TOPIC_CUSTOMER)
+
                     SharedPref.token = ""
                     viewModel.deleteUser().invokeOnCompletion {
                         startActivity(Intent(requireActivity(), LoginActivity::class.java))

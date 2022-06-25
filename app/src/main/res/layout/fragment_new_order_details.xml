@@ -12,7 +12,7 @@
 
 
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/new_order_details_scrollview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -95,6 +95,34 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
+
+            <TextView
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/buyumlar"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginHorizontal="16dp"/>
+            <com.google.android.material.card.MaterialCardView
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:nestedScrollingEnabled="false"
+                    android:id="@+id/new_order_details_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
             <TextView
                 android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
@@ -167,7 +195,7 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 
     <LinearLayout

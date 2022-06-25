@@ -24,6 +24,7 @@ import uz.ibroxim.dostavkauz.dialog.CustomProgressDialog
 import uz.ibroxim.dostavkauz.dialog.SuccessFailedDialog
 import uz.ibroxim.dostavkauz.models.News
 import uz.ibroxim.dostavkauz.models.PostalHistory
+import uz.ibroxim.dostavkauz.utils.Constants
 import uz.ibroxim.dostavkauz.utils.Resource
 import uz.ibroxim.dostavkauz.utils.SharedPref
 import uz.ibroxim.dostavkauz.utils.Utils
@@ -59,6 +60,8 @@ class HomeFragment:Fragment(R.layout.fragment_home), TextWatcher {
 
         home_et_search.addTextChangedListener(this)
 
+        Utils.subscribeTopic(Constants.TOPIC_CUSTOMER)
+        Utils.subscribeTopic(Constants.TOPIC_ALL)
 
         successFailedDialog = SuccessFailedDialog(requireContext(), object :
             SuccessFailedDialog.SuccessFailedCallback {
@@ -106,9 +109,10 @@ class HomeFragment:Fragment(R.layout.fragment_home), TextWatcher {
                     customProgressDialog.dismiss()
                     response.data?.let {
                         if (it.status == 200){
-                            val list = it.data
+                            val list = it.data?.toMutableList()?.sortedByDescending {
+                                it.created_at
+                            }
                             postalHisAdapter.differ.submitList(list)
-                            historyList.clear()
                             historyList = list as MutableList<PostalHistory>
                         }
                         else{

@@ -147,35 +147,6 @@
 
 
 
-            <TextView
-                android:layout_marginTop="12dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="6dp"
-                android:text="@string/nimalarni_yuborasiz"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_small" />
-
-            <EditText
-                android:layout_margin="6dp"
-                android:elevation="@dimen/elevation_size"
-                android:id="@+id/mail_et_location_mail_title"
-                style="@style/edittextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/edittext_bg"
-                android:gravity="top|left"
-                android:hint="@string/yuk_nomlarini_kiriting"
-                android:inputType="textMultiLine"
-                android:lines="3"
-                android:paddingHorizontal="16dp"
-                android:paddingVertical="16dp"
-                android:privateImeOptions="nm"
-                android:scrollbars="vertical"
-                android:textColorHint="@color/colorHint"/>
-
-
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

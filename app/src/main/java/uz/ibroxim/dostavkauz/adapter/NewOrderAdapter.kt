@@ -49,10 +49,11 @@ class NewOrderAdapter(val status:Int, val context:Context, val callBack: NewOrde
             holder.itemView.adapter_new_order_address.text = order.sender_address?.sender_address_name
             holder.itemView.adapter_new_order_phone.text = order.sender_phone
             holder.itemView.adapter_new_order_date.text = Utils.reformatDateFromStringLocale(order.created_at)
-            if (status == StatusList.Accepted.id){
-                holder.itemView.adapter_new_order_status.text = StatusList.Accepted.title
-            }
-            else{
+
+            holder.itemView.adapter_new_order_status.text = order.status_name
+
+
+            if (status == 0){
                 holder.itemView.adapter_new_order_status.text = context.getString(R.string.yangi)
             }
 

@@ -69,7 +69,7 @@ interface RetrofitApi {
     suspend fun uploadCustomerPassport(
         @PartMap map:HashMap<String, RequestBody>,
         @Part file:MultipartBody.Part,
-        @Header("Authorization") token: String = SharedPref.token,
+        @Header("Authorization") token: String,
         @Header("MyToken") myToken: String = Constants.MY_TOKEN
     ):Response<PostalResponse>
 
@@ -78,20 +78,19 @@ interface RetrofitApi {
     //postal
 
     @Multipart
-    @POST("postal-customer-create/")
-    suspend fun uploadPostalWithCustomer(
+    @POST("customer-and-passport-create/")
+    suspend fun createReceiver(
         @PartMap map:HashMap<String, RequestBody>,
         @Part file:MultipartBody.Part,
-        @Header("Authorization") token: String,
+        @Header("Authorization") token: String = SharedPref.token,
         @Header("MyToken") myToken: String = Constants.MY_TOKEN
-    ):Response<PostalResponse>
+    ):Response<Login>
 
-    @Multipart
+
     @POST("postal-create/")
     suspend fun uploadPostal(
-        @PartMap map:HashMap<String, RequestBody>,
-        @Part file:MultipartBody.Part,
-        @Header("Authorization") token: String,
+        @Body map:HashMap<String, Any>,
+        @Header("Authorization") token: String = SharedPref.token,
         @Header("MyToken") myToken: String = Constants.MY_TOKEN
     ):Response<PostalResponse>
 
@@ -151,7 +150,7 @@ interface RetrofitApi {
     ):Response<OrderResponse>
 
     @FormUrlEncoded
-    @GET("driver-search-barcode-id/")
+    @POST("driver-search-barcode-id/")
     suspend fun searchByBarcode(
         @Field("barcode_id") barCode:String,
         @Header("Authorization") token: String,
@@ -195,6 +194,54 @@ interface RetrofitApi {
         @Header("Authorization") token: String = SharedPref.token,
         @Header("MyToken") myToken: String = Constants.MY_TOKEN
     ):Response<UpdateStatusResponse>
+
+
+    //audio part
+    @Multipart
+    @POST("driver-audio-create/")
+    suspend fun uploadAudio(
+        @Part("postal") postal:Int,
+        @Part file:MultipartBody.Part,
+        @Header("Authorization") token: String = SharedPref.token,
+        @Header("MyToken") myToken: String = Constants.MY_TOKEN
+    ):Response<PostalResponse>
+
+
+    //items
+    @FormUrlEncoded
+    @POST("postal-add-items/")
+    suspend fun addItem(
+        @FieldMap map:HashMap<String, Any>,
+        @Header("Authorization") token: String = SharedPref.token,
+        @Header("MyToken") myToken: String = Constants.MY_TOKEN
+    ):Response<ItemResponse>
+
+    @FormUrlEncoded
+    @POST("postal-update-items/")
+    suspend fun updateItem(
+        @FieldMap map:HashMap<String, Any>,
+        @Header("Authorization") token: String = SharedPref.token,
+        @Header("MyToken") myToken: String = Constants.MY_TOKEN
+    ):Response<ItemResponse>
+
+    @FormUrlEncoded
+    @POST("postal-delete-items/")
+    suspend fun deleteItem(
+        @Field("item_id") itemId:Int,
+        @Header("Authorization") token: String = SharedPref.token,
+        @Header("MyToken") myToken: String = Constants.MY_TOKEN
+    ):Response<ItemResponse>
+
+
+    //payment
+    @FormUrlEncoded
+    @POST("driver-payment-create/")
+    suspend fun createPayment(
+        @FieldMap map:HashMap<String, Any>,
+        @Header("Authorization") token: String = SharedPref.token,
+        @Header("MyToken") myToken: String = Constants.MY_TOKEN
+    ):Response<PaymentResponse>
+
 
 
 }

@@ -140,5 +140,9 @@ dependencies {
 
     implementation 'com.github.chrisbanes:PhotoView:2.0.0'
 
+    //scanning barcode
+    implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
+
+
 
 }

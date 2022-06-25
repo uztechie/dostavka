@@ -9,6 +9,7 @@ import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
+import retrofit2.http.Field
 import uz.ibroxim.dostavkauz.models.*
 import uz.ibroxim.dostavkauz.utils.Resource
 import uz.techie.mexmash.models.District
@@ -36,6 +37,7 @@ class AppViewModel @Inject constructor(
     var updateCustomerResponse:MutableLiveData<Resource<Login>> = MutableLiveData()
 
     val postalResponse:MutableLiveData<Resource<PostalResponse>> = MutableLiveData()
+    val createReceiverResponse:MutableLiveData<Resource<Login>> = MutableLiveData()
 
     val tariffResponse:MutableLiveData<Resource<List<Tariff>>> = MutableLiveData()
     val newsResponse:MutableLiveData<Resource<List<News>>> = MutableLiveData()
@@ -43,14 +45,22 @@ class AppViewModel @Inject constructor(
     val postalHistoryResponse:MutableLiveData<Resource<PostalHistoryResponse>> = MutableLiveData()
 
     val newOrderResponse:MutableLiveData<Resource<OrderResponse>> = MutableLiveData()
-    val searchByBarcodeResponse:MutableLiveData<Resource<SearchOrderResponse>> = MutableLiveData()
+    var searchByBarcodeResponse:MutableLiveData<Resource<SearchOrderResponse>> = MutableLiveData()
     val updateOrderResponse:MutableLiveData<Resource<OrderResponse>> = MutableLiveData()
     val deleteOrderResponse:MutableLiveData<Resource<DeleteOrderResponse>> = MutableLiveData()
     val orderHistoryResponse:MutableLiveData<Resource<OrderResponse>> = MutableLiveData()
 
     val updateStatusResponse:MutableLiveData<Resource<UpdateStatusResponse>> = MutableLiveData()
 
+    val uploadAudioResponse:MutableLiveData<Resource<PostalResponse>> = MutableLiveData()
+
     val uploadCustomerPassportResponse:MutableLiveData<Resource<PostalResponse>> = MutableLiveData()
+
+    val addItemResponse:MutableLiveData<Resource<ItemResponse>> = MutableLiveData()
+    val updateItemResponse:MutableLiveData<Resource<ItemResponse>> = MutableLiveData()
+    val deleteItemResponse:MutableLiveData<Resource<ItemResponse>> = MutableLiveData()
+
+    val createPaymentResponse:MutableLiveData<Resource<PaymentResponse>> = MutableLiveData()
 
 
 
@@ -153,10 +163,10 @@ class AppViewModel @Inject constructor(
         }
     }
 
-    fun uploadCustomerPassport(  map:HashMap<String, RequestBody>, file: MultipartBody.Part) = viewModelScope.launch {
+    fun uploadCustomerPassport(  map:HashMap<String, RequestBody>, file: MultipartBody.Part, token: String) = viewModelScope.launch {
         uploadCustomerPassportResponse.postValue(Resource.Loading())
         try {
-            val response = repository.uploadCustomerPassport(map, file)
+            val response = repository.uploadCustomerPassport(map, file, token)
             uploadCustomerPassportResponse.postValue(handleUploadCustomerPassport(response))
         }catch (e: UnknownHostException) {
             uploadCustomerPassportResponse.postValue(Resource.Error("Интернетга боғланишда хатолик!"))
@@ -170,32 +180,29 @@ class AppViewModel @Inject constructor(
 
     //postal
 
-    fun uploadPostalWithCustomer(
+    fun createReceiver(
         map:HashMap<String, RequestBody>,
-        file: MultipartBody.Part,
-        token: String
+        file: MultipartBody.Part
     ) = viewModelScope.launch {
-        postalResponse.postValue(Resource.Loading())
+        createReceiverResponse.postValue(Resource.Loading())
         try {
-            val response = repository.uploadPostalWithCustomer(map, file, token)
-            postalResponse.postValue(handlePostalResponse(response))
+            val response = repository.createReceiver(map, file)
+            createReceiverResponse.postValue(handleLogin(response))
         }catch (e: UnknownHostException) {
-            postalResponse.postValue(Resource.Error("Интернетга боғланишда хатолик!"))
+            createReceiverResponse.postValue(Resource.Error("Интернетга боғланишда хатолик!"))
         } catch (e: InterruptedIOException) {
-            postalResponse.postValue(Resource.Error("Интернетга боғланишда хатолик!"))
+            createReceiverResponse.postValue(Resource.Error("Интернетга боғланишда хатолик!"))
         } catch (e: Exception) {
-            postalResponse.postValue(Resource.Error(message = e.toString()))
+            createReceiverResponse.postValue(Resource.Error(message = e.toString()))
         }
     }
 
     fun uploadPostal(
-        map:HashMap<String, RequestBody>,
-        file: MultipartBody.Part,
-        token: String
+        map:HashMap<String, Any>
     ) = viewModelScope.launch {
         postalResponse.postValue(Resource.Loading())
         try {
-            val response = repository.uploadPostal(map, file, token)
+            val response = repository.uploadPostal(map)
             postalResponse.postValue(handlePostalResponse(response))
         }catch (e: UnknownHostException) {
             postalResponse.postValue(Resource.Error("Интернетга боғланишда хатолик!"))
@@ -340,6 +347,80 @@ class AppViewModel @Inject constructor(
     }
 
 
+    //audio
+    fun uploadAudio(postalId:Int, file:MultipartBody.Part) = viewModelScope.launch {
+        uploadAudioResponse.postValue(Resource.Loading())
+        try {
+            val response = repository.uploadAudio(postalId, file)
+            uploadAudioResponse.postValue(handlePostalResponse(response))
+        }catch (e: UnknownHostException) {
+            uploadAudioResponse.postValue(Resource.Error("Интернетга боғланишда хатолик!"))
+        } catch (e: InterruptedIOException) {
+            uploadAudioResponse.postValue(Resource.Error("Интернетга боғланишда хатолик!"))
+        } catch (e: Exception) {
+            uploadAudioResponse.postValue(Resource.Error(message = e.toString()))
+        }
+    }
+
+    //items
+    fun requestAddItem(map:HashMap<String, Any>) = viewModelScope.launch {
+        addItemResponse.postValue(Resource.Loading())
+        try {
+            val response = repository.addItem(map)
+            addItemResponse.postValue(handleItemResponse(response))
+        }catch (e: UnknownHostException) {
+            addItemResponse.postValue(Resource.Error("Интернетга боғланишда хатолик!"))
+        } catch (e: InterruptedIOException) {
+            addItemResponse.postValue(Resource.Error("Интернетга боғланишда хатолик!"))
+        } catch (e: Exception) {
+            addItemResponse.postValue(Resource.Error(message = e.toString()))
+        }
+    }
+
+    fun requestUpdateItem(map:HashMap<String, Any>) = viewModelScope.launch {
+        updateItemResponse.postValue(Resource.Loading())
+        try {
+            val response = repository.updateItem(map)
+            updateItemResponse.postValue(handleItemResponse(response))
+        }catch (e: UnknownHostException) {
+            updateItemResponse.postValue(Resource.Error("Интернетга боғланишда хатолик!"))
+        } catch (e: InterruptedIOException) {
+            updateItemResponse.postValue(Resource.Error("Интернетга боғланишда хатолик!"))
+        } catch (e: Exception) {
+            updateItemResponse.postValue(Resource.Error(message = e.toString()))
+        }
+    }
+
+    fun requestDeleteItem(itemId:Int) = viewModelScope.launch {
+        deleteItemResponse.postValue(Resource.Loading())
+        try {
+            val response = repository.deleteItem(itemId)
+            deleteItemResponse.postValue(handleItemResponse(response))
+        }catch (e: UnknownHostException) {
+            deleteItemResponse.postValue(Resource.Error("Интернетга боғланишда хатолик!"))
+        } catch (e: InterruptedIOException) {
+            deleteItemResponse.postValue(Resource.Error("Интернетга боғланишда хатолик!"))
+        } catch (e: Exception) {
+            deleteItemResponse.postValue(Resource.Error(message = e.toString()))
+        }
+    }
+
+
+    //payment
+    fun createPayment(map:HashMap<String, Any>) = viewModelScope.launch {
+        createPaymentResponse.postValue(Resource.Loading())
+        try {
+            val response = repository.createPayment(map)
+            createPaymentResponse.postValue(handlePaymentResponse(response))
+        }catch (e: UnknownHostException) {
+            createPaymentResponse.postValue(Resource.Error("Интернетга боғланишда хатолик!"))
+        } catch (e: InterruptedIOException) {
+            createPaymentResponse.postValue(Resource.Error("Интернетга боғланишда хатолик!"))
+        } catch (e: Exception) {
+            createPaymentResponse.postValue(Resource.Error(message = e.toString()))
+        }
+    }
+
 
 
 
@@ -470,6 +551,26 @@ class AppViewModel @Inject constructor(
 
     private fun handleUpdateStatusResponse(response:Response<UpdateStatusResponse>):Resource<UpdateStatusResponse>{
         Log.d(TAG, "handleUpdateStatusResponse: "+response.body())
+        if (response.isSuccessful){
+            response.body()?.let {
+                return Resource.Success(it)
+            }
+        }
+        return Resource.Error(response.message())
+    }
+
+    private fun handleItemResponse(response:Response<ItemResponse>):Resource<ItemResponse>{
+        Log.d(TAG, "handleItemResponse: "+response.body())
+        if (response.isSuccessful){
+            response.body()?.let {
+                return Resource.Success(it)
+            }
+        }
+        return Resource.Error(response.message())
+    }
+
+    private fun handlePaymentResponse(response:Response<PaymentResponse>):Resource<PaymentResponse>{
+        Log.d(TAG, "handlePaymentResponse: "+response.body())
         if (response.isSuccessful){
             response.body()?.let {
                 return Resource.Success(it)

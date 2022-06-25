@@ -49,7 +49,7 @@ class CreateMailFragment:Fragment(R.layout.fragment_create_mail_location) {
 
         checkPassportInfo()
 
-//        findNavController().navigate(CreateMailFragmentDirections.actionCreateMailFragmentToCreateMailPhoneFragment())
+//        findNavController().navigate(CreateMailFragmentDirections.actionCreateMailFragmentToCreateMailItemsFragment())
 
         mail_et_location_from.setOnClickListener {
             findNavController().navigate(CreateMailFragmentDirections.actionCreateMailFragmentToChooseLocationFragment())
@@ -99,15 +99,12 @@ class CreateMailFragment:Fragment(R.layout.fragment_create_mail_location) {
             mail_et_location_address.setText(SharedPref.receiver_address)
         }
 
-        if (SharedPref.receiver_mailTitle.isNotEmpty()){
-            mail_et_location_mail_title.setText(SharedPref.receiver_mailTitle)
-        }
 
 
 
 
         create_mail_location_btn_next.setOnClickListener {
-            val mailTitles = mail_et_location_mail_title.text.toString().trim()
+
             val address = mail_et_location_address.text.toString().trim()
 
             if (SharedPref.customer_latitude == "0.0" || SharedPref.customer_longitude == "0.0"){
@@ -133,17 +130,13 @@ class CreateMailFragment:Fragment(R.layout.fragment_create_mail_location) {
                 return@setOnClickListener
             }
 
-            if (mailTitles.isEmpty()){
-                Utils.toastIconError(requireActivity(), getString(R.string.yuk_nomlarini_kiriting))
-                return@setOnClickListener
-            }
+
 
 
             SharedPref.receiver_region = mail_et_location_province.text.toString()
             SharedPref.receiver_district = mail_et_location_region.text.toString()
             SharedPref.receiver_quarter = mail_et_location_quarter.text.toString()
             SharedPref.receiver_address = mail_et_location_address.text.toString()
-            SharedPref.receiver_mailTitle = mailTitles
 
 
             findNavController().navigate(CreateMailFragmentDirections.actionCreateMailFragmentToCreateMailPhoneFragment())
@@ -187,10 +180,11 @@ class CreateMailFragment:Fragment(R.layout.fragment_create_mail_location) {
                     add(getString(R.string.telefon_raqami))
                     add(getString(R.string.qabul_qiluvchi_malumotlari))
                     add(getString(R.string.passport))
+                    add(getString(R.string.buyumlar))
                 }
             }) // You should specify only steps number or steps array of strings.
             // In case you specify both steps array is chosen.
-            .stepsNumber(4)
+            .stepsNumber(5)
             .animationDuration(resources.getInteger(android.R.integer.config_shortAnimTime))
             // other state methods are equal to the corresponding xml attributes
             .commit()

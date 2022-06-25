@@ -6,24 +6,20 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import uz.ibroxim.dostavkauz.fragments.driver.OrderUpdateAudioFragment
-import uz.ibroxim.dostavkauz.fragments.driver.OrderUpdatePassportFragment
-import uz.ibroxim.dostavkauz.fragments.driver.OrderUpdatePaymentFragment
-import uz.ibroxim.dostavkauz.fragments.driver.OrderUpdateReceiverInfoFragment
+import uz.ibroxim.dostavkauz.fragments.driver.*
 
 class OrderUpdateViewPager(fragmentManager: FragmentManager, lifecycle:Lifecycle):FragmentStateAdapter(fragmentManager, lifecycle)
 
 {
     override fun getItemCount(): Int {
-        return 4
+        return 3
     }
 
     override fun createFragment(position: Int): Fragment {
         return when(position){
-            0-> OrderUpdateReceiverInfoFragment()
-            1-> OrderUpdatePassportFragment()
-            2-> OrderUpdateAudioFragment()
-            3-> OrderUpdatePaymentFragment()
+            0-> OrderUpdateItemsFragment()
+            1-> OrderUpdateAudioFragment()
+            2-> OrderUpdatePaymentFragment()
             else-> throw Resources.NotFoundException("Position not found")
         }
     }

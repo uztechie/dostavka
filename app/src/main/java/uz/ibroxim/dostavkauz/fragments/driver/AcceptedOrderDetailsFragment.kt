@@ -145,8 +145,8 @@ class AcceptedOrderDetailsFragment : Fragment(R.layout.fragment_accepted_order_d
         }
 
         accepted_order_details_btn_update.setOnClickListener {
-            order?.barcode?.let {
-                findNavController().navigate(AcceptedOrderDetailsFragmentDirections.actionAcceptedOrderDetailsFragmentToOrderUpdateFragment(it.toString()))
+            order?.let {
+                findNavController().navigate(AcceptedOrderDetailsFragmentDirections.actionAcceptedOrderDetailsFragmentToOrderUpdateFragment(it))
             }
         }
 

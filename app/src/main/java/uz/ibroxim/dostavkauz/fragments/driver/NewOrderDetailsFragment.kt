@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.yandex.mapkit.Animation
 import com.yandex.mapkit.MapKitFactory
 import com.yandex.mapkit.geometry.Point
@@ -23,6 +24,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import uz.ibroxim.dostavkauz.R
+import uz.ibroxim.dostavkauz.adapter.NewOrderItemAdapter
 import uz.ibroxim.dostavkauz.dialog.CustomProgressDialog
 import uz.ibroxim.dostavkauz.dialog.SuccessFailedDialog
 import uz.ibroxim.dostavkauz.models.Order
@@ -43,6 +45,8 @@ class NewOrderDetailsFragment : Fragment(R.layout.fragment_new_order_details) {
     private lateinit var successFailedDialogForMap: SuccessFailedDialog
     private lateinit var successFailedDialogForDeleteRequest: SuccessFailedDialog
     private lateinit var successFailedDialogForDelete: SuccessFailedDialog
+
+    private lateinit var newOrderItemAdapter:NewOrderItemAdapter
     var latitude = 0.0
     var longitude = 0.0
 
@@ -57,6 +61,7 @@ class NewOrderDetailsFragment : Fragment(R.layout.fragment_new_order_details) {
         super.onViewCreated(view, savedInstanceState)
 
         initToolbar()
+        newOrderItemAdapter = NewOrderItemAdapter()
 
         arguments?.let {
             order = NewOrderDetailsFragmentArgs.fromBundle(it).order
@@ -107,6 +112,16 @@ class NewOrderDetailsFragment : Fragment(R.layout.fragment_new_order_details) {
 
             }
         })
+
+
+        new_order_details_recyclerview?.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = newOrderItemAdapter
+        }
+
+        order?.items?.let {
+            newOrderItemAdapter.differ.submitList(it)
+        }
 
 
 

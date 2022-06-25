@@ -18,6 +18,7 @@ import uz.ibroxim.dostavkauz.adapter.NewsAdapter
 import uz.ibroxim.dostavkauz.dialog.CustomProgressDialog
 import uz.ibroxim.dostavkauz.dialog.SuccessFailedDialog
 import uz.ibroxim.dostavkauz.models.News
+import uz.ibroxim.dostavkauz.utils.Constants
 import uz.ibroxim.dostavkauz.utils.Resource
 import uz.ibroxim.dostavkauz.utils.SharedPref
 import uz.ibroxim.dostavkauz.utils.Utils
@@ -28,6 +29,23 @@ class PassportInfoGuideFragment:Fragment(R.layout.fragment_passport_info_guide) 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        arguments?.let {
+            val url = PassportInfoGuideFragmentArgs.fromBundle(it).url
+            if (url.isEmpty()){
+                Glide.with(this)
+                    .load(R.drawable.passport_guide)
+                    .apply(Utils.options)
+                    .into(photoview)
+            }
+            else{
+                Glide.with(this)
+                    .load(Constants.BASE_URL+url)
+                    .apply(Utils.options)
+                    .into(photoview)
+            }
+        }
+
 
         passport_guide_btn_close.setOnClickListener {
             findNavController().popBackStack()

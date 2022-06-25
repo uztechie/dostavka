@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/item_menu_update"
+        android:title="@string/taxrirlash"/>
+    <item
+        android:id="@+id/item_menu_delete"
+        android:title="@string/o_chirish"/>
+
+</menu>

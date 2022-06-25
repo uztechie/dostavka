@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:background="@color/white"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <include
+        layout="@layout/custom_toolbar"/>
+
+
+    <com.shuhart.stepview.StepView
+        android:id="@+id/add_stepview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        app:sv_selectedCircleColor="@color/colorPrimary"
+        app:sv_selectedTextColor="@color/colorPrimary"
+        app:sv_stepLineWidth="2dp"
+        app:sv_stepPadding="4dp"
+        app:sv_nextTextColor="@color/darkGray"
+        app:sv_nextStepLineColor="@color/darkGray"
+        app:sv_doneCircleColor="@color/colorAccent"
+        app:sv_doneStepLineColor="@color/colorAccent"
+        app:sv_doneCircleRadius="12dp"
+        app:sv_selectedCircleRadius="12dp"
+        app:sv_selectedStepNumberColor="@color/white"
+        app:sv_stepViewStyle="@style/StepView"
+        app:sv_doneStepMarkColor="@color/white"
+        app:sv_stepNumberTextSize="12sp"
+        app:sv_animationType="Line"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/create_mail_items_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <FrameLayout
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <View
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorPrimary"/>
+
+                <ImageView
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:id="@+id/create_mail_items_btn_add"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/ic_baseline_add_circle_outline_24"
+                    app:tint="@color/colorPrimary"
+                    android:layout_gravity="center"/>
+            </FrameLayout>
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+    <LinearLayout
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            app:iconTint="@color/colorPrimary"
+            app:iconGravity="textStart"
+            app:icon="@drawable/ic_baseline_close_24"
+            android:textColor="@color/colorPrimary"
+            android:id="@+id/create_mail_items_btn_cancel"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="55dp"
+            app:cornerRadius="8dp"
+            android:layout_gravity="bottom"
+            android:layout_marginEnd="6dp"
+            app:backgroundTint="@color/colorPrimaryLight"
+            android:text="@string/bekor_qilish"
+            android:textAllCaps="false" />
+
+        <com.google.android.material.button.MaterialButton
+            app:cornerRadius="8dp"
+            android:layout_marginStart="6dp"
+            app:iconTint="@color/white"
+            app:iconGravity="textStart"
+            app:icon="@drawable/ic_baseline_check_24"
+            android:id="@+id/create_mail_items_btn_submit"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="55dp"
+            android:layout_gravity="bottom"
+            app:backgroundTint="@color/colorPrimary"
+            android:text="@string/yuborish"
+            android:textAllCaps="false" />
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>

@@ -2,6 +2,8 @@ package uz.techie.mexmash.data
 
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import retrofit2.http.Field
+import uz.ibroxim.dostavkauz.models.Item
 import uz.ibroxim.dostavkauz.models.User
 import uz.techie.airshop.db.AppDatabase
 import uz.techie.airshop.network.RetrofitApi
@@ -33,22 +35,20 @@ class AppRepository @Inject constructor(
 
     suspend fun uploadCustomerPassport(
         map:HashMap<String, RequestBody>,
-        file: MultipartBody.Part
-    ) = retrofitApi.uploadCustomerPassport(map, file)
+        file: MultipartBody.Part,
+         token: String
+    ) = retrofitApi.uploadCustomerPassport(map, file, token)
 
     //postal
 
-    suspend fun uploadPostalWithCustomer(
+    suspend fun createReceiver(
         map:HashMap<String, RequestBody>,
-        file: MultipartBody.Part,
-        token: String
-    ) = retrofitApi.uploadPostalWithCustomer(map, file, token)
+        file: MultipartBody.Part
+    ) = retrofitApi.createReceiver(map, file)
 
     suspend fun uploadPostal(
-        map:HashMap<String, RequestBody>,
-        file: MultipartBody.Part,
-        token: String
-    ) = retrofitApi.uploadPostal(map, file, token)
+        map:HashMap<String, Any>
+    ) = retrofitApi.uploadPostal(map)
 
     suspend fun uploadPostal2(
         senderAddress: RequestBody,
@@ -79,6 +79,18 @@ class AppRepository @Inject constructor(
 
     //status
     suspend fun updateOrderStatus(status:Int, postalId:Int) = retrofitApi.updateOrderStatus(status, postalId)
+
+
+    //audio
+    suspend fun uploadAudio(postalId:Int, file:MultipartBody.Part) = retrofitApi.uploadAudio(postalId, file)
+
+    //items
+    suspend fun addItem(map:HashMap<String, Any>) = retrofitApi.addItem(map)
+    suspend fun updateItem(map:HashMap<String, Any>) = retrofitApi.updateItem(map)
+    suspend fun deleteItem(itemId:Int) = retrofitApi.deleteItem(itemId)
+
+    //payment
+    suspend fun createPayment(map:HashMap<String, Any>) = retrofitApi.createPayment(map)
 
 
 

@@ -19,6 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.custom_toolbar.*
 import kotlinx.android.synthetic.main.fragment_create_mail_location.add_stepview
 import kotlinx.android.synthetic.main.fragment_create_mail_passport.*
+import kotlinx.android.synthetic.main.fragment_upload_customer_passport.*
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -28,6 +29,7 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import uz.ibroxim.dostavkauz.R
 import uz.ibroxim.dostavkauz.dialog.CustomProgressDialog
 import uz.ibroxim.dostavkauz.dialog.SuccessFailedDialog
+import uz.ibroxim.dostavkauz.models.Item
 import uz.ibroxim.dostavkauz.utils.Resource
 import uz.ibroxim.dostavkauz.utils.SharedPref
 import uz.ibroxim.dostavkauz.utils.Utils
@@ -44,6 +46,8 @@ class CreateMailPassportFragment:Fragment(R.layout.fragment_create_mail_passport
     private lateinit var customProgressDialog:CustomProgressDialog
     private lateinit var successFailedDialog: SuccessFailedDialog
     private var fileUri:Uri? = null
+    var passportSerial = ""
+    var passportId = ""
 
 
     private val TAG = "AddFragment"
@@ -59,14 +63,15 @@ class CreateMailPassportFragment:Fragment(R.layout.fragment_create_mail_passport
             SuccessFailedDialog.SuccessFailedCallback {
             override fun onActionButtonClick(clickAction: String) {
                 if (clickAction == SuccessFailedDialog.ACTION_SUCCESS){
-                    findNavController().navigate(CreateMailPhoneFragmentDirections.actionGlobalHomeFragment())
+                    findNavController().navigate(CreateMailPassportFragmentDirections.actionCreateMailPassportFragmentToCreateMailItemsFragment())
+
                 }
             }
 
         })
 
 
-        viewModel.postalResponse.observe(viewLifecycleOwner){ response->
+        viewModel.createReceiverResponse.observe(viewLifecycleOwner){ response->
             when(response){
                 is Resource.Loading->{
                     customProgressDialog.show()
@@ -86,13 +91,25 @@ class CreateMailPassportFragment:Fragment(R.layout.fragment_create_mail_passport
                 is Resource.Success->{
                     Log.d(TAG, "onViewCreated: postalResponse "+response.data)
                     customProgressDialog.dismiss()
-                    response.data?.let {
-                        if (it.status == 200){
+                    response.data?.let { login->
+                        if (login.status == 200){
+                            login.data?.let { user ->
+                                SharedPref.receiver_id = user.id
+                                SharedPref.receiver_name = user.first_name ?: ""
+                                SharedPref.receiver_lastname = user.last_name ?: ""
+                                SharedPref.receiver_middlename = user.surname ?: "s"
+                                SharedPref.receiver_phone1 = user.phone ?: ""
+                                SharedPref.receiver_phone2 = user.phone2 ?: ""
+                                SharedPref.receiver_passport_serial = user.passport_serial ?: ""
+                                SharedPref.receiver_passport_id = user.passport_number ?: ""
+                                SharedPref.receiver_passport_image = user.passport_image ?: ""
+                            }
+
                             successFailedDialog.show()
                             successFailedDialog.setStatusImage(R.drawable.success)
                             successFailedDialog.setTitle(getString(R.string.pochta_yuborish))
-                            successFailedDialog.setMessage(it.message?:"")
-                            successFailedDialog.setButtonText(getString(R.string.yopish))
+                            successFailedDialog.setMessage(getString(R.string.yangi_foydalanuvchi_yaratildi))
+                            successFailedDialog.setButtonText(getString(R.string.keyingisi))
                             successFailedDialog.showCloseButton(false)
                             successFailedDialog.setClickAction(SuccessFailedDialog.ACTION_SUCCESS)
                         }
@@ -100,7 +117,7 @@ class CreateMailPassportFragment:Fragment(R.layout.fragment_create_mail_passport
                             successFailedDialog.show()
                             successFailedDialog.setStatusImage(R.drawable.error)
                             successFailedDialog.setTitle(getString(R.string.pochta_yuborish))
-                            successFailedDialog.setMessage(it.message?:getString(R.string.xatolik))
+                            successFailedDialog.setMessage(login.message?:getString(R.string.xatolik))
                             successFailedDialog.setButtonText(getString(R.string.bekor_qilish))
                             successFailedDialog.showCloseButton(true)
                             successFailedDialog.setClickAction(SuccessFailedDialog.ACTION_FAILED)
@@ -110,25 +127,52 @@ class CreateMailPassportFragment:Fragment(R.layout.fragment_create_mail_passport
             }
         }
 
-        create_mail_passport_btn_choose_image.setOnClickListener {
+        create_mail_passport_btn_select_image.setOnClickListener {
             val photoPickerIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             photoPickerIntent.type = "image/*"
             launchSomeActivity.launch(photoPickerIntent)
         }
 
-        create_mail_passport_btn_submit.setOnClickListener {
+        create_mail_passport_btn_next.setOnClickListener {
+
+            passportSerial = create_mail_passport_serial.text.toString().trim()
+            passportId = create_mail_passport_id.text.toString().trim()
+            if (passportSerial.length<9){
+                Utils.toastIconError(requireActivity(), getString(R.string.pasport_seriya_raqamini_toliq_kiriting))
+                return@setOnClickListener
+            }
+
+            if (passportId.length<14){
+                Utils.toastIconError(requireActivity(), getString(R.string.pasport_shir_toliq_kiriting))
+                return@setOnClickListener
+            }
+
             if (fileUri == null){
                 Utils.toastIconError(requireActivity(), getString(R.string.iltimos_pasport_rasmini_tanlang))
                 return@setOnClickListener
             }
 
-            if (SharedPref.receiver_id>-1){
-                preparePostal()
+            if (SharedPref.receiver_id>-1 && SharedPref.receiver_passport_serial.isEmpty()){
+                prepareUploadPassport()
             }
             else{
-                preparePostalWithReceiver()
+                SharedPref.receiver_passport_serial = passportSerial
+                SharedPref.receiver_passport_id = passportId
+                createReceiver()
             }
+
         }
+
+        create_mail_passport_tv_help1.setOnClickListener {
+            findNavController().navigate(CreateMailPassportFragmentDirections.actionCreateMailPassportFragmentToPassportInfoGuideFragment())
+        }
+
+        create_mail_passport_tv_help2.setOnClickListener {
+            findNavController().navigate(CreateMailPassportFragmentDirections.actionCreateMailPassportFragmentToPassportInfoGuideFragment())
+        }
+
+
+        uploadPassportResponse()
 
 
 
@@ -153,7 +197,7 @@ class CreateMailPassportFragment:Fragment(R.layout.fragment_create_mail_passport
                 } catch (e: IOException) {
                     e.printStackTrace()
                 }
-                create_mail_passport_img.setImageURI(
+                create_mail_passport_imageview.setImageURI(
                     selectedImageUri
                 )
             }
@@ -161,94 +205,119 @@ class CreateMailPassportFragment:Fragment(R.layout.fragment_create_mail_passport
     }
 
 
-    private fun preparePostalWithReceiver(){
+
+    private fun createReceiver(){
         val map = HashMap<String, RequestBody>()
 
-        val receiverAddress = SharedPref.receiver_address
-//        val receiverAddressBody = receiverAddress.toRequestBody("text/plain".toMediaTypeOrNull())
-
-        val receiverAddressBody = RequestBody.create("text/plain".toMediaTypeOrNull(), receiverAddress)
-        Log.d(TAG, "preparePostalWithReceiver: receiverAddress "+receiverAddress)
-
-        map["sender_address_name"] = (SharedPref.customer_knownAreaName+", "+SharedPref.customer_city+", "+SharedPref.customer_state+", "+SharedPref.customer_country).toRequestBody(MultipartBody.FORM)
-        map["sender_longitude"] = SharedPref.customer_longitude.toRequestBody(MultipartBody.FORM)
-        map["sender_latitude"] = SharedPref.customer_latitude.toRequestBody(MultipartBody.FORM)
-        map["description"] = SharedPref.receiver_mailTitle.toRequestBody(MultipartBody.FORM)
         map["first_name"] = SharedPref.receiver_name.toRequestBody(MultipartBody.FORM)
         map["last_name"] = SharedPref.receiver_lastname.toRequestBody(MultipartBody.FORM)
         map["surname"] = SharedPref.receiver_middlename.toRequestBody(MultipartBody.FORM)
         map["phone"] = SharedPref.receiver_phone1.toRequestBody(MultipartBody.FORM)
         map["phone2"] = SharedPref.receiver_phone2.toRequestBody(MultipartBody.FORM)
-        if (SharedPref.receiver_phone2.isEmpty()){
-            Log.d(TAG, "preparePostalWithReceiver: SharedPref.receiver_phone2 empty ")
-        }
-        if (SharedPref.receiver_phone1.isDigitsOnly()){
-        }
-        if (SharedPref.receiver_phone2.isDigitsOnly()){
-        }
-        map["note"] = SharedPref.receiver_note.toRequestBody(MultipartBody.FORM)
+
+        map["notes"] = SharedPref.receiver_note.toRequestBody(MultipartBody.FORM)
         map["quarters_id"] = SharedPref.receiver_quarterId.toString().toRequestBody(MultipartBody.FORM)
         map["street"] = SharedPref.receiver_address.toRequestBody(MultipartBody.FORM)
         map["customer_type"] = SharedPref.receiver_type.toString().toRequestBody(MultipartBody.FORM)
+        map["passport_serial"] = SharedPref.receiver_passport_serial.toRequestBody(MultipartBody.FORM)
+        map["passport_number"] = SharedPref.receiver_passport_id.toRequestBody(MultipartBody.FORM)
 
-        Log.d(TAG, "preparePostalWithReceiver: map "+map)
-        Log.d(TAG, "preparePostalWithReceiver: fileUri "+fileUri)
+        Log.d(TAG, "createReceiver: map "+map)
+        Log.d(TAG, "createReceiver: fileUri "+fileUri)
+
 
         val file = File(getPath(fileUri))
-        Log.d(TAG, "preparePostalWithReceiver: file "+file)
+        Log.d(TAG, "createReceiver: file "+file)
 
         val filePart = file.asRequestBody("image/*".toMediaType())
-        val passport = MultipartBody.Part.createFormData("passport", file.name, filePart)
+        val passport = MultipartBody.Part.createFormData("passport_image", file.name, filePart)
 
 
-        viewModel.uploadPostalWithCustomer(map, passport, SharedPref.token)
+        viewModel.createReceiver(map, passport)
 
     }
 
-    private fun preparePostal(){
+    private fun uploadPassportResponse() {
+        viewModel.uploadCustomerPassportResponse.observe(viewLifecycleOwner){ response->
+            when(response){
+                is Resource.Loading->{
+                    customProgressDialog.show()
+                }
+                is Resource.Error->{
+                    customProgressDialog.dismiss()
+                    Log.d(TAG, "onViewCreated: uploadPassportResponse error "+response.message)
+                    successFailedDialog.show()
+                    successFailedDialog.setStatusImage(R.drawable.error)
+                    successFailedDialog.setTitle(getString(R.string.pasport_malumotlari))
+                    successFailedDialog.setMessage(response.message?:getString(R.string.xatolik))
+                    successFailedDialog.setButtonText(getString(R.string.bekor_qilish))
+                    successFailedDialog.showCloseButton(true)
+                    successFailedDialog.setClickAction(SuccessFailedDialog.ACTION_FAILED)
+
+                }
+                is Resource.Success->{
+                    Log.d(TAG, "onViewCreated: uploadPassportResponse "+response.data)
+                    customProgressDialog.dismiss()
+                    response.data?.let {
+                        if (it.status == 201){
+                            successFailedDialog.show()
+                            successFailedDialog.setStatusImage(R.drawable.success)
+                            successFailedDialog.setTitle(getString(R.string.pochta_yuborish))
+                            successFailedDialog.setMessage(getString(R.string.pasport_malumotlari_yuklandi))
+                            successFailedDialog.setButtonText(getString(R.string.keyingisi))
+                            successFailedDialog.showCloseButton(false)
+                            successFailedDialog.setClickAction(SuccessFailedDialog.ACTION_SUCCESS)
+                        }
+                        else{
+                            successFailedDialog.show()
+                            successFailedDialog.setStatusImage(R.drawable.error)
+                            successFailedDialog.setTitle(getString(R.string.pasport_malumotlari))
+                            successFailedDialog.setMessage(it.message?:getString(R.string.xatolik))
+                            successFailedDialog.setButtonText(getString(R.string.bekor_qilish))
+                            successFailedDialog.showCloseButton(true)
+                            successFailedDialog.setClickAction(SuccessFailedDialog.ACTION_FAILED)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    private fun prepareUploadPassport() {
         val map = HashMap<String, RequestBody>()
-        val receiverAddress = SharedPref.receiver_address
-        val receiverAddressBody = receiverAddress.toRequestBody(MultipartBody.FORM)
-        Log.d(TAG, "preparePostal: receiverAddress "+receiverAddress)
-
-
-        map["sender_address_name"] = (SharedPref.customer_knownAreaName+", "+SharedPref.customer_city+", "+SharedPref.customer_state+", "+SharedPref.customer_country).toRequestBody(MultipartBody.FORM)
-        map["sender_longitude"] = SharedPref.customer_longitude.toRequestBody(MultipartBody.FORM)
-        map["sender_latitude"] = SharedPref.customer_latitude.toRequestBody(MultipartBody.FORM)
-        map["description"] = SharedPref.receiver_mailTitle.toRequestBody(MultipartBody.FORM)
-        map["note"] = SharedPref.receiver_note.toRequestBody(MultipartBody.FORM)
-        map["quarters_id"] = SharedPref.receiver_quarterId.toString().toRequestBody(MultipartBody.FORM)
-        map["street"] = SharedPref.receiver_address.toRequestBody(MultipartBody.FORM)
-        map["receiver_id"] = SharedPref.receiver_id.toString().toRequestBody(MultipartBody.FORM)
-
-        Log.d(TAG, "preparePostal: map "+map)
-        Log.d(TAG, "preparePostal: map "+map["street"].toString())
-        Log.d(TAG, "preparePostal: file uri "+fileUri?.path)
+        map["passport_serial"] = passportSerial.toRequestBody(MultipartBody.FORM)
+        map["passport_number"] = passportId.toRequestBody(MultipartBody.FORM)
 
         val file = File(getPath(fileUri))
-        Log.d(TAG, "preparePostalWithReceiver: file "+file)
+        Log.d(TAG, "prepareUploadPassport: file "+file)
+        Log.d(TAG, "prepareUploadPassport: map "+map)
 
         file.let {
             val filePart = file.asRequestBody("image/*".toMediaType())
-            val passport = MultipartBody.Part.createFormData("passport", file.name, filePart)
+            val passport = MultipartBody.Part.createFormData("passport_image", file.name, filePart)
 
 
-            viewModel.uploadPostal(map, passport, SharedPref.token)
+            viewModel.uploadCustomerPassport(map, passport, SharedPref.receiver_token)
 
         }
-
-
     }
 
 
     fun getPath(uri: Uri?): String? {
-        val projection = arrayOf(MediaStore.Images.Media.DATA)
-        val cursor: Cursor = requireActivity().managedQuery(uri, projection, null, null, null)
-        val column_index: Int = cursor
-            .getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
-        cursor.moveToFirst()
-        return cursor.getString(column_index)
+        try {
+            val projection = arrayOf(MediaStore.Images.Media.DATA)
+            val cursor: Cursor = requireActivity().managedQuery(uri, projection, null, null, null)
+            val column_index: Int = cursor
+                .getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+            cursor.moveToFirst()
+            return cursor.getString(column_index)
+        }catch (e:Exception){
+            return ""
+        }
+
     }
+
 
     private fun initStepProgress() {
         add_stepview.state
@@ -258,10 +327,11 @@ class CreateMailPassportFragment:Fragment(R.layout.fragment_create_mail_passport
                     add(getString(R.string.telefon_raqami))
                     add(getString(R.string.qabul_qiluvchi_malumotlari))
                     add(getString(R.string.passport))
+                    add(getString(R.string.buyumlar))
                 }
             }) // You should specify only steps number or steps array of strings.
             // In case you specify both steps array is chosen.
-            .stepsNumber(4)
+            .stepsNumber(5)
             .animationDuration(resources.getInteger(android.R.integer.config_shortAnimTime))
             // other state methods are equal to the corresponding xml attributes
             .commit()

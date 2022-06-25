@@ -57,6 +57,8 @@ class CreateMailPrivateInfoFragment:Fragment(R.layout.fragment_create_mail_priva
                 mail_radio_legal.isChecked = true
             }
 
+            mail_radio_legal.isEnabled = false
+            mail_radio_physical.isEnabled = false
         }
         else{
             mail_et_info_phone.setText(SharedPref.receiver_phone1)
@@ -136,8 +138,16 @@ class CreateMailPrivateInfoFragment:Fragment(R.layout.fragment_create_mail_priva
             }
 
 
+            Log.d(TAG, "onViewCreated: receiver_passport_id "+SharedPref.receiver_passport_id)
+            Log.d(TAG, "onViewCreated: receiver_passport_image "+SharedPref.receiver_passport_image)
+            Log.d(TAG, "onViewCreated: receiver_passport_serial "+SharedPref.receiver_passport_serial)
 
-            findNavController().navigate(CreateMailPrivateInfoFragmentDirections.actionCreateMailPrivateInfoFragmentToCreateMailPassportFragment())
+            if (SharedPref.receiver_passport_id.isNotEmpty() && SharedPref.receiver_passport_image.isNotEmpty() && SharedPref.receiver_passport_serial.isNotEmpty()){
+                findNavController().navigate(CreateMailPrivateInfoFragmentDirections.actionCreateMailPrivateInfoFragmentToCreateMailItemsFragment())
+            }
+            else{
+                findNavController().navigate(CreateMailPrivateInfoFragmentDirections.actionCreateMailPrivateInfoFragmentToCreateMailPassportFragment())
+            }
         }
 
     }
@@ -150,10 +160,11 @@ class CreateMailPrivateInfoFragment:Fragment(R.layout.fragment_create_mail_priva
                     add(getString(R.string.telefon_raqami))
                     add(getString(R.string.qabul_qiluvchi_malumotlari))
                     add(getString(R.string.passport))
+                    add(getString(R.string.buyumlar))
                 }
             }) // You should specify only steps number or steps array of strings.
             // In case you specify both steps array is chosen.
-            .stepsNumber(4)
+            .stepsNumber(5)
             .animationDuration(resources.getInteger(android.R.integer.config_shortAnimTime))
             // other state methods are equal to the corresponding xml attributes
             .commit()

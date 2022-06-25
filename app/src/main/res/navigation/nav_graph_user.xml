@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_createMailFragment_to_uploadCustomerPassportFragment"
             app:destination="@id/uploadCustomerPassportFragment" />
+        <action
+            android:id="@+id/action_createMailFragment_to_createMailItemsFragment"
+            app:destination="@id/createMailItemsFragment" />
     </fragment>
     <fragment
         android:id="@+id/cabinetFragment"
@@ -45,7 +48,14 @@
     <fragment
         android:id="@+id/createMailPassportFragment"
         android:name="uz.ibroxim.dostavkauz.fragments.user.CreateMailPassportFragment"
-        android:label="CreateMailPassportFragment" />
+        android:label="CreateMailPassportFragment" >
+        <action
+            android:id="@+id/action_createMailPassportFragment_to_createMailItemsFragment"
+            app:destination="@id/createMailItemsFragment" />
+        <action
+            android:id="@+id/action_createMailPassportFragment_to_passportInfoGuideFragment"
+            app:destination="@id/passportInfoGuideFragment" />
+    </fragment>
     <fragment
         android:id="@+id/createMailPhoneFragment"
         android:name="uz.ibroxim.dostavkauz.fragments.user.CreateMailPhoneFragment"
@@ -61,6 +71,9 @@
         <action
             android:id="@+id/action_createMailPrivateInfoFragment_to_createMailPassportFragment"
             app:destination="@id/createMailPassportFragment" />
+        <action
+            android:id="@+id/action_createMailPrivateInfoFragment_to_createMailItemsFragment"
+            app:destination="@id/createMailItemsFragment" />
     </fragment>
     <fragment
         android:id="@+id/chooseLocationFragment"
@@ -108,4 +121,8 @@
         android:id="@+id/passportInfoGuideFragment"
         android:name="uz.ibroxim.dostavkauz.fragments.user.PassportInfoGuideFragment"
         android:label="PassportInfoGuideFragment" />
+    <fragment
+        android:id="@+id/createMailItemsFragment"
+        android:name="uz.ibroxim.dostavkauz.fragments.user.CreateMailItemsFragment"
+        android:label="CreateMailItemsFragment" />
 </navigation>

@@ -5,13 +5,18 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.custom_toolbar.*
 import kotlinx.android.synthetic.main.fragment_order_update.*
 import uz.ibroxim.dostavkauz.R
 import uz.ibroxim.dostavkauz.adapter.OrderUpdateViewPager
 import uz.ibroxim.dostavkauz.dialog.CustomProgressDialog
 import uz.ibroxim.dostavkauz.dialog.SuccessFailedDialog
+import uz.ibroxim.dostavkauz.models.Order
+import uz.ibroxim.dostavkauz.utils.Constants
 import uz.ibroxim.dostavkauz.utils.Resource
 import uz.ibroxim.dostavkauz.utils.SharedPref
 import uz.ibroxim.dostavkauz.utils.Utils
@@ -20,6 +25,7 @@ import uz.techie.mexmash.data.AppViewModel
 @AndroidEntryPoint
 class OrderUpdateFragment:Fragment(R.layout.fragment_order_update) {
     var barcode = ""
+    private var order:Order? = null
     private val viewModel by viewModels<AppViewModel>()
     private lateinit var customProgressDialog: CustomProgressDialog
     private lateinit var successFailedDialog: SuccessFailedDialog
@@ -32,12 +38,14 @@ class OrderUpdateFragment:Fragment(R.layout.fragment_order_update) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        arguments?.let {
-            barcode = OrderUpdateFragmentArgs.fromBundle(it).barcode
-        }
-        Log.d(TAG, "onViewCreated: barcode  "+barcode)
+        initToolbar()
 
-        viewModel.searchByBarcode(barcode, SharedPref.token)
+        arguments?.let {
+            order = OrderUpdateFragmentArgs.fromBundle(it).order
+        }
+        Log.d(TAG, "onViewCreated: barcode  "+order?.barcode.toString())
+
+        viewModel.searchByBarcode(order?.barcode.toString(), SharedPref.token)
 
         customProgressDialog = CustomProgressDialog(requireContext())
         successFailedDialog = SuccessFailedDialog(requireContext(), object :
@@ -55,13 +63,29 @@ class OrderUpdateFragment:Fragment(R.layout.fragment_order_update) {
 
         TabLayoutMediator(order_update_tablayout, order_update_viewpager){tab, position->
             when(position){
-                0->tab.text = getString(R.string.qabul_qiluvchi_malumotlari)
-                1->tab.text = getString(R.string.passport)
-                2->tab.text = getString(R.string.audio_yuklash)
-                3->tab.text = getString(R.string.tolov)
+                0->tab.text = getString(R.string.buyurtma_malumotlari)
+                1->tab.text = getString(R.string.audio_yuklash)
+                2->tab.text = getString(R.string.tolov)
                 else->tab.text = "No page found"
             }
         }.attach()
+
+        order_update_tablayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                Log.d(TAG, "onTabSelected: "+tab?.position)
+                order_update_viewpager.setCurrentItem(tab?.position?:0)
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+
+            }
+
+        })
+
 
 
     }
@@ -99,4 +123,13 @@ class OrderUpdateFragment:Fragment(R.layout.fragment_order_update) {
 
         }
     }
+
+    private fun initToolbar(){
+        toolbar_title.text = getString(R.string.buyurtmani_taxrirlash)
+        toolbar_btn_back.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
+    }
+
 }

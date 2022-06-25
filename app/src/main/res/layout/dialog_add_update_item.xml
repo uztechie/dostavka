@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    app:cardBackgroundColor="@color/colorBackground"
+    app:cardCornerRadius="24dp"
+    app:cardElevation="2dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/dialog_add_item_title"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ma_lumotlarni_yangilash"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_normal"
+                android:textStyle="bold"
+                android:layout_marginHorizontal="32dp"/>
+
+            <ImageView
+                android:id="@+id/dialog_add_item_btn_close"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_baseline_close_24"
+                android:padding="4dp"
+                android:layout_gravity="end"
+                app:tint="@color/black"/>
+        </FrameLayout>
+
+
+        <EditText
+            android:id="@+id/dialog_add_item_tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/edittext_bg"
+            android:hint="@string/buyum_nomi"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingHorizontal="16dp"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/dialog_add_item_tv_amount"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/edittext_bg"
+            android:hint="@string/buyum_soni"
+            android:inputType="number"
+            android:maxLines="1"
+            android:paddingHorizontal="16dp"
+            android:textColor="@color/black" />
+
+
+        <com.google.android.material.button.MaterialButton
+            app:elevation="@dimen/elevation_size"
+            android:id="@+id/dialog_add_item_btn_save"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginVertical="24dp"
+            android:text="@string/saqlash"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/colorAccent"
+            app:cornerRadius="@dimen/edittext_corner_radius" />
+
+
+
+
+
+
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

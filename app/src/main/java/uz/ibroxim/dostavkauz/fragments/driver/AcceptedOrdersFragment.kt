@@ -1,6 +1,7 @@
 package uz.ibroxim.dostavkauz.fragments.driver
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -14,10 +15,7 @@ import uz.ibroxim.dostavkauz.adapter.NewOrderAdapter
 import uz.ibroxim.dostavkauz.dialog.CustomProgressDialog
 import uz.ibroxim.dostavkauz.dialog.SuccessFailedDialog
 import uz.ibroxim.dostavkauz.models.Order
-import uz.ibroxim.dostavkauz.utils.Resource
-import uz.ibroxim.dostavkauz.utils.SharedPref
-import uz.ibroxim.dostavkauz.utils.StatusList
-import uz.ibroxim.dostavkauz.utils.Utils
+import uz.ibroxim.dostavkauz.utils.*
 import uz.techie.mexmash.data.AppViewModel
 
 @AndroidEntryPoint
@@ -25,6 +23,8 @@ class AcceptedOrdersFragment:Fragment(R.layout.fragment_new_orders) {
     private lateinit var customProgressDialog: CustomProgressDialog
     private lateinit var successFailedDialog: SuccessFailedDialog
     private lateinit var newOrderAdapter: NewOrderAdapter
+
+    private val TAG = "AcceptedOrdersFragment"
 
     private val viewModel by viewModels<AppViewModel>()
 
@@ -44,6 +44,22 @@ class AcceptedOrdersFragment:Fragment(R.layout.fragment_new_orders) {
 
         newOrderAdapter = NewOrderAdapter(StatusList.Accepted.id, requireContext(), object : NewOrderAdapter.NewOrderAdapterCallBack {
             override fun onItemClick(order: Order) {
+
+                Log.d(TAG, "onItemClick: orderrrrr "+order)
+
+                order.items?.let {
+                    Log.d(TAG, "onViewCreated: itemssssss "+it)
+                    Constants.orderItems = it.toMutableList()
+                }
+                order.payment?.let {
+                    Log.d(TAG, "onItemClick: paymentssssss "+it)
+                    Constants.paymentList = it.toMutableList()
+                }
+
+
+                Constants.orderId = order.id?:-1
+                Constants.barcode = order.barcode.toString()
+
                 findNavController().navigate(AcceptedOrdersFragmentDirections.actionAcceptedOrdersFragmentToAcceptedOrderDetailsFragment(order))
             }
 
@@ -71,7 +87,10 @@ class AcceptedOrdersFragment:Fragment(R.layout.fragment_new_orders) {
                     customProgressDialog.dismiss()
                     response.data?.let {
                         if (it.status == 200){
-                            newOrderAdapter.differ.submitList(it.data)
+                            val list = it.data?.filter { order->
+                                order.status_id == 1
+                            }
+                            newOrderAdapter.differ.submitList(list)
                         }
                         else{
                             Utils.toastIconError(requireActivity(), it.message)

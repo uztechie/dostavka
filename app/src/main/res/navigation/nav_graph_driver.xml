@@ -25,8 +25,8 @@
         android:name="uz.ibroxim.dostavkauz.fragments.driver.OrderUpdateFragment"
         android:label="OrderUpdateFragment" >
         <argument
-            android:name="barcode"
-            app:argType="string" />
+            android:name="order"
+            app:argType="uz.ibroxim.dostavkauz.models.Order" />
     </fragment>
     <fragment
         android:id="@+id/tariffDriverFragment"
@@ -43,6 +43,9 @@
         <action
             android:id="@+id/action_cabinetDriverFragment_to_acceptedOrdersFragment"
             app:destination="@id/acceptedOrdersFragment" />
+        <action
+            android:id="@+id/action_cabinetDriverFragment_to_orderHistoryFragment"
+            app:destination="@id/orderHistoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/acceptedOrdersFragment"
@@ -62,5 +65,29 @@
         <action
             android:id="@+id/action_acceptedOrderDetailsFragment_to_orderUpdateFragment"
             app:destination="@id/orderUpdateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderHistoryFragment"
+        android:name="uz.ibroxim.dostavkauz.fragments.driver.OrderHistoryFragment"
+        android:label="OrderHistoryFragment" >
+        <action
+            android:id="@+id/action_orderHistoryFragment_to_acceptedOrderDetailsFragment"
+            app:destination="@id/acceptedOrderDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/driverSearchOrderFragment"
+        android:name="uz.ibroxim.dostavkauz.fragments.driver.DriverSearchOrderFragment"
+        android:label="DriverSearchOrderFragment" >
+        <action
+            android:id="@+id/action_driverSearchOrderFragment_to_passportInfoGuideFragment2"
+            app:destination="@id/passportInfoGuideFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/passportInfoGuideFragment2"
+        android:name="uz.ibroxim.dostavkauz.fragments.user.PassportInfoGuideFragment"
+        android:label="PassportInfoGuideFragment" >
+        <argument
+            android:name="url"
+            app:argType="string" />
     </fragment>
 </navigation>

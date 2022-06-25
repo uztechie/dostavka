@@ -1,11 +1,14 @@
 package uz.ibroxim.dostavkauz.fragments.driver
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.ktx.messaging
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.custom_toolbar.*
 import kotlinx.android.synthetic.main.fragment_new_orders.*
@@ -14,6 +17,7 @@ import uz.ibroxim.dostavkauz.adapter.NewOrderAdapter
 import uz.ibroxim.dostavkauz.dialog.CustomProgressDialog
 import uz.ibroxim.dostavkauz.dialog.SuccessFailedDialog
 import uz.ibroxim.dostavkauz.models.Order
+import uz.ibroxim.dostavkauz.utils.Constants
 import uz.ibroxim.dostavkauz.utils.Resource
 import uz.ibroxim.dostavkauz.utils.SharedPref
 import uz.ibroxim.dostavkauz.utils.Utils
@@ -30,6 +34,9 @@ class NewOrdersFragment:Fragment(R.layout.fragment_new_orders) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initToolbar()
+
+        Utils.subscribeTopic(Constants.TOPIC_DRIVER)
+        Utils.subscribeTopic(Constants.TOPIC_ALL)
 
         customProgressDialog = CustomProgressDialog(requireContext())
 
@@ -83,6 +90,7 @@ class NewOrdersFragment:Fragment(R.layout.fragment_new_orders) {
 
 
     }
+
 
     private fun initToolbar(){
         toolbar_btn_back.visibility = View.INVISIBLE

@@ -48,6 +48,7 @@ class NewsAdapter(val callBack: NewsAdapterCallBack):RecyclerView.Adapter<NewsAd
 
             Glide.with(holder.itemView.adapter_news_image)
                 .load(differ.currentList[position].image)
+                .apply(Utils.options)
                 .into(holder.itemView.adapter_news_image)
         }
     }

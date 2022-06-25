@@ -19,9 +19,13 @@ import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
+import com.bumptech.glide.Priority
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.ktx.messaging
 import uz.ibroxim.dostavkauz.R
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
@@ -363,6 +367,20 @@ object Utils {
 
     }
 
+    var options: RequestOptions = RequestOptions()
+        .centerCrop()
+        .placeholder(R.drawable.progress_rotate_animation)
+        .error(R.drawable.no_image)
+        .diskCacheStrategy(DiskCacheStrategy.ALL)
+        .priority(Priority.HIGH)
+        .dontAnimate()
+        .dontTransform()
+
+
+    fun subscribeTopic(topic:String){
+        Log.d("TAG", "subscribeTopic: topic $topic")
+        Firebase.messaging.subscribeToTopic(topic)
+    }
 
 
 }

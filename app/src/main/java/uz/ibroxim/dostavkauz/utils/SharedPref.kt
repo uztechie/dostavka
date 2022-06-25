@@ -29,6 +29,7 @@ object SharedPref:KotprefModel() {
     var receiver_address by stringPref("")
     var receiver_mailTitle by stringPref("")
 
+    var receiver_token by stringPref("")
     var receiver_id by intPref(-1)
     var receiver_name by stringPref("")
     var receiver_lastname by stringPref("")
@@ -37,6 +38,13 @@ object SharedPref:KotprefModel() {
     var receiver_phone2 by stringPref("")
     var receiver_note by stringPref("")
     var receiver_type by intPref(1)
+    var receiver_passport_serial by stringPref("")
+    var receiver_passport_id by stringPref("")
+    var receiver_passport_image by stringPref("")
+    var receiver_passport_image_uri by stringPref("")
+
+    var orderId by intPref(-1)
+
 
 
 
@@ -60,6 +68,7 @@ object SharedPref:KotprefModel() {
         receiver_address = ""
         receiver_mailTitle = ""
 
+        receiver_token = ""
         receiver_id = -1
         receiver_name = ""
         receiver_lastname = ""
@@ -67,6 +76,10 @@ object SharedPref:KotprefModel() {
         receiver_phone1 = ""
         receiver_phone2 = ""
         receiver_note = ""
+        receiver_passport_id = ""
+        receiver_passport_serial = ""
+        receiver_passport_image = ""
+        receiver_passport_image_uri = ""
         receiver_type = 1
     }
 

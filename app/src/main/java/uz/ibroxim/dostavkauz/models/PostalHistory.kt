@@ -12,6 +12,7 @@ data class PostalHistory(
     val size:String?,
     val price:String?,
     val description:String?,
+    val items:List<Item>?,
     val status:List<PostalStatus>?,
     val created_at:String?,
     val sender_address:SenderAddress?,

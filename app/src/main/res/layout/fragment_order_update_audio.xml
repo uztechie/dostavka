@@ -1,8 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:background="@color/colorPrimary"
+<LinearLayout
+    android:padding="16dp"
+    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ovozli_xabarlar"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp"
+        android:layout_marginHorizontal="2dp"
+        android:layout_marginVertical="4dp">
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="4dp"
+            android:id="@+id/update_audio_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_marginTop="16dp"
+            android:visibility="visible"
+            android:id="@+id/update_audio_layout"
+            android:padding="12dp"
+            android:background="@drawable/rounded_image_for_new_order"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:layout_marginEnd="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ProgressBar
+                        android:visibility="gone"
+                        android:id="@+id/update_audio_progress"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"/>
+
+
+                    <ImageView
+                        app:tint="@color/colorPrimary"
+                        android:id="@+id/update_audio_music_icon"
+                        android:visibility="visible"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_baseline_audiotrack_24"/>
+                </FrameLayout>
+
+
+
+                <TextView
+                    android:layout_gravity="center_vertical"
+                    android:visibility="visible"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    android:id="@+id/update_audio_tv_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_marginTop="4dp"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/update_audio_btn_play"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/ic_baseline_play_circle_filled_24"
+                        android:layout_gravity="center_horizontal"
+                        app:tint="@color/colorPrimary"/>
+                    <ImageView
+                        android:visibility="invisible"
+                        android:id="@+id/update_audio_btn_pause"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/ic_baseline_pause_circle_24"
+                        android:layout_gravity="center_horizontal"
+                        app:tint="@color/colorPrimary"/>
+                </FrameLayout>
+                <SeekBar
+                    android:id="@+id/update_audio_seekbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/update_audio_btn_select"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:text="@string/audio_tanlang"
+            android:textAllCaps="false"
+            app:cornerRadius="8dp"
+            app:backgroundTint="@color/colorPrimaryLight"
+            android:textColor="@color/colorPrimary"
+            android:layout_marginTop="16dp"/>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/update_audio_btn_save"
+            android:layout_gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:text="@string/saqlash"
+            android:textAllCaps="false"
+            app:cornerRadius="8dp"
+            android:layout_marginTop="24dp"/>
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
