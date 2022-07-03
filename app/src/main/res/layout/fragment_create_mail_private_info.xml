@@ -10,6 +10,7 @@
 
 
     <com.shuhart.stepview.StepView
+        app:sv_textSize="12sp"
         android:id="@+id/add_stepview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -13,7 +13,7 @@ import uz.techie.mexmash.models.*
         District::class,
         Quarter::class
                ],
-    version = 3
+    version = 5
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun AppDao(): AppDao

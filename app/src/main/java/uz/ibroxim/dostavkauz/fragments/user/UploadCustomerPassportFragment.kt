@@ -110,11 +110,11 @@ class UploadCustomerPassportFragment:Fragment(R.layout.fragment_upload_customer_
         }
 
         customer_passport_tv_help1.setOnClickListener {
-            findNavController().navigate(UploadCustomerPassportFragmentDirections.actionUploadCustomerPassportFragmentToPassportInfoGuideFragment())
+            findNavController().navigate(UploadCustomerPassportFragmentDirections.actionUploadCustomerPassportFragmentToPassportInfoGuideFragment(""))
         }
 
         customer_passport_tv_help2.setOnClickListener {
-            findNavController().navigate(UploadCustomerPassportFragmentDirections.actionUploadCustomerPassportFragmentToPassportInfoGuideFragment())
+            findNavController().navigate(UploadCustomerPassportFragmentDirections.actionUploadCustomerPassportFragmentToPassportInfoGuideFragment(""))
         }
 
 

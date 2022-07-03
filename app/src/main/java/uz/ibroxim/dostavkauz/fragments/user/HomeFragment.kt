@@ -113,7 +113,7 @@ class HomeFragment:Fragment(R.layout.fragment_home), TextWatcher {
                                 it.created_at
                             }
                             postalHisAdapter.differ.submitList(list)
-                            historyList = list as MutableList<PostalHistory>
+                            historyList = list?.toMutableList()?: mutableListOf()
                         }
                         else{
                             successFailedDialog.show()

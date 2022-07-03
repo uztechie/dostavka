@@ -164,11 +164,11 @@ class CreateMailPassportFragment:Fragment(R.layout.fragment_create_mail_passport
         }
 
         create_mail_passport_tv_help1.setOnClickListener {
-            findNavController().navigate(CreateMailPassportFragmentDirections.actionCreateMailPassportFragmentToPassportInfoGuideFragment())
+            findNavController().navigate(CreateMailPassportFragmentDirections.actionCreateMailPassportFragmentToPassportInfoGuideFragment(""))
         }
 
         create_mail_passport_tv_help2.setOnClickListener {
-            findNavController().navigate(CreateMailPassportFragmentDirections.actionCreateMailPassportFragmentToPassportInfoGuideFragment())
+            findNavController().navigate(CreateMailPassportFragmentDirections.actionCreateMailPassportFragmentToPassportInfoGuideFragment(""))
         }
 
 

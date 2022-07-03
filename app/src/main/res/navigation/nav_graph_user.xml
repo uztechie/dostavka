@@ -120,7 +120,11 @@
     <fragment
         android:id="@+id/passportInfoGuideFragment"
         android:name="uz.ibroxim.dostavkauz.fragments.user.PassportInfoGuideFragment"
-        android:label="PassportInfoGuideFragment" />
+        android:label="PassportInfoGuideFragment" >
+        <argument
+            android:name="url"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/createMailItemsFragment"
         android:name="uz.ibroxim.dostavkauz.fragments.user.CreateMailItemsFragment"

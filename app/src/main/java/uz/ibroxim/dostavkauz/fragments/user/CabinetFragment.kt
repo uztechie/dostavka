@@ -14,6 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.custom_toolbar.*
 import kotlinx.android.synthetic.main.dialog_update_user.*
 import kotlinx.android.synthetic.main.fragment_cabinet.*
+import kotlinx.android.synthetic.main.fragment_home.*
 import uz.ibroxim.dostavkauz.LoginActivity
 import uz.ibroxim.dostavkauz.UserActivity
 import uz.ibroxim.dostavkauz.R

@@ -144,5 +144,10 @@ dependencies {
     implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
 
 
+    //ACRA
+    implementation "ch.acra:acra-mail:5.7.0"
+    implementation "ch.acra:acra-dialog:5.7.0"
+
+
 
 }
