@@ -1,8 +1,10 @@
 package uz.ibroxim.dostavkauz.adapter
 
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -43,7 +45,7 @@ class NewsAdapter(val callBack: NewsAdapterCallBack):RecyclerView.Adapter<NewsAd
 
     override fun onBindViewHolder(holder: AdapterViewHolder, position: Int) {
         if (position>=0){
-            holder.itemView.adapter_news_tv_title.text = differ.currentList[position].name
+            holder.itemView.adapter_news_tv_title.text = Html.fromHtml(differ.currentList[position].name)
             holder.itemView.adapter_news_tv_date.text = Utils.reformatDateFromStringLocale(differ.currentList[position].updated_at)
 
             Glide.with(holder.itemView.adapter_news_image)

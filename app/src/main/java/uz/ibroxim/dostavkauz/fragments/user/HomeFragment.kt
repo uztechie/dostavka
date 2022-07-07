@@ -133,7 +133,7 @@ class HomeFragment:Fragment(R.layout.fragment_home), TextWatcher {
         viewModel.loadPostalHistory(SharedPref.token)
 
 
-        SharedPref.resetCustomerData()
+        SharedPref.resetCustomerAllData()
 
 
     }

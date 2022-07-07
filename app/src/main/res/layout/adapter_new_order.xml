@@ -28,16 +28,31 @@
                 app:tint="@color/colorPrimary"
                 android:src="@drawable/delivery_truck"
                 android:background="@drawable/rounded_image_for_new_order"
-                android:layout_width="24dp"
-                android:layout_height="24dp"/>
-            <TextView
-                android:id="@+id/adapter_new_order_full_name"
+                android:layout_width="32dp"
+                android:layout_height="32dp"/>
+
+            <LinearLayout
+                android:layout_marginStart="4dp"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_size_medium"
-                android:textColor="@color/black"
-                android:text="name"/>
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/adapter_new_order_barcode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_medium"
+                    android:textColor="@color/black"
+                    android:text="name"/>
+                <TextView
+                    android:id="@+id/adapter_new_order_full_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_normal"
+                    android:textColor="@color/black"
+                    android:text="name"/>
+            </LinearLayout>
+
 
             <TextView
                 android:id="@+id/adapter_new_order_status"

@@ -2,6 +2,7 @@ package uz.ibroxim.dostavkauz.fragments.user
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -95,8 +96,8 @@ class TariffFragment:Fragment(R.layout.fragment_tariff) {
         val dialog = BottomSheetDialog(requireContext(), R.style.bottomSheetStyle)
         dialog.setContentView(R.layout.dialog_tariff_details)
         dialog.show()
-        dialog.tariff_details_tv_title.text = tariff.name
-        dialog.tariff_details_tv_desc.text = tariff.description
+        dialog.tariff_details_tv_title.text = HtmlCompat.fromHtml(tariff.name, HtmlCompat.FROM_HTML_MODE_LEGACY)
+        dialog.tariff_details_tv_desc.text = HtmlCompat.fromHtml(tariff.description, HtmlCompat.FROM_HTML_MODE_LEGACY)
         dialog.tariff_details_tv_date.text = Utils.reformatDateFromStringLocale(tariff.updated_at)
 
         dialog.tariff_details_btn_close.setOnClickListener {

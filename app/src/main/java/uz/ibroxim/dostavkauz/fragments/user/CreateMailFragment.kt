@@ -3,6 +3,7 @@ package uz.ibroxim.dostavkauz.fragments.user
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -38,6 +39,19 @@ class CreateMailFragment:Fragment(R.layout.fragment_create_mail_location) {
 
 
     private val TAG = "AddFragment"
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val callback: OnBackPressedCallback =
+            object : OnBackPressedCallback(true /* enabled by default */) {
+                override fun handleOnBackPressed() {
+                    findNavController().popBackStack()
+                }
+            }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

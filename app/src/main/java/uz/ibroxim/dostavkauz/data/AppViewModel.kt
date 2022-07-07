@@ -32,7 +32,7 @@ class AppViewModel @Inject constructor(
     val quarters:MutableLiveData<Resource<List<Quarter>>> = MutableLiveData()
 
     val checkPhoneResponse:MutableLiveData<Resource<Login>> = MutableLiveData()
-    val loginCustomerResponse:MutableLiveData<Resource<Login>> = MutableLiveData()
+    var loginCustomerResponse:MutableLiveData<Resource<Login>> = MutableLiveData()
     val registerCustomerResponse:MutableLiveData<Resource<Login>> = MutableLiveData()
     var updateCustomerResponse:MutableLiveData<Resource<Login>> = MutableLiveData()
 
@@ -61,6 +61,8 @@ class AppViewModel @Inject constructor(
     val deleteItemResponse:MutableLiveData<Resource<ItemResponse>> = MutableLiveData()
 
     val createPaymentResponse:MutableLiveData<Resource<PaymentResponse>> = MutableLiveData()
+
+    val privacyResponse:MutableLiveData<Resource<PrivacyResponse>> = MutableLiveData()
 
 
 
@@ -421,6 +423,21 @@ class AppViewModel @Inject constructor(
         }
     }
 
+    //privacy
+    fun loadPrivacy() = viewModelScope.launch {
+        privacyResponse.postValue(Resource.Loading())
+        try {
+            val response = repository.loadPrivacy()
+            privacyResponse.postValue(handlePrivacyResponse(response))
+        }catch (e: UnknownHostException) {
+            privacyResponse.postValue(Resource.Error("Интернетга боғланишда хатолик!"))
+        } catch (e: InterruptedIOException) {
+            privacyResponse.postValue(Resource.Error("Интернетга боғланишда хатолик!"))
+        } catch (e: Exception) {
+            privacyResponse.postValue(Resource.Error(message = e.toString()))
+        }
+    }
+
 
 
 
@@ -571,6 +588,16 @@ class AppViewModel @Inject constructor(
 
     private fun handlePaymentResponse(response:Response<PaymentResponse>):Resource<PaymentResponse>{
         Log.d(TAG, "handlePaymentResponse: "+response.body())
+        if (response.isSuccessful){
+            response.body()?.let {
+                return Resource.Success(it)
+            }
+        }
+        return Resource.Error(response.message())
+    }
+
+    private fun handlePrivacyResponse(response:Response<PrivacyResponse>):Resource<PrivacyResponse>{
+        Log.d(TAG, "handlePrivacyResponse: "+response.body())
         if (response.isSuccessful){
             response.body()?.let {
                 return Resource.Success(it)

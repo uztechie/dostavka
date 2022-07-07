@@ -48,8 +48,20 @@ object SharedPref:KotprefModel() {
 
 
 
+    fun resetCustomerInfo(){
+        SharedPref.receiver_token = ""
+        SharedPref.receiver_id = -1
+        SharedPref.receiver_name = ""
+        SharedPref.receiver_lastname = ""
+        SharedPref.receiver_middlename = ""
+//        SharedPref.receiver_phone1 = ""
+        SharedPref.receiver_phone2 = ""
+        SharedPref.receiver_passport_serial = ""
+        SharedPref.receiver_passport_id = ""
+        SharedPref.receiver_passport_image = ""
+    }
 
-    fun resetCustomerData(){
+    fun resetCustomerAllData(){
         customer_latitude = "0.0"
         customer_longitude = "0.0"
         customer_country = ""

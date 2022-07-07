@@ -45,6 +45,7 @@ class NewOrderAdapter(val status:Int, val context:Context, val callBack: NewOrde
     override fun onBindViewHolder(holder: AdapterViewHolder, position: Int) {
         if (position>=0){
             val order = differ.currentList[position]
+            holder.itemView.adapter_new_order_barcode.text = order.barcode.toString()
             holder.itemView.adapter_new_order_full_name.text = order.sender_full_name
             holder.itemView.adapter_new_order_address.text = order.sender_address?.sender_address_name
             holder.itemView.adapter_new_order_phone.text = order.sender_phone

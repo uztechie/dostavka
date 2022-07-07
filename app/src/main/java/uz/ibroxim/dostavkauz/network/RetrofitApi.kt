@@ -243,5 +243,9 @@ interface RetrofitApi {
     ):Response<PaymentResponse>
 
 
+    //privacy
+    @GET("condition/")
+    suspend fun loadPrivacy():Response<PrivacyResponse>
+
 
 }

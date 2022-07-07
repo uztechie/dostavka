@@ -66,6 +66,7 @@ class NewOrderDetailsFragment : Fragment(R.layout.fragment_new_order_details) {
         arguments?.let {
             order = NewOrderDetailsFragmentArgs.fromBundle(it).order
 
+            new_order_details_tv_barcode.text = order?.barcode.toString()
             new_order_details_tv_name.text = order?.sender_full_name
             new_order_details_tv_phone.text = order?.sender_phone
             new_order_details_tv_address.text = order?.sender_address?.sender_address_name

@@ -3,8 +3,10 @@ package uz.ibroxim.dostavkauz.fragments.user
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.custom_toolbar.*
@@ -26,6 +28,19 @@ class CreateMailPhoneFragment:Fragment(R.layout.fragment_create_mail_phone) {
 
     private val TAG = "AddFragment"
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val callback: OnBackPressedCallback =
+            object : OnBackPressedCallback(true /* enabled by default */) {
+                override fun handleOnBackPressed() {
+                    findNavController().popBackStack()
+                }
+            }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -44,50 +59,58 @@ class CreateMailPhoneFragment:Fragment(R.layout.fragment_create_mail_phone) {
                 return@setOnClickListener
             }
             SharedPref.receiver_phone1 = phone
-            viewModel.loginCustomerResponse.observe(viewLifecycleOwner){
-                when(it){
-                    is Resource.Loading->{
-                        customProgressDialog.show()
-                    }
-                    is Resource.Error->{
-                        Log.d(TAG, "checkPhoneFromServer: error "+it.message)
-                        customProgressDialog.dismiss()
-                        it.message?.let {message->
-                            Utils.toastIconError(requireActivity(), message)
-                        }
-
-                    }
-                    is Resource.Success->{
-                        Log.d(TAG, "checkPhoneFromServer: success ")
-                        customProgressDialog.dismiss()
-
-                        it.data?.let { login->
-                            if (login.status == 200){
-                                login.data?.let { user->
-                                    SharedPref.receiver_token = "Token "+user.token
-                                    SharedPref.receiver_id = user.id
-                                    SharedPref.receiver_name = user.first_name?:""
-                                    SharedPref.receiver_lastname = user.last_name?:""
-                                    SharedPref.receiver_middlename = user.surname?:""
-                                    SharedPref.receiver_phone1 = user.phone?:""
-                                    SharedPref.receiver_phone2 = user.phone2?:""
-                                    SharedPref.receiver_passport_serial = user.passport_serial?:""
-                                    SharedPref.receiver_passport_id = user.passport_number?:""
-                                    SharedPref.receiver_passport_image = user.passport_image?:""
-
-                                }
-
-                            }
-
-                            findNavController().navigate(CreateMailPhoneFragmentDirections.actionCreateMailPhoneFragmentToCreateMailPrivateInfoFragment())
-
-                        }
-
-                    }
-                }
-            }
             viewModel.loginCustomer(phone)
 
+        }
+
+        viewModel.loginCustomerResponse.observe(viewLifecycleOwner){
+            when(it){
+                is Resource.Loading->{
+                    customProgressDialog.show()
+                }
+                is Resource.Error->{
+                    Log.d(TAG, "checkPhoneFromServer: error "+it.message)
+                    customProgressDialog.dismiss()
+                    it.message?.let {message->
+                        Utils.toastIconError(requireActivity(), message)
+                    }
+
+
+                    viewModel.loginCustomerResponse = MutableLiveData()
+
+                }
+                is Resource.Success->{
+
+                    viewModel.loginCustomerResponse = MutableLiveData()
+                    Log.d(TAG, "checkPhoneFromServer: success ")
+                    customProgressDialog.dismiss()
+
+                    it.data?.let { login->
+                        if (login.status == 200){
+                            login.data?.let { user->
+                                SharedPref.receiver_token = "Token "+user.token
+                                SharedPref.receiver_id = user.id
+                                SharedPref.receiver_name = user.first_name?:""
+                                SharedPref.receiver_lastname = user.last_name?:""
+                                SharedPref.receiver_middlename = user.surname?:""
+                                SharedPref.receiver_phone1 = user.phone?:""
+                                SharedPref.receiver_phone2 = user.phone2?:""
+                                SharedPref.receiver_passport_serial = user.passport_serial?:""
+                                SharedPref.receiver_passport_id = user.passport_number?:""
+                                SharedPref.receiver_passport_image = user.passport_image?:""
+
+                            }
+                        }
+                        else{
+                            SharedPref.resetCustomerInfo()
+                        }
+
+                        findNavController().navigate(CreateMailPhoneFragmentDirections.actionCreateMailPhoneFragmentToCreateMailPrivateInfoFragment())
+
+                    }
+
+                }
+            }
         }
 
 

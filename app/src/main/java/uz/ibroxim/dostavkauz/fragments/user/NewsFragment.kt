@@ -2,6 +2,7 @@ package uz.ibroxim.dostavkauz.fragments.user
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -94,8 +95,8 @@ class NewsFragment:Fragment(R.layout.fragment_news) {
         val dialog = BottomSheetDialog(requireContext(), R.style.bottomSheetStyle)
         dialog.setContentView(R.layout.dialog_news_details)
         dialog.show()
-        dialog.news_details_tv_title.text = news.name
-        dialog.news_details_tv_desc.text = news.description
+        dialog.news_details_tv_title.text = HtmlCompat.fromHtml(news.name, HtmlCompat.FROM_HTML_MODE_LEGACY)
+        dialog.news_details_tv_desc.text = HtmlCompat.fromHtml(news.description, HtmlCompat.FROM_HTML_MODE_LEGACY)
         dialog.news_details_tv_date.text = Utils.reformatDateFromStringLocale(news.updated_at)
 
         Glide.with(dialog.news_details_image)

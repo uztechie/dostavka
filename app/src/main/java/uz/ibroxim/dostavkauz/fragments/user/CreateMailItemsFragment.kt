@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.core.text.isDigitsOnly
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -45,6 +46,19 @@ class CreateMailItemsFragment : Fragment(R.layout.fragment_create_mail_items) {
     private var itemsList: MutableLiveData<MutableList<Item>> = MutableLiveData()
 
     private val TAG = "CreateMailItemsFragment"
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val callback: OnBackPressedCallback =
+            object : OnBackPressedCallback(true /* enabled by default */) {
+                override fun handleOnBackPressed() {
+                    findNavController().popBackStack()
+                }
+            }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

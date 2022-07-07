@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.text.isDigitsOnly
@@ -51,6 +52,19 @@ class CreateMailPassportFragment:Fragment(R.layout.fragment_create_mail_passport
 
 
     private val TAG = "AddFragment"
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val callback: OnBackPressedCallback =
+            object : OnBackPressedCallback(true /* enabled by default */) {
+                override fun handleOnBackPressed() {
+                    findNavController().popBackStack()
+                }
+            }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -92,6 +92,8 @@ class AppRepository @Inject constructor(
     //payment
     suspend fun createPayment(map:HashMap<String, Any>) = retrofitApi.createPayment(map)
 
+    //privacy
+    suspend fun loadPrivacy() = retrofitApi.loadPrivacy()
 
 
     //database
