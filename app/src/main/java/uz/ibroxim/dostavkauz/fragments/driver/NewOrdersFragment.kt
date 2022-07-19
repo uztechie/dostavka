@@ -77,7 +77,15 @@ class NewOrdersFragment:Fragment(R.layout.fragment_new_orders) {
                     customProgressDialog.dismiss()
                     response.data?.let {
                         if (it.status == 200){
-                            newOrderAdapter.differ.submitList(it.data)
+
+                            if (!it.data.isNullOrEmpty()){
+                                val list = it.data.sortedByDescending {
+                                    it.created_at
+                                }
+                                newOrderAdapter.differ.submitList(list)
+                            }
+
+
                         }
                         else{
                             Utils.toastIconError(requireActivity(), it.message)

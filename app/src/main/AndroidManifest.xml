@@ -20,6 +20,8 @@
 
 
     <application
+        android:usesCleartextTraffic="true"
+
         android:requestLegacyExternalStorage="true"
         android:name=".MyApp"
         android:allowBackup="true"
