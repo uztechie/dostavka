@@ -11,9 +11,9 @@
         android:title="@string/buyurtma_izlash" />
 
     <item
-        android:id="@+id/tariffDriverFragment"
-        android:icon="@drawable/ic_baseline_info_24"
-        android:title="@string/tariflar" />
+        android:id="@+id/acceptedOrdersFragment"
+        android:icon="@drawable/shipped"
+        android:title="@string/qabul_qilingan_buyurtmalar" />
 
     <item
         android:id="@+id/newsDriverFragment"

@@ -105,7 +105,7 @@ class AcceptedOrdersFragment:Fragment(R.layout.fragment_new_orders) {
     }
 
     private fun initToolbar(){
-        toolbar_btn_back.visibility = View.VISIBLE
+        toolbar_btn_back.visibility = View.INVISIBLE
         toolbar_title.text = getString(R.string.qabul_qilingan_buyurtmalar)
         toolbar_btn_back.setOnClickListener {
             findNavController().popBackStack()

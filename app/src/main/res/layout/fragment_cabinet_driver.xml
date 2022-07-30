@@ -103,7 +103,7 @@
 
             <LinearLayout
                 android:background="?attr/selectableItemBackground"
-                android:id="@+id/cabinet_driver_accepted_layout"
+                android:id="@+id/cabinet_driver_tarifs"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:gravity="center_vertical"
@@ -114,7 +114,7 @@
                     android:layout_height="30dp"
                     android:background="@drawable/rounded_image_for_new_order"
                     android:padding="4dp"
-                    android:src="@drawable/shipped"
+                    android:src="@drawable/ic_baseline_info_24"
                     app:tint="@color/colorPrimary" />
 
                 <com.google.android.material.textview.MaterialTextView
@@ -122,7 +122,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_right_24"
-                    android:text="@string/qabul_qilingan_buyurtmalar"
+                    android:text="@string/tariflar"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     app:drawableTint="@color/gray" />
@@ -156,6 +156,40 @@
                     android:layout_marginStart="12dp"
                     android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_right_24"
                     android:text="@string/tarix"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:drawableTint="@color/gray" />
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_marginEnd="24dp"
+                android:background="@color/gray" />
+
+            <LinearLayout
+                android:background="?attr/selectableItemBackground"
+                android:id="@+id/cabinet_driver_policy"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/rounded_image_for_new_order"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_baseline_privacy_tip_24"
+                    app:tint="@color/colorPrimary" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_right_24"
+                    android:text="@string/tashish_shartlari"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     app:drawableTint="@color/gray" />

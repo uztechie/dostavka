@@ -45,7 +45,7 @@ class DriverActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
             val id = destination.id
-            if (id == R.id.newOrderDetailsFragment || id == R.id.acceptedOrdersFragment || id == R.id.acceptedOrderDetailsFragment ||
+            if (id == R.id.newOrderDetailsFragment || id == R.id.tariffDriverFragment || id == R.id.acceptedOrderDetailsFragment ||
                     id == R.id.orderUpdateFragment){
                 bottomNavigationView.visibility = View.GONE
             }

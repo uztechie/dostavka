@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -157,6 +158,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 // This callback is invoked in an invalid request for verification is made,
                 // for instance if the the phone number format is not valid.
                 Log.w(TAG, "onVerificationFailed", e)
+                Toast.makeText(requireContext(), e.toString(), Toast.LENGTH_LONG).show()
                 customProgressDialog.dismiss()
                 if (e is FirebaseAuthInvalidCredentialsException) {
                     // Invalid request
