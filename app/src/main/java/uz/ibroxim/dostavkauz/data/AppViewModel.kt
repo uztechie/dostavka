@@ -63,6 +63,7 @@ class AppViewModel @Inject constructor(
     val createPaymentResponse:MutableLiveData<Resource<PaymentResponse>> = MutableLiveData()
 
     val privacyResponse:MutableLiveData<Resource<PrivacyResponse>> = MutableLiveData()
+    val contactResponse:MutableLiveData<Resource<PrivacyResponse>> = MutableLiveData()
 
 
 
@@ -435,6 +436,21 @@ class AppViewModel @Inject constructor(
             privacyResponse.postValue(Resource.Error("Интернетга боғланишда хатолик!"))
         } catch (e: Exception) {
             privacyResponse.postValue(Resource.Error(message = e.toString()))
+        }
+    }
+
+    //contact
+    fun loadContact() = viewModelScope.launch {
+        contactResponse.postValue(Resource.Loading())
+        try {
+            val response = repository.loadContact()
+            contactResponse.postValue(handlePrivacyResponse(response))
+        }catch (e: UnknownHostException) {
+            contactResponse.postValue(Resource.Error("Интернетга боғланишда хатолик!"))
+        } catch (e: InterruptedIOException) {
+            contactResponse.postValue(Resource.Error("Интернетга боғланишда хатолик!"))
+        } catch (e: Exception) {
+            contactResponse.postValue(Resource.Error(message = e.toString()))
         }
     }
 

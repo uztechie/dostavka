@@ -95,6 +95,9 @@ class AppRepository @Inject constructor(
     //privacy
     suspend fun loadPrivacy() = retrofitApi.loadPrivacy()
 
+    //contact
+    suspend fun loadContact() = retrofitApi.loadContact()
+
 
     //database
 

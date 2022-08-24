@@ -7,8 +7,8 @@ object SharedPref:KotprefModel() {
     val userLoggedIn by booleanPref(false)
     var token by stringPref("")
 
-    var latitude by stringPref("0.0")
-    var longitude by stringPref("0.0")
+    var latitude by stringPref("55.7558")
+    var longitude by stringPref("37.6173")
 
 
     var customer_latitude by stringPref("0.0")

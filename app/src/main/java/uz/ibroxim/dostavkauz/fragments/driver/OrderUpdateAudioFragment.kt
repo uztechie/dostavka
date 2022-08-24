@@ -94,10 +94,17 @@ class OrderUpdateAudioFragment : Fragment(R.layout.fragment_order_update_audio) 
 
 
         update_audio_btn_select.setOnClickListener {
-            val photoPickerIntent =
-                Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            photoPickerIntent.type = "audio/*"
-            launchSomeActivity.launch(photoPickerIntent)
+            try {
+                val photoPickerIntent =
+                    Intent(Intent.ACTION_PICK, MediaStore.Audio.Media.EXTERNAL_CONTENT_URI)
+//                val photoPickerIntent = Intent()
+//                photoPickerIntent.action = Intent.ACTION_GET_CONTENT
+                photoPickerIntent.type = "audio/*"
+                launchSomeActivity.launch(photoPickerIntent)
+            }catch (e:Exception){
+                e.printStackTrace()
+            }
+
         }
 
         playAudio()

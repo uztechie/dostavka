@@ -321,9 +321,6 @@ class AcceptedOrderDetailsFragment : Fragment(R.layout.fragment_accepted_order_d
         val userLat = SharedPref.latitude
         val userLon = SharedPref.longitude
 
-        latitude = 41.57909391202691
-        longitude = 64.18384505481062
-
         var uri: Uri = Uri.EMPTY
         if (requireContext().isPackageInstalled("ru.yandex.yandexmaps")) {
             try {

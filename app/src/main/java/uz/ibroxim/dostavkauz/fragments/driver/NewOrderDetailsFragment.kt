@@ -347,14 +347,12 @@ class NewOrderDetailsFragment : Fragment(R.layout.fragment_new_order_details) {
         val userLat = SharedPref.latitude
         val userLon = SharedPref.longitude
 
-        latitude = 41.57909391202691
-        longitude = 64.18384505481062
-
         var uri: Uri = Uri.EMPTY
         if (requireContext().isPackageInstalled("ru.yandex.yandexmaps")) {
             try {
                 uri = Uri.parse("yandexmaps://maps.yandex.ru/?rtext=$userLat,$userLon~$latitude,$longitude&rtt=mt")
                 val intent = Intent(Intent.ACTION_VIEW, uri)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 requireActivity().startActivity(intent)
             }catch (e:Exception){
                 e.printStackTrace()

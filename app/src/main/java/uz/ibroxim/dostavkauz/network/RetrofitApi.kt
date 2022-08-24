@@ -248,4 +248,9 @@ interface RetrofitApi {
     suspend fun loadPrivacy():Response<PrivacyResponse>
 
 
+    //contact
+    @GET("contact/")
+    suspend fun loadContact():Response<PrivacyResponse>
+
+
 }
