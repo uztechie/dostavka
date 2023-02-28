@@ -81,7 +81,7 @@ interface RetrofitApi {
     @POST("customer-and-passport-create/")
     suspend fun createReceiver(
         @PartMap map:HashMap<String, RequestBody>,
-        @Part file:MultipartBody.Part,
+        @Part file:MultipartBody.Part? = null,
         @Header("Authorization") token: String = SharedPref.token,
         @Header("MyToken") myToken: String = Constants.MY_TOKEN
     ):Response<Login>

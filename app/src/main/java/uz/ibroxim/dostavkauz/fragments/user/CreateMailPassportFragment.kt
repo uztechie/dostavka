@@ -12,7 +12,6 @@ import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.text.isDigitsOnly
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -20,9 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.custom_toolbar.*
 import kotlinx.android.synthetic.main.fragment_create_mail_location.add_stepview
 import kotlinx.android.synthetic.main.fragment_create_mail_passport.*
-import kotlinx.android.synthetic.main.fragment_upload_customer_passport.*
 import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -30,7 +27,6 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import uz.ibroxim.dostavkauz.R
 import uz.ibroxim.dostavkauz.dialog.CustomProgressDialog
 import uz.ibroxim.dostavkauz.dialog.SuccessFailedDialog
-import uz.ibroxim.dostavkauz.models.Item
 import uz.ibroxim.dostavkauz.utils.Resource
 import uz.ibroxim.dostavkauz.utils.SharedPref
 import uz.ibroxim.dostavkauz.utils.Utils
@@ -172,10 +168,21 @@ class CreateMailPassportFragment:Fragment(R.layout.fragment_create_mail_passport
             else{
                 SharedPref.receiver_passport_serial = passportSerial
                 SharedPref.receiver_passport_id = passportId
-                createReceiver()
+                createReceiverWithPassport()
             }
 
         }
+
+        create_mail_passport_btn_skip.setOnClickListener {
+            if (SharedPref.receiver_id < 0){
+                createReceiverWithOutPassport()
+            }
+            else{
+                findNavController().navigate(CreateMailPassportFragmentDirections.actionCreateMailPassportFragmentToCreateMailItemsFragment())
+            }
+        }
+
+
 
         create_mail_passport_tv_help1.setOnClickListener {
             findNavController().navigate(CreateMailPassportFragmentDirections.actionCreateMailPassportFragmentToPassportInfoGuideFragment(""))
@@ -220,7 +227,7 @@ class CreateMailPassportFragment:Fragment(R.layout.fragment_create_mail_passport
 
 
 
-    private fun createReceiver(){
+    private fun createReceiverWithPassport(){
         val map = HashMap<String, RequestBody>()
 
         map["first_name"] = SharedPref.receiver_name.toRequestBody(MultipartBody.FORM)
@@ -248,6 +255,42 @@ class CreateMailPassportFragment:Fragment(R.layout.fragment_create_mail_passport
 
 
         viewModel.createReceiver(map, passport)
+
+    }
+
+
+    private fun createReceiverWithOutPassport(){
+        val map = HashMap<String, RequestBody>()
+
+        map["first_name"] = SharedPref.receiver_name.toRequestBody(MultipartBody.FORM)
+        map["last_name"] = SharedPref.receiver_lastname.toRequestBody(MultipartBody.FORM)
+        map["surname"] = SharedPref.receiver_middlename.toRequestBody(MultipartBody.FORM)
+        map["phone"] = SharedPref.receiver_phone1.toRequestBody(MultipartBody.FORM)
+        map["phone2"] = SharedPref.receiver_phone2.toRequestBody(MultipartBody.FORM)
+
+        map["notes"] = SharedPref.receiver_note.toRequestBody(MultipartBody.FORM)
+        map["quarters_id"] = SharedPref.receiver_quarterId.toString().toRequestBody(MultipartBody.FORM)
+        map["street"] = SharedPref.receiver_address.toRequestBody(MultipartBody.FORM)
+        map["customer_type"] = SharedPref.receiver_type.toString().toRequestBody(MultipartBody.FORM)
+
+        map["passport_serial"] = "".toRequestBody(MultipartBody.FORM)
+        map["passport_number"] = "".toRequestBody(MultipartBody.FORM)
+        map["passport_image"] = "".toRequestBody(MultipartBody.FORM)
+
+//        val file = File(getPath(fileUri))
+//        Log.d(TAG, "createReceiver: file "+file)
+//
+//        val filePart = file.asRequestBody("image/*".toMediaType())
+//        val passport = MultipartBody.Part.createFormData("passport_image", file.name, filePart)
+
+
+        Log.d(TAG, "createReceiver: map "+map)
+        Log.d(TAG, "createReceiver: fileUri "+fileUri)
+
+
+
+
+        viewModel.createReceiver(map)
 
     }
 

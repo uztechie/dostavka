@@ -185,7 +185,7 @@ class AppViewModel @Inject constructor(
 
     fun createReceiver(
         map:HashMap<String, RequestBody>,
-        file: MultipartBody.Part
+        file: MultipartBody.Part? = null
     ) = viewModelScope.launch {
         createReceiverResponse.postValue(Resource.Loading())
         try {

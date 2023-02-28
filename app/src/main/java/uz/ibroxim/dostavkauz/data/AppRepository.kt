@@ -43,7 +43,7 @@ class AppRepository @Inject constructor(
 
     suspend fun createReceiver(
         map:HashMap<String, RequestBody>,
-        file: MultipartBody.Part
+        file: MultipartBody.Part? = null
     ) = retrofitApi.createReceiver(map, file)
 
     suspend fun uploadPostal(

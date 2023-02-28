@@ -84,6 +84,13 @@
             app:destination="@id/createMailFragment"
             app:popUpTo="@id/createMailFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_chooseLocationFragment_to_createMailItemsFragment"
+            app:destination="@id/createMailItemsFragment" />
+        <argument
+            android:name="new_mail"
+            app:argType="boolean"
+            android:defaultValue="true" />
     </fragment>
     <action
         android:id="@+id/action_global_homeFragment"
@@ -102,6 +109,15 @@
         <argument
             android:name="postalHistory"
             app:argType="uz.ibroxim.dostavkauz.models.PostalHistory" />
+        <action
+            android:id="@+id/action_postalHistoryDetailsFragment_to_createMailItemsFragment"
+            app:destination="@id/createMailItemsFragment" />
+        <action
+            android:id="@+id/action_postalHistoryDetailsFragment_to_chooseLocationFragment"
+            app:destination="@id/chooseLocationFragment" />
+        <action
+            android:id="@+id/action_postalHistoryDetailsFragment_to_chooseLocationFragment2"
+            app:destination="@id/chooseLocationFragment" />
     </fragment>
     <fragment
         android:id="@+id/uploadCustomerPassportFragment"

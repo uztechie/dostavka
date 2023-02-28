@@ -207,12 +207,12 @@ class CreateMailItemsFragment : Fragment(R.layout.fragment_create_mail_items) {
         map["receiver_id"] = SharedPref.receiver_id
         map["items"] = items
 
-        Log.d(TAG, "preparePostal: map "+map)
+        Log.d(TAG, "preparePostal: map $map")
         Log.d(TAG, "preparePostal: map "+map["street"].toString())
         Log.d(TAG, "preparePostal: file uri "+fileUri?.path)
 
-
         viewModel.uploadPostal(map)
+
 
     }
 

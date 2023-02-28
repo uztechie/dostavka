@@ -40,6 +40,8 @@ class ChooseLocationFragment : Fragment(R.layout.fragment_choose_location) {
     private var cityName = ""
     private var knownName = ""
 
+    private var newMail = false
+
     private val TAG = "ChooseLocationFragment"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,6 +56,11 @@ class ChooseLocationFragment : Fragment(R.layout.fragment_choose_location) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "onViewCreated: ")
+
+        arguments?.let {
+            newMail = ChooseLocationFragmentArgs.fromBundle(it).newMail
+        }
+
 
         customProgressDialog = CustomProgressDialog(requireContext())
 
@@ -102,7 +109,12 @@ class ChooseLocationFragment : Fragment(R.layout.fragment_choose_location) {
             SharedPref.customer_state = stateName
             SharedPref.customer_knownAreaName = knownName
 
-            findNavController().navigate(ChooseLocationFragmentDirections.actionChooseLocationFragmentToCreateMailFragment())
+            if (newMail){
+                findNavController().navigate(ChooseLocationFragmentDirections.actionChooseLocationFragmentToCreateMailFragment())
+            }
+            else{
+                findNavController().navigate(ChooseLocationFragmentDirections.actionChooseLocationFragmentToCreateMailItemsFragment())
+            }
 
 
         }

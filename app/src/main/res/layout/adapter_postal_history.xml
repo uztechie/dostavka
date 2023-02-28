@@ -7,7 +7,8 @@
     app:cardCornerRadius="8dp"
     app:cardBackgroundColor="@color/white"
     app:cardElevation="2dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:padding="16dp"
@@ -53,7 +54,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:text="ddd\ndd"
+                tools:text="ddd\ndd"
                 android:layout_weight="1"
                 android:id="@+id/adapter_postal_history_destination"
                 android:layout_width="0dp"

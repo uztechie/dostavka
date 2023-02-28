@@ -11,12 +11,17 @@ import kotlinx.android.synthetic.main.fragment_order_hsitory_details.*
 import uz.ibroxim.dostavkauz.R
 import uz.ibroxim.dostavkauz.adapter.NewOrderItemAdapter
 import uz.ibroxim.dostavkauz.adapter.StatusAdapter
+import uz.ibroxim.dostavkauz.dialog.SuccessFailedDialog
+import uz.ibroxim.dostavkauz.models.PostalHistory
+import uz.ibroxim.dostavkauz.utils.SharedPref
+import java.util.TimeZone
 
 @AndroidEntryPoint
 class PostalHistoryDetailsFragment:Fragment(R.layout.fragment_order_hsitory_details) {
 
     private lateinit var statusAdapter:StatusAdapter
     private lateinit var itemAdapter:NewOrderItemAdapter
+    private var postalHistory : PostalHistory? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -26,23 +31,32 @@ class PostalHistoryDetailsFragment:Fragment(R.layout.fragment_order_hsitory_deta
         itemAdapter = NewOrderItemAdapter()
 
         arguments?.let {
-            val postalHistory = PostalHistoryDetailsFragmentArgs.fromBundle(it).postalHistory
+            postalHistory = PostalHistoryDetailsFragmentArgs.fromBundle(it).postalHistory
 
-            postal_details_tv_postal_id.text = postalHistory.barcode.toString()
-            postal_details_tv_postal_destination.text = postalHistory.receiver_address?.street+", "+
-                    postalHistory.receiver_address?.quarters_name+", "+
-                    postalHistory.receiver_address?.district_name+", "+
-                    postalHistory.receiver_address?.region_name
+            postalHistory?.let {
+                postal_details_tv_postal_id.text = it.barcode.toString()
 
-            var list = postalHistory.status
-            list = list?.sortedByDescending { postalStatus ->
-                postalStatus.status
+                postal_details_tv_receiver_name.text = it.receiver_full_name
+
+                postal_details_tv_postal_destination.text = it.receiver_address?.street+", "+
+                        it.receiver_address?.quarters_name+", "+
+                        it.receiver_address?.district_name+", "+
+                        it.receiver_address?.region_name
+
+                var list = it.status
+                list = list?.sortedByDescending { postalStatus ->
+                    postalStatus.status
+                }
+                statusAdapter.differ.submitList(list)
+
+                it.items?.let {
+                    itemAdapter.differ.submitList(it)
+                }
             }
-            statusAdapter.differ.submitList(list)
 
-            postalHistory.items?.let {
-                itemAdapter.differ.submitList(it)
-            }
+            initButtons()
+
+
 
         }
 
@@ -59,10 +73,44 @@ class PostalHistoryDetailsFragment:Fragment(R.layout.fragment_order_hsitory_deta
             adapter = itemAdapter
         }
 
+    }
+
+    private fun initButtons(){
+        postal_details_btn_send_mail.setOnClickListener {
+            SharedPref.receiver_quarterId = postalHistory?.receiver_address?.quarters_id?:0
+            SharedPref.receiver_address = postalHistory?.receiver_address?.street?:""
+            SharedPref.receiver_id = postalHistory?.receiver?:0
+
+            println("initButtons receiver_quarterId "+ SharedPref.receiver_quarterId)
+            println("initButtons receiver_address "+ SharedPref.receiver_address)
+            println("initButtons receiver_id "+ SharedPref.receiver_id)
+            println("initButtons customer_latitude "+ SharedPref.customer_latitude)
+            println("initButtons customer_longitude "+ SharedPref.customer_longitude)
+
+            if (SharedPref.customer_latitude == "0.0" || SharedPref.customer_longitude == "0.0"){
+                showSetLocationDialog()
+            }
+            else{
+                findNavController().navigate(PostalHistoryDetailsFragmentDirections.actionPostalHistoryDetailsFragmentToCreateMailItemsFragment())
+            }
 
 
 
+        }
+    }
 
+    private fun showSetLocationDialog(){
+        val dialog = SuccessFailedDialog(requireContext(), object :
+            SuccessFailedDialog.SuccessFailedCallback {
+            override fun onActionButtonClick(clickAction: String) {
+                findNavController().navigate(PostalHistoryDetailsFragmentDirections.actionPostalHistoryDetailsFragmentToChooseLocationFragment(false))
+            }
+        })
+        dialog.show()
+        dialog.setTitle(getString(R.string.joylashuvni_tanlang))
+        dialog.setMessage(getString(R.string.iltimos_hozirgi_manzilingizni_xarita_orqali_korsating))
+        dialog.setButtonText(getString(R.string.davom_etish))
+        dialog.showCloseButton(true)
     }
 
     private fun initToolbar(){

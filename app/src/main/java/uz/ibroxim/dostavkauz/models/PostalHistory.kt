@@ -7,6 +7,8 @@ data class PostalHistory(
     val barcode:Long?,
     val sender:Int?,
     val receiver:Int?,
+    val receiver_full_name:String?,
+    val receiver_phone:String?,
     val truck:Int?,
     val passport:String?,
     val size:String?,
@@ -25,5 +27,8 @@ data class ReceiverAddress(
     val street:String?,
     val quarters_name:String?,
     val district_name:String?,
-    val region_name:String?
+    val region_name:String?,
+    val quarters_id:Int?,
+    val district_id:Int?,
+    val region_id:Int?,
 ):Serializable

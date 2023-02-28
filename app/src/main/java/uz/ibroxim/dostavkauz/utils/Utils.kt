@@ -131,6 +131,7 @@ object Utils {
             var dateFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
             val date = dateFormat.parse(previousDate)
             dateFormat = SimpleDateFormat("dd MMM yyyy HH:mm", Locale.getDefault())
+//            dateFormat.timeZone = TimeZone.getTimeZone("GMT")
             dateFormat.format(date!!)
         }catch (e:Exception){
             previousDate?:""
@@ -142,6 +143,7 @@ object Utils {
             var dateFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
             val date = dateFormat.parse(previousDate)
             dateFormat = SimpleDateFormat("dd MMM yyyy\nHH:mm", Locale.getDefault())
+//            dateFormat.timeZone = TimeZone.getTimeZone("GMT")
             dateFormat.format(date!!)
         }catch (e:Exception){
             previousDate
@@ -153,6 +155,7 @@ object Utils {
             var dateFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
             val date = dateFormat.parse(previousDate)
             dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
+//            dateFormat.timeZone = TimeZone.getTimeZone("GMT+3")
             dateFormat.format(date!!)
         }catch (e:Exception){
             previousDate

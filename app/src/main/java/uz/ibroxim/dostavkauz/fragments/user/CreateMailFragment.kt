@@ -62,6 +62,7 @@ class CreateMailFragment:Fragment(R.layout.fragment_create_mail_location) {
         Utils.getLastKnownLocation(requireContext())
 
         checkPassportInfo()
+        SharedPref.resetReceiverInfo()
 
 //        findNavController().navigate(CreateMailFragmentDirections.actionCreateMailFragmentToCreateMailItemsFragment())
 

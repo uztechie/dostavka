@@ -25,6 +25,7 @@ class CreateMailPhoneFragment:Fragment(R.layout.fragment_create_mail_phone) {
 
     private val viewModel by viewModels<AppViewModel>()
     private lateinit var customProgressDialog:CustomProgressDialog
+    private var senderPhone = ""
 
     private val TAG = "AddFragment"
 
@@ -47,6 +48,7 @@ class CreateMailPhoneFragment:Fragment(R.layout.fragment_create_mail_phone) {
         customProgressDialog = CustomProgressDialog(requireContext())
         initToolbar()
         initStepProgress()
+        getSenderPhone()
 
 //        findNavController().navigate(CreateMailPhoneFragmentDirections.actionCreateMailPhoneFragmentToCreateMailPrivateInfoFragment())
 
@@ -58,6 +60,12 @@ class CreateMailPhoneFragment:Fragment(R.layout.fragment_create_mail_phone) {
                 Utils.toastIconError(requireActivity(), getString(R.string.telefon_raqamni_toliq_kiriting))
                 return@setOnClickListener
             }
+            if (phone == senderPhone){
+                Utils.toastIconError(requireActivity(), getString(R.string.siz_ozingizning_telefon_raqamingizga_pochta_yubora_olmaysiz))
+                return@setOnClickListener
+            }
+
+
             SharedPref.receiver_phone1 = phone
             viewModel.loginCustomer(phone)
 
@@ -101,9 +109,6 @@ class CreateMailPhoneFragment:Fragment(R.layout.fragment_create_mail_phone) {
 
                             }
                         }
-                        else{
-                            SharedPref.resetCustomerInfo()
-                        }
 
                         findNavController().navigate(CreateMailPhoneFragmentDirections.actionCreateMailPhoneFragmentToCreateMailPrivateInfoFragment())
 
@@ -115,6 +120,15 @@ class CreateMailPhoneFragment:Fragment(R.layout.fragment_create_mail_phone) {
 
 
 
+    }
+
+    private fun getSenderPhone(){
+        viewModel.getUserLive().observe(viewLifecycleOwner){
+            if (it.isNotEmpty()){
+                senderPhone = it[0].phone?:""
+                println("getSenderPhone phone $senderPhone")
+            }
+        }
     }
 
     private fun initStepProgress() {

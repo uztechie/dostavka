@@ -157,4 +157,8 @@
     <string name="batafsil">Батафсил</string>
     <string name="tashish_shartlari">Фойдаланиш шартлари</string>
     <string name="aloqa_uchun">Aлоқа учун</string>
+    <string name="siz_ozingizning_telefon_raqamingizga_pochta_yubora_olmaysiz">Сиз ўзингизнинг телефон рақамингизга почта юбора олмайсиз!</string>
+    <string name="otkazib_yuborish">Ўтказиб юбориш</string>
+    <string name="iltimos_hozirgi_manzilingizni_xarita_orqali_korsating">Илтимос ҳозирги манзилингизни харита орқали кўрсатинг!</string>
+    <string name="qabul_qiluvchi">Қабул қилувчи</string>
 </resources>

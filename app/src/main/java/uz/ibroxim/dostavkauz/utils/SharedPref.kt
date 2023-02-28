@@ -48,38 +48,7 @@ object SharedPref:KotprefModel() {
 
 
 
-    fun resetCustomerInfo(){
-        SharedPref.receiver_token = ""
-        SharedPref.receiver_id = -1
-        SharedPref.receiver_name = ""
-        SharedPref.receiver_lastname = ""
-        SharedPref.receiver_middlename = ""
-//        SharedPref.receiver_phone1 = ""
-        SharedPref.receiver_phone2 = ""
-        SharedPref.receiver_passport_serial = ""
-        SharedPref.receiver_passport_id = ""
-        SharedPref.receiver_passport_image = ""
-    }
-
-    fun resetCustomerAllData(){
-        customer_latitude = "0.0"
-        customer_longitude = "0.0"
-        customer_country = ""
-        customer_city = ""
-        customer_state = ""
-        customer_knownAreaName = ""
-
-
-        receiver_regionId = -1
-        receiver_districtId = -1
-        receiver_quarterId = -1
-
-        receiver_region = ""
-        receiver_district = ""
-        receiver_quarter = ""
-        receiver_address = ""
-        receiver_mailTitle = ""
-
+    fun resetReceiverInfo(){
         receiver_token = ""
         receiver_id = -1
         receiver_name = ""
@@ -93,7 +62,17 @@ object SharedPref:KotprefModel() {
         receiver_passport_image = ""
         receiver_passport_image_uri = ""
         receiver_type = 1
-    }
 
+        receiver_regionId = -1
+        receiver_districtId = -1
+        receiver_quarterId = -1
+
+        receiver_region = ""
+        receiver_district = ""
+        receiver_quarter = ""
+        receiver_address = ""
+        receiver_mailTitle = ""
+
+    }
 
 }
