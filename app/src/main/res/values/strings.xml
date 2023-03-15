@@ -30,9 +30,9 @@
     <string name="qabul_qilib_oluvchining_telefon_raqamini_kiriting">Қабул қилиб олувчининг телефон рақамини киритинг!</string>
     <string name="davom_etish">Давом этиш</string>
     <string name="telefon_raqamni_toliq_kiriting">Телефон рақамни тўлиқ киритинг</string>
-    <string name="qayerdan">Қаердан</string>
+    <string name="qayerdan">Қайердан</string>
     <string name="joylashuvni_tanlang">Жойлашувни танланг</string>
-    <string name="qayerga">Қаерга</string>
+    <string name="qayerga">Қайерга</string>
     <string name="mahallani_tanlang">Маҳаллани танланг</string>
     <string name="tumanni_tanlang">Туманни танланг</string>
     <string name="viloyatni_tanlang">Вилоятни танланг</string>
@@ -161,4 +161,5 @@
     <string name="otkazib_yuborish">Ўтказиб юбориш</string>
     <string name="iltimos_hozirgi_manzilingizni_xarita_orqali_korsating">Илтимос ҳозирги манзилингизни харита орқали кўрсатинг!</string>
     <string name="qabul_qiluvchi">Қабул қилувчи</string>
+    <string name="yangi_buyurtma">Янги буюртма</string>
 </resources>

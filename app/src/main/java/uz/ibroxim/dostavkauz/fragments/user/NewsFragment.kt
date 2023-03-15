@@ -40,10 +40,14 @@ class NewsFragment:Fragment(R.layout.fragment_news) {
 
         successFailedDialog = SuccessFailedDialog(requireContext(), object :
             SuccessFailedDialog.SuccessFailedCallback {
-            override fun onActionButtonClick(clickAction: String) {
+            override fun onActionButton1Click(clickAction: String) {
                 if (clickAction == SuccessFailedDialog.ACTION_SUCCESS){
 
                 }
+            }
+
+            override fun onActionButton2Click(clickAction: String) {
+
             }
 
         })
@@ -73,7 +77,7 @@ class NewsFragment:Fragment(R.layout.fragment_news) {
                     successFailedDialog.setStatusImage(R.drawable.error)
                     successFailedDialog.setTitle(getString(R.string.tariflar))
                     successFailedDialog.setMessage(response.message?:getString(R.string.xatolik))
-                    successFailedDialog.setButtonText(getString(R.string.yopish))
+                    successFailedDialog.setButton1Text(getString(R.string.yopish))
                     successFailedDialog.showCloseButton(false)
                     successFailedDialog.setClickAction(SuccessFailedDialog.ACTION_FAILED)
 

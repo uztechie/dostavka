@@ -19,21 +19,16 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.custom_toolbar.*
-import kotlinx.android.synthetic.main.fragment_create_mail_passport.*
 import kotlinx.android.synthetic.main.fragment_upload_customer_passport.*
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
-import uz.ibroxim.dostavkauz.DriverActivity
 import uz.ibroxim.dostavkauz.R
-import uz.ibroxim.dostavkauz.UserActivity
 import uz.ibroxim.dostavkauz.dialog.CustomProgressDialog
 import uz.ibroxim.dostavkauz.dialog.SuccessFailedDialog
-import uz.ibroxim.dostavkauz.fragments.login.LoginFragmentDirections
 import uz.ibroxim.dostavkauz.utils.Constants
 import uz.ibroxim.dostavkauz.utils.Resource
 import uz.ibroxim.dostavkauz.utils.SharedPref
@@ -73,10 +68,14 @@ class UploadCustomerPassportFragment:Fragment(R.layout.fragment_upload_customer_
         customProgressDialog = CustomProgressDialog(requireContext())
         successFailedDialog = SuccessFailedDialog(requireContext(), object :
             SuccessFailedDialog.SuccessFailedCallback {
-            override fun onActionButtonClick(clickAction: String) {
+            override fun onActionButton1Click(clickAction: String) {
                 if (clickAction == SuccessFailedDialog.ACTION_SUCCESS){
                     findNavController().popBackStack()
                 }
+            }
+
+            override fun onActionButton2Click(clickAction: String) {
+
             }
 
         })
@@ -165,7 +164,7 @@ class UploadCustomerPassportFragment:Fragment(R.layout.fragment_upload_customer_
                     successFailedDialog.setStatusImage(R.drawable.error)
                     successFailedDialog.setTitle(getString(R.string.pasport_malumotlari))
                     successFailedDialog.setMessage(response.message?:getString(R.string.xatolik))
-                    successFailedDialog.setButtonText(getString(R.string.bekor_qilish))
+                    successFailedDialog.setButton1Text(getString(R.string.bekor_qilish))
                     successFailedDialog.showCloseButton(true)
                     successFailedDialog.setClickAction(SuccessFailedDialog.ACTION_FAILED)
 
@@ -183,7 +182,7 @@ class UploadCustomerPassportFragment:Fragment(R.layout.fragment_upload_customer_
                             successFailedDialog.setStatusImage(R.drawable.error)
                             successFailedDialog.setTitle(getString(R.string.pasport_malumotlari))
                             successFailedDialog.setMessage(it.message?:getString(R.string.xatolik))
-                            successFailedDialog.setButtonText(getString(R.string.bekor_qilish))
+                            successFailedDialog.setButton1Text(getString(R.string.bekor_qilish))
                             successFailedDialog.showCloseButton(true)
                             successFailedDialog.setClickAction(SuccessFailedDialog.ACTION_FAILED)
                         }
@@ -274,7 +273,7 @@ class UploadCustomerPassportFragment:Fragment(R.layout.fragment_upload_customer_
                                     successFailedDialog.setStatusImage(R.drawable.success)
                                     successFailedDialog.setTitle(getString(R.string.pasport_malumotlari))
                                     successFailedDialog.setMessage(getString(R.string.pasport_malumotlari_yuklandi))
-                                    successFailedDialog.setButtonText(getString(R.string.yopish))
+                                    successFailedDialog.setButton1Text(getString(R.string.yopish))
                                     successFailedDialog.showCloseButton(false)
                                     successFailedDialog.setClickAction(SuccessFailedDialog.ACTION_SUCCESS)
 

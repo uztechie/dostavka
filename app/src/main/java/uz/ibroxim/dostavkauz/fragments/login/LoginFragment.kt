@@ -84,12 +84,16 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         customProgressDialog = CustomProgressDialog(requireContext())
         successFailedDialog = SuccessFailedDialog(requireContext(), object :
             SuccessFailedDialog.SuccessFailedCallback {
-            override fun onActionButtonClick(clickAction: String) {
+            override fun onActionButton1Click(clickAction: String) {
                 if (clickAction == SuccessFailedDialog.ACTION_SUCCESS) {
 
                 } else {
 
                 }
+            }
+
+            override fun onActionButton2Click(clickAction: String) {
+
             }
 
         })

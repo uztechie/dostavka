@@ -54,16 +54,34 @@
 
 
         <com.google.android.material.button.MaterialButton
-            android:paddingHorizontal="50dp"
             app:backgroundTint="@color/colorPrimary"
             android:textColor="@color/white"
-            android:id="@+id/dialog_success_close_btn_action"
-            android:layout_width="wrap_content"
+            android:id="@+id/dialog_success_btn_action1"
+            android:layout_width="200dp"
             android:layout_height="50dp"
             android:text="Okay"
             android:textAllCaps="false"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="16dp"/>
+            android:layout_gravity="center_horizontal" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:visibility="gone"
+            android:layout_marginTop="4dp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:textColor="@color/colorPrimary"
+            app:strokeColor="@color/colorPrimary"
+            app:strokeWidth="1dp"
+            android:id="@+id/dialog_success_btn_action2"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:text="Cancel"
+            android:textAllCaps="false"
+            android:layout_gravity="center_horizontal" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="16dp"/>
+
 
 
 

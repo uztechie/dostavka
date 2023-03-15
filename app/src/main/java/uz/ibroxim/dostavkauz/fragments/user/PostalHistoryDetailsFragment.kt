@@ -14,7 +14,6 @@ import uz.ibroxim.dostavkauz.adapter.StatusAdapter
 import uz.ibroxim.dostavkauz.dialog.SuccessFailedDialog
 import uz.ibroxim.dostavkauz.models.PostalHistory
 import uz.ibroxim.dostavkauz.utils.SharedPref
-import java.util.TimeZone
 
 @AndroidEntryPoint
 class PostalHistoryDetailsFragment:Fragment(R.layout.fragment_order_hsitory_details) {
@@ -102,14 +101,18 @@ class PostalHistoryDetailsFragment:Fragment(R.layout.fragment_order_hsitory_deta
     private fun showSetLocationDialog(){
         val dialog = SuccessFailedDialog(requireContext(), object :
             SuccessFailedDialog.SuccessFailedCallback {
-            override fun onActionButtonClick(clickAction: String) {
+            override fun onActionButton1Click(clickAction: String) {
                 findNavController().navigate(PostalHistoryDetailsFragmentDirections.actionPostalHistoryDetailsFragmentToChooseLocationFragment(false))
+            }
+
+            override fun onActionButton2Click(clickAction: String) {
+
             }
         })
         dialog.show()
         dialog.setTitle(getString(R.string.joylashuvni_tanlang))
         dialog.setMessage(getString(R.string.iltimos_hozirgi_manzilingizni_xarita_orqali_korsating))
-        dialog.setButtonText(getString(R.string.davom_etish))
+        dialog.setButton1Text(getString(R.string.davom_etish))
         dialog.showCloseButton(true)
     }
 

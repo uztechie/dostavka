@@ -36,7 +36,7 @@ class AppViewModel @Inject constructor(
     val registerCustomerResponse:MutableLiveData<Resource<Login>> = MutableLiveData()
     var updateCustomerResponse:MutableLiveData<Resource<Login>> = MutableLiveData()
 
-    val postalResponse:MutableLiveData<Resource<PostalResponse>> = MutableLiveData()
+    var postalResponse:MutableLiveData<Resource<PostalResponse>> = MutableLiveData()
     val createReceiverResponse:MutableLiveData<Resource<Login>> = MutableLiveData()
 
     val tariffResponse:MutableLiveData<Resource<List<Tariff>>> = MutableLiveData()

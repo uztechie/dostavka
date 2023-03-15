@@ -1,13 +1,10 @@
 package uz.ibroxim.dostavkauz.fragments.user
 
-import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import androidx.activity.OnBackPressedCallback
-import androidx.core.text.isDigitsOnly
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
@@ -17,12 +14,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.custom_toolbar.*
 import kotlinx.android.synthetic.main.fragment_create_mail_items.*
 import kotlinx.android.synthetic.main.fragment_create_mail_location.add_stepview
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.asRequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
 import uz.ibroxim.dostavkauz.R
 import uz.ibroxim.dostavkauz.adapter.ItemAdapter
 import uz.ibroxim.dostavkauz.dialog.CustomProgressDialog
@@ -32,7 +23,6 @@ import uz.ibroxim.dostavkauz.utils.Resource
 import uz.ibroxim.dostavkauz.utils.SharedPref
 import uz.ibroxim.dostavkauz.utils.Utils
 import uz.techie.mexmash.data.AppViewModel
-import java.io.File
 
 
 @AndroidEntryPoint
@@ -69,10 +59,15 @@ class CreateMailItemsFragment : Fragment(R.layout.fragment_create_mail_items) {
 
         successFailedDialog = SuccessFailedDialog(requireContext(), object :
             SuccessFailedDialog.SuccessFailedCallback {
-            override fun onActionButtonClick(clickAction: String) {
+            override fun onActionButton1Click(clickAction: String) {
                 if (clickAction == SuccessFailedDialog.ACTION_SUCCESS){
                     findNavController().navigate(CreateMailItemsFragmentDirections.actionGlobalHomeFragment())
                 }
+            }
+
+            override fun onActionButton2Click(clickAction: String) {
+                itemsList.value?.clear()
+                itemsList.postValue(mutableListOf(Item(-1,"", "")))
             }
 
         })
@@ -83,7 +78,6 @@ class CreateMailItemsFragment : Fragment(R.layout.fragment_create_mail_items) {
         itemAdapter = ItemAdapter(object : ItemAdapter.ItemAdapterCallBack {
             override fun onItemRemove(item: Item) {
             }
-
         }, mutableListOf())
 
         create_mail_items_recyclerview?.apply {
@@ -150,7 +144,7 @@ class CreateMailItemsFragment : Fragment(R.layout.fragment_create_mail_items) {
                     successFailedDialog.setStatusImage(R.drawable.error)
                     successFailedDialog.setTitle(getString(R.string.pochta_yuborish))
                     successFailedDialog.setMessage(response.message ?: getString(R.string.xatolik))
-                    successFailedDialog.setButtonText(getString(R.string.bekor_qilish))
+                    successFailedDialog.setButton1Text(getString(R.string.bekor_qilish))
                     successFailedDialog.showCloseButton(true)
                     successFailedDialog.setClickAction(SuccessFailedDialog.ACTION_FAILED)
 
@@ -164,8 +158,10 @@ class CreateMailItemsFragment : Fragment(R.layout.fragment_create_mail_items) {
                             successFailedDialog.setStatusImage(R.drawable.success)
                             successFailedDialog.setTitle(getString(R.string.pochta_yuborish))
                             successFailedDialog.setMessage(it.message ?: "")
-                            successFailedDialog.setButtonText(getString(R.string.yopish))
+                            successFailedDialog.setButton1Text(getString(R.string.yopish))
+                            successFailedDialog.setButton2Text(getString(R.string.yangi_buyurtma))
                             successFailedDialog.showCloseButton(false)
+                            successFailedDialog.showButton2(true)
                             successFailedDialog.setClickAction(SuccessFailedDialog.ACTION_SUCCESS)
                         } else {
                             successFailedDialog.show()
@@ -174,7 +170,7 @@ class CreateMailItemsFragment : Fragment(R.layout.fragment_create_mail_items) {
                             successFailedDialog.setMessage(
                                 it.message ?: getString(R.string.xatolik)
                             )
-                            successFailedDialog.setButtonText(getString(R.string.bekor_qilish))
+                            successFailedDialog.setButton1Text(getString(R.string.bekor_qilish))
                             successFailedDialog.showCloseButton(true)
                             successFailedDialog.setClickAction(SuccessFailedDialog.ACTION_FAILED)
                         }

@@ -65,10 +65,14 @@ class HomeFragment:Fragment(R.layout.fragment_home), TextWatcher {
 
         successFailedDialog = SuccessFailedDialog(requireContext(), object :
             SuccessFailedDialog.SuccessFailedCallback {
-            override fun onActionButtonClick(clickAction: String) {
+            override fun onActionButton1Click(clickAction: String) {
                 if (clickAction == SuccessFailedDialog.ACTION_FAILED){
                     viewModel.loadPostalHistory(SharedPref.token)
                 }
+            }
+
+            override fun onActionButton2Click(clickAction: String) {
+
             }
 
         })
@@ -99,7 +103,7 @@ class HomeFragment:Fragment(R.layout.fragment_home), TextWatcher {
                     successFailedDialog.setStatusImage(R.drawable.error)
                     successFailedDialog.setTitle(getString(R.string.buyurtmalar_tarixi))
                     successFailedDialog.setMessage(response.message?:getString(R.string.xatolik))
-                    successFailedDialog.setButtonText(getString(R.string.qayta_urinish))
+                    successFailedDialog.setButton1Text(getString(R.string.qayta_urinish))
                     successFailedDialog.showCloseButton(true)
                     successFailedDialog.setClickAction(SuccessFailedDialog.ACTION_FAILED)
 
@@ -120,7 +124,7 @@ class HomeFragment:Fragment(R.layout.fragment_home), TextWatcher {
                             successFailedDialog.setStatusImage(R.drawable.error)
                             successFailedDialog.setTitle(getString(R.string.buyurtmalar_tarixi))
                             successFailedDialog.setMessage(it.message?:getString(R.string.xatolik))
-                            successFailedDialog.setButtonText(getString(R.string.qayta_urinish))
+                            successFailedDialog.setButton1Text(getString(R.string.qayta_urinish))
                             successFailedDialog.showCloseButton(true)
                             successFailedDialog.setClickAction(SuccessFailedDialog.ACTION_FAILED)
                         }

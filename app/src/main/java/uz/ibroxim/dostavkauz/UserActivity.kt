@@ -77,10 +77,14 @@ class UserActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
 
         successFailedDialog = SuccessFailedDialog(this, object :
             SuccessFailedDialog.SuccessFailedCallback {
-            override fun onActionButtonClick(clickAction: String) {
+            override fun onActionButton1Click(clickAction: String) {
                 if (clickAction == SuccessFailedDialog.ACTION_SUCCESS){
                     finish()
                 }
+            }
+
+            override fun onActionButton2Click(clickAction: String) {
+
             }
 
         })
@@ -131,7 +135,7 @@ class UserActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
             successFailedDialog.setStatusImage(R.drawable.wifi_off)
             successFailedDialog.setTitle(getString(R.string.internet_boglanish))
             successFailedDialog.setMessage(getString(R.string.ilovadan_foydalanish_uchun_internetga))
-            successFailedDialog.setButtonText(getString(R.string.yopish))
+            successFailedDialog.setButton1Text(getString(R.string.yopish))
             successFailedDialog.showCloseButton(false)
             successFailedDialog.setClickAction(SuccessFailedDialog.ACTION_SUCCESS)
         }

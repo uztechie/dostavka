@@ -71,11 +71,15 @@ class CreateMailPassportFragment:Fragment(R.layout.fragment_create_mail_passport
 
         successFailedDialog = SuccessFailedDialog(requireContext(), object :
             SuccessFailedDialog.SuccessFailedCallback {
-            override fun onActionButtonClick(clickAction: String) {
+            override fun onActionButton1Click(clickAction: String) {
                 if (clickAction == SuccessFailedDialog.ACTION_SUCCESS){
                     findNavController().navigate(CreateMailPassportFragmentDirections.actionCreateMailPassportFragmentToCreateMailItemsFragment())
 
                 }
+            }
+
+            override fun onActionButton2Click(clickAction: String) {
+
             }
 
         })
@@ -93,7 +97,7 @@ class CreateMailPassportFragment:Fragment(R.layout.fragment_create_mail_passport
                     successFailedDialog.setStatusImage(R.drawable.error)
                     successFailedDialog.setTitle(getString(R.string.pochta_yuborish))
                     successFailedDialog.setMessage(response.message?:getString(R.string.xatolik))
-                    successFailedDialog.setButtonText(getString(R.string.bekor_qilish))
+                    successFailedDialog.setButton1Text(getString(R.string.bekor_qilish))
                     successFailedDialog.showCloseButton(true)
                     successFailedDialog.setClickAction(SuccessFailedDialog.ACTION_FAILED)
 
@@ -119,7 +123,7 @@ class CreateMailPassportFragment:Fragment(R.layout.fragment_create_mail_passport
                             successFailedDialog.setStatusImage(R.drawable.success)
                             successFailedDialog.setTitle(getString(R.string.pochta_yuborish))
                             successFailedDialog.setMessage(getString(R.string.yangi_foydalanuvchi_yaratildi))
-                            successFailedDialog.setButtonText(getString(R.string.keyingisi))
+                            successFailedDialog.setButton1Text(getString(R.string.keyingisi))
                             successFailedDialog.showCloseButton(false)
                             successFailedDialog.setClickAction(SuccessFailedDialog.ACTION_SUCCESS)
                         }
@@ -128,7 +132,7 @@ class CreateMailPassportFragment:Fragment(R.layout.fragment_create_mail_passport
                             successFailedDialog.setStatusImage(R.drawable.error)
                             successFailedDialog.setTitle(getString(R.string.pochta_yuborish))
                             successFailedDialog.setMessage(login.message?:getString(R.string.xatolik))
-                            successFailedDialog.setButtonText(getString(R.string.bekor_qilish))
+                            successFailedDialog.setButton1Text(getString(R.string.bekor_qilish))
                             successFailedDialog.showCloseButton(true)
                             successFailedDialog.setClickAction(SuccessFailedDialog.ACTION_FAILED)
                         }
@@ -307,7 +311,7 @@ class CreateMailPassportFragment:Fragment(R.layout.fragment_create_mail_passport
                     successFailedDialog.setStatusImage(R.drawable.error)
                     successFailedDialog.setTitle(getString(R.string.pasport_malumotlari))
                     successFailedDialog.setMessage(response.message?:getString(R.string.xatolik))
-                    successFailedDialog.setButtonText(getString(R.string.bekor_qilish))
+                    successFailedDialog.setButton1Text(getString(R.string.bekor_qilish))
                     successFailedDialog.showCloseButton(true)
                     successFailedDialog.setClickAction(SuccessFailedDialog.ACTION_FAILED)
 
@@ -321,7 +325,7 @@ class CreateMailPassportFragment:Fragment(R.layout.fragment_create_mail_passport
                             successFailedDialog.setStatusImage(R.drawable.success)
                             successFailedDialog.setTitle(getString(R.string.pochta_yuborish))
                             successFailedDialog.setMessage(getString(R.string.pasport_malumotlari_yuklandi))
-                            successFailedDialog.setButtonText(getString(R.string.keyingisi))
+                            successFailedDialog.setButton1Text(getString(R.string.keyingisi))
                             successFailedDialog.showCloseButton(false)
                             successFailedDialog.setClickAction(SuccessFailedDialog.ACTION_SUCCESS)
                         }
@@ -330,7 +334,7 @@ class CreateMailPassportFragment:Fragment(R.layout.fragment_create_mail_passport
                             successFailedDialog.setStatusImage(R.drawable.error)
                             successFailedDialog.setTitle(getString(R.string.pasport_malumotlari))
                             successFailedDialog.setMessage(it.message?:getString(R.string.xatolik))
-                            successFailedDialog.setButtonText(getString(R.string.bekor_qilish))
+                            successFailedDialog.setButton1Text(getString(R.string.bekor_qilish))
                             successFailedDialog.showCloseButton(true)
                             successFailedDialog.setClickAction(SuccessFailedDialog.ACTION_FAILED)
                         }

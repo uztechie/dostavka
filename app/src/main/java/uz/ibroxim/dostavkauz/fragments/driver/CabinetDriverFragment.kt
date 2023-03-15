@@ -45,7 +45,7 @@ class CabinetDriverFragment:Fragment(R.layout.fragment_cabinet_driver) {
 
         successFailedDialog = SuccessFailedDialog(requireContext(), object :
             SuccessFailedDialog.SuccessFailedCallback {
-            override fun onActionButtonClick(clickAction: String) {
+            override fun onActionButton1Click(clickAction: String) {
                 if (clickAction == SuccessFailedDialog.ACTION_SUCCESS){
                     SharedPref.token = ""
                     Firebase.messaging.unsubscribeFromTopic(Constants.TOPIC_DRIVER)
@@ -56,6 +56,10 @@ class CabinetDriverFragment:Fragment(R.layout.fragment_cabinet_driver) {
                         requireActivity().finish()
                     }
                 }
+            }
+
+            override fun onActionButton2Click(clickAction: String) {
+
             }
 
         })
@@ -82,7 +86,7 @@ class CabinetDriverFragment:Fragment(R.layout.fragment_cabinet_driver) {
             successFailedDialog.setStatusImage(R.drawable.question)
             successFailedDialog.setTitle(getString(R.string.tizimdan_chiqish))
             successFailedDialog.setMessage(getString(R.string.siz_rostdan_tizimdan_chiqmoqchimisiz))
-            successFailedDialog.setButtonText(getString(R.string.ha))
+            successFailedDialog.setButton1Text(getString(R.string.ha))
             successFailedDialog.showCloseButton(true)
             successFailedDialog.setClickAction(SuccessFailedDialog.ACTION_SUCCESS)
         }
@@ -150,7 +154,7 @@ class CabinetDriverFragment:Fragment(R.layout.fragment_cabinet_driver) {
                         successFailedDialog.setStatusImage(R.drawable.error)
                         successFailedDialog.setTitle(getString(R.string.ma_lumotlarni_yangilash))
                         successFailedDialog.setMessage(response.message?:getString(R.string.xatolik))
-                        successFailedDialog.setButtonText(getString(R.string.yopish))
+                        successFailedDialog.setButton1Text(getString(R.string.yopish))
                         successFailedDialog.showCloseButton(false)
                         successFailedDialog.setClickAction(SuccessFailedDialog.ACTION_FAILED)
 
@@ -177,7 +181,7 @@ class CabinetDriverFragment:Fragment(R.layout.fragment_cabinet_driver) {
                                 successFailedDialog.setStatusImage(R.drawable.error)
                                 successFailedDialog.setTitle(getString(R.string.ma_lumotlarni_yangilash))
                                 successFailedDialog.setMessage(it.message?:getString(R.string.xatolik))
-                                successFailedDialog.setButtonText(getString(R.string.yopish))
+                                successFailedDialog.setButton1Text(getString(R.string.yopish))
                                 successFailedDialog.showCloseButton(false)
                                 successFailedDialog.setClickAction(SuccessFailedDialog.ACTION_FAILED)
                             }

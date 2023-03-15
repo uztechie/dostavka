@@ -22,8 +22,13 @@ class SuccessFailedDialog(context:Context, private val callback:SuccessFailedCal
         setCancelable(false)
         setContentView(R.layout.dialog_success_failed)
 
-        dialog_success_close_btn_action.setOnClickListener {
-            callback.onActionButtonClick(mClickAction)
+        dialog_success_btn_action1.setOnClickListener {
+            callback.onActionButton1Click(mClickAction)
+            dismiss()
+        }
+
+        dialog_success_btn_action2.setOnClickListener {
+            callback.onActionButton2Click(mClickAction)
             dismiss()
         }
 
@@ -43,9 +48,17 @@ class SuccessFailedDialog(context:Context, private val callback:SuccessFailedCal
     fun setMessage(message:String){
         dialog_success_close_tv_message.text = message
     }
-    fun setButtonText(text:String){
-        dialog_success_close_btn_action.setText(text)
+    fun setButton1Text(text:String){
+        dialog_success_btn_action1.setText(text)
     }
+    fun setButton2Text(text:String){
+        dialog_success_btn_action2.setText(text)
+    }
+
+    fun showButton2(show:Boolean){
+        dialog_success_btn_action2.isVisible = show
+    }
+
     fun showCloseButton(isVisible:Boolean){
         if (isVisible){
             dialog_success_close_btn_close.visibility = View.VISIBLE
@@ -60,7 +73,8 @@ class SuccessFailedDialog(context:Context, private val callback:SuccessFailedCal
 
 
     interface SuccessFailedCallback{
-        fun onActionButtonClick(clickAction:String)
+        fun onActionButton1Click(clickAction:String)
+        fun onActionButton2Click(clickAction:String)
     }
 
     companion object{

@@ -50,7 +50,11 @@ class OrderUpdateFragment:Fragment(R.layout.fragment_order_update) {
         customProgressDialog = CustomProgressDialog(requireContext())
         successFailedDialog = SuccessFailedDialog(requireContext(), object :
             SuccessFailedDialog.SuccessFailedCallback {
-            override fun onActionButtonClick(clickAction: String) {
+            override fun onActionButton1Click(clickAction: String) {
+
+            }
+
+            override fun onActionButton2Click(clickAction: String) {
 
             }
 

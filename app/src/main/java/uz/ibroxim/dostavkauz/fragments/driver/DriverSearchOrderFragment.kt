@@ -1,21 +1,13 @@
 package uz.ibroxim.dostavkauz.fragments.driver
 
-import android.app.Activity
-import android.content.Intent
-import android.graphics.Bitmap
 import android.media.AudioManager
 import android.media.MediaPlayer
-import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
-import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.SeekBar
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
@@ -25,26 +17,19 @@ import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.zxing.integration.android.IntentIntegrator
 import com.journeyapps.barcodescanner.ScanContract
-import com.journeyapps.barcodescanner.ScanIntentResult
 import com.journeyapps.barcodescanner.ScanOptions
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.dialog_play_audio.*
-import kotlinx.android.synthetic.main.dialog_play_audio.update_audio_music_icon
-import kotlinx.android.synthetic.main.dialog_update_user.*
-import kotlinx.android.synthetic.main.fragment_create_mail_passport.*
 import kotlinx.android.synthetic.main.fragment_driver_search_order.*
-import kotlinx.android.synthetic.main.fragment_order_update_audio.*
 import uz.ibroxim.dostavkauz.R
 import uz.ibroxim.dostavkauz.adapter.AudioAdapter
 import uz.ibroxim.dostavkauz.adapter.NewOrderItemAdapter
 import uz.ibroxim.dostavkauz.dialog.CustomProgressDialog
 import uz.ibroxim.dostavkauz.dialog.SuccessFailedDialog
 import uz.ibroxim.dostavkauz.models.SearchOrder
-import uz.ibroxim.dostavkauz.models.User
 import uz.ibroxim.dostavkauz.models.UserRecord
 import uz.ibroxim.dostavkauz.utils.*
 import uz.techie.mexmash.data.AppViewModel
-import java.io.IOException
 
 @AndroidEntryPoint
 class DriverSearchOrderFragment:Fragment(R.layout.fragment_driver_search_order) {
@@ -256,7 +241,11 @@ class DriverSearchOrderFragment:Fragment(R.layout.fragment_driver_search_order) 
 
         val successFailedDialog = SuccessFailedDialog(requireContext(), object :
             SuccessFailedDialog.SuccessFailedCallback {
-            override fun onActionButtonClick(clickAction: String) {
+            override fun onActionButton1Click(clickAction: String) {
+
+            }
+
+            override fun onActionButton2Click(clickAction: String) {
 
             }
 
@@ -267,7 +256,7 @@ class DriverSearchOrderFragment:Fragment(R.layout.fragment_driver_search_order) 
             successFailedDialog.setStatusImage(R.drawable.success)
             successFailedDialog.setTitle(title)
             successFailedDialog.setMessage(message)
-            successFailedDialog.setButtonText(getString(R.string.yopish))
+            successFailedDialog.setButton1Text(getString(R.string.yopish))
             successFailedDialog.showCloseButton(false)
             successFailedDialog.setClickAction(SuccessFailedDialog.ACTION_SUCCESS)
         }
@@ -276,7 +265,7 @@ class DriverSearchOrderFragment:Fragment(R.layout.fragment_driver_search_order) 
             successFailedDialog.setStatusImage(R.drawable.error)
             successFailedDialog.setTitle(title)
             successFailedDialog.setMessage(message)
-            successFailedDialog.setButtonText(getString(R.string.yopish ))
+            successFailedDialog.setButton1Text(getString(R.string.yopish ))
             successFailedDialog.showCloseButton(true)
             successFailedDialog.setClickAction(SuccessFailedDialog.ACTION_FAILED)
         }

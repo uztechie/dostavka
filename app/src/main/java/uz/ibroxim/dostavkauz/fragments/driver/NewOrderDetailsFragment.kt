@@ -81,35 +81,51 @@ class NewOrderDetailsFragment : Fragment(R.layout.fragment_new_order_details) {
 
         successFailedDialogForMap = SuccessFailedDialog(requireContext(), object :
             SuccessFailedDialog.SuccessFailedCallback {
-            override fun onActionButtonClick(clickAction: String) {
+            override fun onActionButton1Click(clickAction: String) {
+
+            }
+
+            override fun onActionButton2Click(clickAction: String) {
 
             }
         })
 
         successFailedDialogForUpdate = SuccessFailedDialog(requireContext(), object :
             SuccessFailedDialog.SuccessFailedCallback {
-            override fun onActionButtonClick(clickAction: String) {
+            override fun onActionButton1Click(clickAction: String) {
                 if (clickAction == SuccessFailedDialog.ACTION_SUCCESS){
                     findNavController().popBackStack()
                 }
+            }
+
+            override fun onActionButton2Click(clickAction: String) {
+
             }
 
         })
 
         successFailedDialogForDeleteRequest = SuccessFailedDialog(requireContext(), object :
             SuccessFailedDialog.SuccessFailedCallback {
-            override fun onActionButtonClick(clickAction: String) {
+            override fun onActionButton1Click(clickAction: String) {
                 if (clickAction == SuccessFailedDialog.ACTION_SUCCESS){
                     order?.barcode?.let {
                         viewModel.deleteOrder(it.toString(), SharedPref.token)
                     }
                 }
             }
+
+            override fun onActionButton2Click(clickAction: String) {
+
+            }
         })
 
         successFailedDialogForDelete = SuccessFailedDialog(requireContext(), object :
             SuccessFailedDialog.SuccessFailedCallback {
-            override fun onActionButtonClick(clickAction: String) {
+            override fun onActionButton1Click(clickAction: String) {
+
+            }
+
+            override fun onActionButton2Click(clickAction: String) {
 
             }
         })
@@ -170,7 +186,7 @@ class NewOrderDetailsFragment : Fragment(R.layout.fragment_new_order_details) {
             successFailedDialogForDeleteRequest.setStatusImage(R.drawable.question)
             successFailedDialogForDeleteRequest.setTitle(getString(R.string.buyurtmani_ochirish))
             successFailedDialogForDeleteRequest.setMessage(getString(R.string.siz_rostdan_buyurtmani_ochirmoqchimisiz))
-            successFailedDialogForDeleteRequest.setButtonText(getString(R.string.o_chirish))
+            successFailedDialogForDeleteRequest.setButton1Text(getString(R.string.o_chirish))
             successFailedDialogForDeleteRequest.showCloseButton(true)
             successFailedDialogForDeleteRequest.setClickAction(SuccessFailedDialog.ACTION_SUCCESS)
         }
@@ -196,7 +212,7 @@ class NewOrderDetailsFragment : Fragment(R.layout.fragment_new_order_details) {
                     successFailedDialogForUpdate.setStatusImage(R.drawable.error)
                     successFailedDialogForUpdate.setTitle(getString(R.string.buyurtma_qabul_qilish))
                     successFailedDialogForUpdate.setMessage(response.message?:getString(R.string.xatolik))
-                    successFailedDialogForUpdate.setButtonText(getString(R.string.yopish))
+                    successFailedDialogForUpdate.setButton1Text(getString(R.string.yopish))
                     successFailedDialogForUpdate.showCloseButton(false)
                     successFailedDialogForUpdate.setClickAction(SuccessFailedDialog.ACTION_FAILED)
 
@@ -209,7 +225,7 @@ class NewOrderDetailsFragment : Fragment(R.layout.fragment_new_order_details) {
                             successFailedDialogForUpdate.setStatusImage(R.drawable.success)
                             successFailedDialogForUpdate.setTitle(getString(R.string.buyurtma_qabul_qilish))
                             successFailedDialogForUpdate.setMessage(getString(R.string.siz_ushbu_buyurtmani_qabul_qildingiz))
-                            successFailedDialogForUpdate.setButtonText(getString(R.string.yopish))
+                            successFailedDialogForUpdate.setButton1Text(getString(R.string.yopish))
                             successFailedDialogForUpdate.showCloseButton(false)
                             successFailedDialogForUpdate.setClickAction(SuccessFailedDialog.ACTION_SUCCESS)
                         }
@@ -218,7 +234,7 @@ class NewOrderDetailsFragment : Fragment(R.layout.fragment_new_order_details) {
                             successFailedDialogForUpdate.setStatusImage(R.drawable.error)
                             successFailedDialogForUpdate.setTitle(getString(R.string.buyurtma_qabul_qilish))
                             successFailedDialogForUpdate.setMessage(it.message?:getString(R.string.xatolik))
-                            successFailedDialogForUpdate.setButtonText(getString(R.string.yopish))
+                            successFailedDialogForUpdate.setButton1Text(getString(R.string.yopish))
                             successFailedDialogForUpdate.showCloseButton(false)
                             successFailedDialogForUpdate.setClickAction(SuccessFailedDialog.ACTION_FAILED)
                         }
@@ -241,7 +257,7 @@ class NewOrderDetailsFragment : Fragment(R.layout.fragment_new_order_details) {
                     successFailedDialogForUpdate.setStatusImage(R.drawable.error)
                     successFailedDialogForUpdate.setTitle(getString(R.string.buyurtma_izlash))
                     successFailedDialogForUpdate.setMessage(response.message?:getString(R.string.xatolik))
-                    successFailedDialogForUpdate.setButtonText(getString(R.string.yopish))
+                    successFailedDialogForUpdate.setButton1Text(getString(R.string.yopish))
                     successFailedDialogForUpdate.showCloseButton(false)
                     successFailedDialogForUpdate.setClickAction(SuccessFailedDialog.ACTION_FAILED)
 
@@ -263,7 +279,7 @@ class NewOrderDetailsFragment : Fragment(R.layout.fragment_new_order_details) {
                             successFailedDialogForUpdate.setStatusImage(R.drawable.error)
                             successFailedDialogForUpdate.setTitle(getString(R.string.buyurtma_izlash))
                             successFailedDialogForUpdate.setMessage(it.message?:getString(R.string.xatolik))
-                            successFailedDialogForUpdate.setButtonText(getString(R.string.yopish))
+                            successFailedDialogForUpdate.setButton1Text(getString(R.string.yopish))
                             successFailedDialogForUpdate.showCloseButton(false)
                             successFailedDialogForUpdate.setClickAction(SuccessFailedDialog.ACTION_FAILED)
                         }
@@ -303,7 +319,7 @@ class NewOrderDetailsFragment : Fragment(R.layout.fragment_new_order_details) {
                     successFailedDialogForDelete.setStatusImage(R.drawable.error)
                     successFailedDialogForDelete.setTitle(getString(R.string.buyurtmani_ochirish))
                     successFailedDialogForDelete.setMessage(response.message?:getString(R.string.xatolik))
-                    successFailedDialogForDelete.setButtonText(getString(R.string.yopish))
+                    successFailedDialogForDelete.setButton1Text(getString(R.string.yopish))
                     successFailedDialogForDelete.showCloseButton(false)
                     successFailedDialogForDelete.setClickAction(SuccessFailedDialog.ACTION_FAILED)
 
@@ -320,7 +336,7 @@ class NewOrderDetailsFragment : Fragment(R.layout.fragment_new_order_details) {
                             successFailedDialogForDelete.setStatusImage(R.drawable.error)
                             successFailedDialogForDelete.setTitle(getString(R.string.buyurtmani_ochirish))
                             successFailedDialogForDelete.setMessage(it.message?:getString(R.string.xatolik))
-                            successFailedDialogForDelete.setButtonText(getString(R.string.yopish))
+                            successFailedDialogForDelete.setButton1Text(getString(R.string.yopish))
                             successFailedDialogForDelete.showCloseButton(false)
                             successFailedDialogForDelete.setClickAction(SuccessFailedDialog.ACTION_FAILED)
                         }
@@ -363,7 +379,7 @@ class NewOrderDetailsFragment : Fragment(R.layout.fragment_new_order_details) {
             successFailedDialogForUpdate.setStatusImage(R.drawable.error)
             successFailedDialogForUpdate.setTitle(getString(R.string.yandexmaps_topildmadi))
             successFailedDialogForUpdate.setMessage(getString(R.string.xarita_orqali_korish))
-            successFailedDialogForUpdate.setButtonText(getString(R.string.yopish))
+            successFailedDialogForUpdate.setButton1Text(getString(R.string.yopish))
             successFailedDialogForUpdate.showCloseButton(false)
             successFailedDialogForUpdate.setClickAction(SuccessFailedDialog.ACTION_FAILED)
             Log.d(TAG, "openMap: map is not installed ")

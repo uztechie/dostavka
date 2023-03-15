@@ -36,7 +36,11 @@ class OrderHistoryFragment:Fragment(R.layout.fragment_new_orders) {
 
         successFailedDialog = SuccessFailedDialog(requireContext(), object :
             SuccessFailedDialog.SuccessFailedCallback {
-            override fun onActionButtonClick(clickAction: String) {
+            override fun onActionButton1Click(clickAction: String) {
+
+            }
+
+            override fun onActionButton2Click(clickAction: String) {
 
             }
 

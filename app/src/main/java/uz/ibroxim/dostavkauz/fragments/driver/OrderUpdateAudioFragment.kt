@@ -3,7 +3,6 @@ package uz.ibroxim.dostavkauz.fragments.driver
 import android.app.Activity
 import android.content.Intent
 import android.database.Cursor
-import android.graphics.Bitmap
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.net.Uri
@@ -18,10 +17,8 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_create_mail_passport.*
 import kotlinx.android.synthetic.main.fragment_order_update_audio.*
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
@@ -30,7 +27,6 @@ import uz.ibroxim.dostavkauz.R
 import uz.ibroxim.dostavkauz.adapter.AudioAdapter
 import uz.ibroxim.dostavkauz.dialog.CustomProgressDialog
 import uz.ibroxim.dostavkauz.dialog.SuccessFailedDialog
-import uz.ibroxim.dostavkauz.fragments.user.CreateMailPassportFragmentDirections
 import uz.ibroxim.dostavkauz.models.UserRecord
 import uz.ibroxim.dostavkauz.utils.Constants
 import uz.ibroxim.dostavkauz.utils.Resource
@@ -38,7 +34,6 @@ import uz.ibroxim.dostavkauz.utils.SharedPref
 import uz.ibroxim.dostavkauz.utils.Utils
 import uz.techie.mexmash.data.AppViewModel
 import java.io.File
-import java.io.IOException
 
 @AndroidEntryPoint
 class OrderUpdateAudioFragment : Fragment(R.layout.fragment_order_update_audio) {
@@ -66,10 +61,14 @@ class OrderUpdateAudioFragment : Fragment(R.layout.fragment_order_update_audio) 
 
         successFailedDialog = SuccessFailedDialog(requireContext(), object :
             SuccessFailedDialog.SuccessFailedCallback {
-            override fun onActionButtonClick(clickAction: String) {
+            override fun onActionButton1Click(clickAction: String) {
                 if (clickAction == SuccessFailedDialog.ACTION_SUCCESS){
 
                 }
+            }
+
+            override fun onActionButton2Click(clickAction: String) {
+
             }
         })
 
@@ -187,7 +186,7 @@ class OrderUpdateAudioFragment : Fragment(R.layout.fragment_order_update_audio) 
                     successFailedDialog.setStatusImage(R.drawable.error)
                     successFailedDialog.setTitle(getString(R.string.audio_yuklash))
                     successFailedDialog.setMessage(response.message?:getString(R.string.xatolik))
-                    successFailedDialog.setButtonText(getString(R.string.yopish))
+                    successFailedDialog.setButton1Text(getString(R.string.yopish))
                     successFailedDialog.showCloseButton(true)
                     successFailedDialog.setClickAction(SuccessFailedDialog.ACTION_FAILED)
 
@@ -200,7 +199,7 @@ class OrderUpdateAudioFragment : Fragment(R.layout.fragment_order_update_audio) 
                             successFailedDialog.setStatusImage(R.drawable.success)
                             successFailedDialog.setTitle(getString(R.string.audio_yuklash))
                             successFailedDialog.setMessage(getString(R.string.audio_yuklandi))
-                            successFailedDialog.setButtonText(getString(R.string.yopish))
+                            successFailedDialog.setButton1Text(getString(R.string.yopish))
                             successFailedDialog.showCloseButton(false)
                             successFailedDialog.setClickAction(SuccessFailedDialog.ACTION_SUCCESS)
                             searchByBarcode()
@@ -212,7 +211,7 @@ class OrderUpdateAudioFragment : Fragment(R.layout.fragment_order_update_audio) 
                             successFailedDialog.setStatusImage(R.drawable.error)
                             successFailedDialog.setTitle(getString(R.string.audio_yuklash))
                             successFailedDialog.setMessage(it.message?:getString(R.string.xatolik))
-                            successFailedDialog.setButtonText(getString(R.string.yopish))
+                            successFailedDialog.setButton1Text(getString(R.string.yopish))
                             successFailedDialog.showCloseButton(true)
                             successFailedDialog.setClickAction(SuccessFailedDialog.ACTION_FAILED)
                         }

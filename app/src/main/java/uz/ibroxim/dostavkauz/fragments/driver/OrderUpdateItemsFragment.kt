@@ -163,11 +163,15 @@ class OrderUpdateItemsFragment:Fragment(R.layout.fragment_order_update_items) {
         Log.d(TAG, "showDeleteDialog: item "+item)
         val successFailedDialog = SuccessFailedDialog(requireContext(), object :
             SuccessFailedDialog.SuccessFailedCallback {
-            override fun onActionButtonClick(clickAction: String) {
+            override fun onActionButton1Click(clickAction: String) {
                 item.id?.let {
                     viewModel.requestDeleteItem(it)
                 }
                 mainItem = item
+            }
+
+            override fun onActionButton2Click(clickAction: String) {
+
             }
         })
 
@@ -175,7 +179,7 @@ class OrderUpdateItemsFragment:Fragment(R.layout.fragment_order_update_items) {
         successFailedDialog.setStatusImage(R.drawable.question)
         successFailedDialog.setTitle(getString(R.string.buyumni_ochirish))
         successFailedDialog.setMessage(getString(R.string.siz_buyumni_ochirmoqchimisiz))
-        successFailedDialog.setButtonText(getString(R.string.o_chirish))
+        successFailedDialog.setButton1Text(getString(R.string.o_chirish))
         successFailedDialog.showCloseButton(false)
         successFailedDialog.setClickAction(SuccessFailedDialog.ACTION_SUCCESS)
     }
@@ -282,7 +286,7 @@ class OrderUpdateItemsFragment:Fragment(R.layout.fragment_order_update_items) {
 
         val successFailedDialog = SuccessFailedDialog(requireContext(), object :
             SuccessFailedDialog.SuccessFailedCallback {
-            override fun onActionButtonClick(clickAction: String) {
+            override fun onActionButton1Click(clickAction: String) {
                 if (isSuccess && action == ACTION_DELETE){
                     Constants.orderItems = Constants.orderItems.filterNot {
                         it.id == mainItem?.id
@@ -305,6 +309,10 @@ class OrderUpdateItemsFragment:Fragment(R.layout.fragment_order_update_items) {
                 }
             }
 
+            override fun onActionButton2Click(clickAction: String) {
+
+            }
+
         })
 
         if (isSuccess){
@@ -312,7 +320,7 @@ class OrderUpdateItemsFragment:Fragment(R.layout.fragment_order_update_items) {
             successFailedDialog.setStatusImage(R.drawable.success)
             successFailedDialog.setTitle(title)
             successFailedDialog.setMessage(message)
-            successFailedDialog.setButtonText(getString(R.string.yopish))
+            successFailedDialog.setButton1Text(getString(R.string.yopish))
             successFailedDialog.showCloseButton(false)
             successFailedDialog.setClickAction(SuccessFailedDialog.ACTION_SUCCESS)
         }
@@ -321,7 +329,7 @@ class OrderUpdateItemsFragment:Fragment(R.layout.fragment_order_update_items) {
             successFailedDialog.setStatusImage(R.drawable.error)
             successFailedDialog.setTitle(title)
             successFailedDialog.setMessage(message)
-            successFailedDialog.setButtonText(getString(R.string.yopish ))
+            successFailedDialog.setButton1Text(getString(R.string.yopish ))
             successFailedDialog.showCloseButton(true)
             successFailedDialog.setClickAction(SuccessFailedDialog.ACTION_FAILED)
         }

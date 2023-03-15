@@ -168,8 +168,12 @@ class CreateMailFragment:Fragment(R.layout.fragment_create_mail_location) {
                 if (user.passport_image.isNullOrEmpty() || user.passport_serial.isNullOrEmpty() || user.passport_number.isNullOrEmpty()){
                     val successFailedDialogPassport = SuccessFailedDialog(requireContext(), object :
                         SuccessFailedDialog.SuccessFailedCallback {
-                        override fun onActionButtonClick(clickAction: String) {
+                        override fun onActionButton1Click(clickAction: String) {
                             findNavController().navigate(CreateMailFragmentDirections.actionCreateMailFragmentToUploadCustomerPassportFragment())
+                        }
+
+                        override fun onActionButton2Click(clickAction: String) {
+
                         }
 
                     })
@@ -178,7 +182,7 @@ class CreateMailFragment:Fragment(R.layout.fragment_create_mail_location) {
                     successFailedDialogPassport.setStatusImage(R.drawable.warning)
                     successFailedDialogPassport.setTitle(getString(R.string.pasport_malumotlari))
                     successFailedDialogPassport.setMessage(getString(R.string.pochta_yuborish_uchun_avval_pasport_malumotlar))
-                    successFailedDialogPassport.setButtonText(getString(R.string.sahifani_ochish))
+                    successFailedDialogPassport.setButton1Text(getString(R.string.sahifani_ochish))
                     successFailedDialogPassport.showCloseButton(false)
                     successFailedDialogPassport.setClickAction(SuccessFailedDialog.ACTION_FAILED)
 

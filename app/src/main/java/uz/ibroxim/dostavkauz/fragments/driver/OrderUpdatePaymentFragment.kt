@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_order_update_payment.*
 import uz.ibroxim.dostavkauz.R
-import uz.ibroxim.dostavkauz.adapter.DriverItemAdapter
 import uz.ibroxim.dostavkauz.adapter.PaymentAdapter
 import uz.ibroxim.dostavkauz.dialog.CustomProgressDialog
 import uz.ibroxim.dostavkauz.dialog.SuccessFailedDialog
@@ -159,8 +158,12 @@ class OrderUpdatePaymentFragment:Fragment(R.layout.fragment_order_update_payment
 
         val successFailedDialog = SuccessFailedDialog(requireContext(), object :
             SuccessFailedDialog.SuccessFailedCallback {
-            override fun onActionButtonClick(clickAction: String) {
+            override fun onActionButton1Click(clickAction: String) {
 
+
+            }
+
+            override fun onActionButton2Click(clickAction: String) {
 
             }
 
@@ -171,7 +174,7 @@ class OrderUpdatePaymentFragment:Fragment(R.layout.fragment_order_update_payment
             successFailedDialog.setStatusImage(R.drawable.success)
             successFailedDialog.setTitle(title)
             successFailedDialog.setMessage(message)
-            successFailedDialog.setButtonText(getString(R.string.yopish))
+            successFailedDialog.setButton1Text(getString(R.string.yopish))
             successFailedDialog.showCloseButton(false)
             successFailedDialog.setClickAction(SuccessFailedDialog.ACTION_SUCCESS)
         }
@@ -180,7 +183,7 @@ class OrderUpdatePaymentFragment:Fragment(R.layout.fragment_order_update_payment
             successFailedDialog.setStatusImage(R.drawable.error)
             successFailedDialog.setTitle(title)
             successFailedDialog.setMessage(message)
-            successFailedDialog.setButtonText(getString(R.string.yopish ))
+            successFailedDialog.setButton1Text(getString(R.string.yopish ))
             successFailedDialog.showCloseButton(true)
             successFailedDialog.setClickAction(SuccessFailedDialog.ACTION_FAILED)
         }
